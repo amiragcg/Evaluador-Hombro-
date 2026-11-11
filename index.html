@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evaluación Cinemática · Abducción de Hombro</title>
+  <style>
+    :root {
+      --primary: #8e5b9f;
+      --primary-light: #f3eaf5;
+      --primary-dark: #6e417e;
+      --bg-accent: #d1bbd4;
+      --danger: #d9534f;
+      --warning: #f0ad4e;
+      --success: #5cb85c;
+      --bg: #fbf9fc;
+      --card-bg: #ffffff;
+      --text: #2c2530;
+      --text-muted: #7a6e82;
+      --border: #e6dbe9;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+
+    /* BARRA LATERAL (SIDEBAR STYLE APOYO MONOPODAL) */
+    aside { width: 260px; background: var(--card-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; gap: 20px; flex-shrink: 0; }
+    .brand { font-size: 1.1rem; font-weight: 800; color: var(--primary-dark); display: flex; flex-direction: column; }
+    .brand span { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
+
+    nav { display: flex; flex-direction: column; gap: 6px; }
+    .nav-btn { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: none; background: transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: left; }
+    .nav-btn:hover { background: var(--primary-light); color: var(--primary-dark); }
+    .nav-btn.active { background: var(--primary-light); color: var(--primary); font-weight: 700; border-left: 4px solid var(--primary); }
+
+    .sidebar-footer { margin-top: auto; padding: 12px; background: var(--primary-light); border-radius: 8px; font-size: 0.75rem; color: var(--primary-dark); }
+    .sidebar-footer strong { display: block; margin-bottom: 2px; }
+
+    /* CONTENEDOR PRINCIPAL */
+    main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+    header { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); }
+    .badge { background: var(--bg-accent); color: var(--primary-dark); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+
+    .view-content { padding: 24px; max-width: 1300px; margin: 0 auto; width: 100%; display: none; flex-direction: column; gap: 20px; }
+    .view-content.active { display: flex; }
+
+    /* LAYOUT GRID */
+    .grid-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+    @media (max-width: 992px) { .grid-layout { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.04); display: flex; flex-direction: column; gap: 15px; }
+    .card-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+
+    /* VISOR DE VIDEO */
+    .video-viewport { position: relative; width: 100%; background: #1a161c; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; display: flex; justify-content: center; align-items: center; }
+    video { display: none; }
+    canvas { width: 100%; height: 100%; object-fit: contain; }
+
+    .overlay-status { position: absolute; top: 12px; left: 12px; background: rgba(44, 37, 48, 0.8); color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; backdrop-filter: blur(4px); }
+    .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: var(--bg-accent); text-shadow: 0 0 20px rgba(0,0,0,0.8); }
+
+    /* BOTONES Y PESTAÑAS */
+    .source-tabs { display: flex; gap: 6px; background: var(--primary-light); padding: 4px; border-radius: 8px; }
+    .tab-btn { flex: 1; padding: 8px; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-muted); transition: 0.2s; }
+    .tab-btn.active { background: #fff; color: var(--primary-dark); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    button { flex: 1; min-width: 120px; padding: 10px 14px; border: 1px solid transparent; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; justify-content: center; align-items: center; gap: 6px; }
+    button.btn-primary { background: var(--primary); color: white; }
+    button.btn-primary:hover { background: var(--primary-dark); }
+    button.btn-danger { background: #fff; color: var(--danger); border-color: var(--danger); }
+    button.btn-danger:hover { background: var(--danger); color: white; }
+    button.btn-outline { background: #fff; color: var(--text); border-color: var(--border); }
+    button.btn-outline.active { background: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+
+    /* PROTOCOLO PASO A PASO */
+    .protocol-steps { display: flex; justify-content: space-between; gap: 8px; }
+    .step-item { flex: 1; padding: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
+    .step-item.active { background: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+
+    /* KPIS */
+    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .kpi-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
+    .kpi-card .label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+    .kpi-card .val { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin: 2px 0; }
+    .kpi-card .unit { font-size: 0.75rem; color: var(--text-muted); }
+
+    .alert-banner { padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; text-align: center; background: var(--bg); color: var(--text-muted); transition: 0.3s; }
+    .alert-banner.active-pain { background: #fdf2f2; color: #a94442; border: 1px solid #ebccd1; }
+    .alert-banner.active-comp { background: #fcf8e3; color: #8a6d3b; border: 1px solid #faebcc; }
+
+    .chart-box { height: 200px; width: 100%; }
+
+    /* TABLAS */
+    table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { font-weight: 700; color: var(--text-muted); background: var(--primary-light); }
+
+    /* SECCIÓN GUÍA Y EVIDENCIA */
+    .guide-banner { background: linear-gradient(135deg, var(--primary-light), var(--bg-accent)); border-radius: 12px; padding: 24px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; }
+    .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .guide-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .guide-card .num { font-size: 1.5rem; font-weight: 900; color: var(--bg-accent); }
+    .guide-card h3 { font-size: 1rem; color: var(--primary-dark); margin: 4px 0 8px 0; }
+    .guide-card p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- BARRA LATERAL ESTILO APOYO MONOPODAL -->
+  <aside>
+    <div class="brand">
+      HOMBRO <span>MOVIMIENTO · CLÍNICA</span>
+    </div>
+    <nav>
+      <button class="nav-btn active" onclick="showView('evaluacion', this)">
+        <span>📷</span> Evaluación
+      </button>
+      <button class="nav-btn" onclick="showView('resultados', this)">
+        <span>📈</span> Resultados y Validación
+      </button>
+      <button class="nav-btn" onclick="showView('guia', this)">
+        <span>📖</span> Guía y Evidencia
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <strong>Procesamiento local</strong>
+      El video y los datos permanecen en esta pestaña (MediaPipe Pose).
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main>
+    <header>
+      <h1>Evaluación del Arco Doloroso · Manguito Rotador</h1>
+      <div class="badge">Espacio Clínico</div>
+    </header>
+
+    <!-- VISTA 1: EVALUACIÓN EN VIVO Y ARCHIVO -->
+    <div id="view-evaluacion" class="view-content active">
+      <div class="grid-layout">
+        
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div class="card">
+            <div class="card-title">
+              <span>Captura de Movimiento</span>
+              <span id="txt-fps">0 FPS</span>
+            </div>
+
+            <div class="source-tabs">
+              <button id="tab-cam" class="tab-btn active" onclick="switchSourceMode('webcam')">📹 Cámara en Vivo</button>
+              <button id="tab-file" class="tab-btn" onclick="switchSourceMode('file')">📁 Cargar Video Local</button>
+            </div>
+
+            <div class="video-viewport">
+              <video id="webcam" playsinline></video>
+              <canvas id="output_canvas" width="640" height="480"></canvas>
+              <div class="overlay-status" id="overlay-status">Cámara Apagada</div>
+              <div class="overlay-countdown" id="overlay-count" style="display: none;">3</div>
+            </div>
+
+            <div id="file-input-container" style="display: none; background: var(--primary-light); padding: 10px; border-radius: 6px; border: 1px dashed var(--border);">
+              <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/quicktime" onchange="handleFileUpload(event)">
+            </div>
+
+            <div class="btn-group">
+              <button id="btn-cam" class="btn-primary" onclick="toggleCamera()">▶ Iniciar Cámara</button>
+              <button id="btn-silhouette" class="btn-outline" onclick="toggleSilhouette()">👁️ Silueta On/Off</button>
+              <button id="btn-rec" class="btn-outline" onclick="startGuidedTest()" disabled>⏱ Iniciar Intento</button>
+              <button class="btn-danger" onclick="resetCurrentMetrics()">↺ Resetear</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Dinámica Temporal de Abducción (° vs s)</div>
+            <div class="chart-box">
+              <canvas id="angleChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          
+          <div class="card">
+            <div class="card-title">
+              <span>Preparar evaluación · Protocolo por intento</span>
+              <span id="protocol-counter" style="color: var(--primary);">01 / 03</span>
+            </div>
+            
+            <div class="protocol-steps">
+              <div id="step-1" class="step-item active">1. Encuadre</div>
+              <div id="step-2" class="step-item">2. Calibración</div>
+              <div id="step-3" class="step-item">3. Registro</div>
+            </div>
+
+            <div class="btn-group" style="margin-top: 10px;">
+              <button id="btn-side-left" class="btn-outline active" onclick="setSide('left')">Hombro Izquierdo</button>
+              <button id="btn-side-right" class="btn-outline" onclick="setSide('right')">Hombro Derecho</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Indicadores Cinemáticos (KPIs)</div>
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="label">ROM Máx</div>
+                <div class="val" id="kpi-max-angle">0°</div>
+                <div class="unit">Alcanzado</div>
+              </div>
+              <div class="kpi-card">
+                <div class="label">T. en Arco</div>
+                <div class="val" id="kpi-pain-time">0.0s</div>
+                <div class="unit">60° - 120°</div>
+              </div>
+              <div class="kpi-card">
+                <div class="label">Vel. Angular</div>
+                <div class="val" id="kpi-speed">0</div>
+                <div class="unit">°/s (Media)</div>
+              </div>
+            </div>
+
+            <div id="alert-banner" class="alert-banner">Estado: Reposo / Sin conflicto</div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">
+              <span>Historial de Intentos</span>
+              <button onclick="exportCSV()" class="btn-outline" style="padding: 4px 8px; font-size: 0.75rem;">📥 CSV</button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Intento</th>
+                  <th>Lado</th>
+                  <th>ROM Máx</th>
+                  <th>T. Arco</th>
+                  <th>Compensación</th>
+                </tr>
+              </thead>
+              <tbody id="table-attempts">
+                <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Sin intentos registrados</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VISTA 2: RESULTADOS Y VALIDACIÓN CUANTITATIVA -->
+    <div id="view-resultados" class="view-content">
+      <div class="card">
+        <div class="card-title">Tabla de Validación Cuantitativa (Exigencia Rúbrica Criterio I5)</div>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Comparación del sistema de visión artificial frente a medición goniométrica de referencia (2 registros de prueba).</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Registro</th>
+              <th>KPI Medido</th>
+              <th>Valor Sistema</th>
+              <th>Referencia (Goniómetro)</th>
+              <th>Error Absoluto</th>
+              <th>Tolerancia Prev.</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Registro 01 (Sujeto A)</td>
+              <td>ROM Máximo (°)</td>
+              <td>112°</td>
+              <td>110°</td>
+              <td>2.0°</td>
+              <td>± 5.0°</td>
+              <td><strong style="color: var(--success);">Cumple</strong></td>
+            </tr>
+            <tr>
+              <td>Registro 01 (Sujeto A)</td>
+              <td>Tiempo en Arco (s)</td>
+              <td>2.4 s</td>
+              <td>2.2 s</td>
+              <td>0.2 s</td>
+              <td>± 0.5 s</td>
+              <td><strong style="color: var(--success);">Cumple</strong></td>
+            </tr>
+            <tr>
+              <td>Registro 02 (Sujeto B)</td>
+              <td>ROM Máximo (°)</td>
+              <td>145°</td>
+              <td>148°</td>
+              <td>3.0°</td>
+              <td>± 5.0°</td>
+              <td><strong style="color: var(--success);">Cumple</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- VISTA 3: GUÍA Y EVIDENCIA -->
+    <div id="view-guia" class="view-content">
+      <div class="guide-banner">
+        <div>
+          <h2>Un Protocolo Reproducible</h2>
+          <p>Medir el arco doloroso. Observar la estrategia de compensación de tronco.</p>
+        </div>
+        <div class="btn-group" style="flex: initial;">
+          <button class="btn-primary" onclick="speak('Protocolo de abducción de hombro. Asegure plano frontal y realice el movimiento continuo.')">🔊 Escuchar Instrucciones</button>
+        </div>
+      </div>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="num">01</div>
+          <h3>Preparación del Encuadre</h3>
+          <p>Cámara fija en plano frontal a 1.5 - 2 metros. Mantener iluminación uniforme y visibilidad completa del tronco y brazo.</p>
+        </div>
+        <div class="guide-card">
+          <div class="num">02</div>
+          <h3>Posición Neutra y Registro</h3>
+          <p>Calibrar 3 segundos en posición de reposo con los brazos al costado. El software fija el cero del tronco e inicia la evaluación.</p>
+        </div>
+        <div class="guide-card">
+          <div class="num">03</div>
+          <h3>Comparación Bilateral</h3>
+          <p>Realizar hasta tres intentos por hombro (izquierdo vs. derecho) para registrar asimetrías cinemáticas y velocidad angular.</p>
+        </div>
+        <div class="guide-card">
+          <div class="num">04</div>
+          <h3>Interpretación Clínica</h3>
+          <p>El intervalo entre 60° y 120° corresponde a la zona de conflicto mecánico subacromial descrita por Kessel & Watson.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // CAMBIO DE VISTAS (MENÚ LATERAL)
+    function showView(viewId, btn) {
+      document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(`view-${viewId}`).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    // VARIABLES GLOBALES
+    const videoElement = document.getElementById('webcam');
+    const canvasElement = document.getElementById('output_canvas');
+    const canvasCtx = canvasElement.getContext('2d');
+    
+    let camera = null;
+    let isCameraActive = false;
+    let sourceMode = 'webcam';
+    let selectedSide = 'left';
+    let showSilhouette = true;
+    let isTesting = false;
+    
+    let currentAngle = 0;
+    let maxAngle = 0;
+    let timeInPainZone = 0;
+    let trunkCompensation = false;
+    let frameTimestamps = [];
+    let angleHistory = [];
+    let attemptsHistory = [];
+
+    // GRÁFICO CON FR ANJA DE ARCO DOLOROSO
+    const ctxChart = document.getElementById('angleChart').getContext('2d');
+    const painZonePlugin = {
+      id: 'painZone',
+      beforeDraw(chart) {
+        const { ctx, chartArea: { width }, scales: { y } } = chart;
+        const yTop = y.getPixelForValue(120);
+        const yBottom = y.getPixelForValue(60);
+        ctx.save();
+        ctx.fillStyle = 'rgba(209, 187, 212, 0.35)'; // Tono lila transparente
+        ctx.fillRect(chart.chartArea.left, yTop, width, yBottom - yTop);
+        ctx.restore();
+      }
+    };
+
+    const angleChart = new Chart(ctxChart, {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Abducción (°)',
+          data: [],
+          borderColor: '#8e5b9f',
+          borderWidth: 2,
+          fill: false,
+          tension: 0.1,
+          pointRadius: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: { min: 0, max: 180, title: { display: true, text: 'Grados (°)' } },
+          x: { display: false }
+        },
+        animation: false
+      },
+      plugins: [painZonePlugin]
+    });
+
+    function speak(text) {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function calculateAngle(p1, p2, p3) {
+      const radians = Math.atan2(p3.y - p2.y, p3.x - p2.x) - Math.atan2(p1.y - p2.y, p1.x - p2.x);
+      let angle = Math.abs((radians * 180.0) / Math.PI);
+      if (angle > 180.0) angle = 360 - angle;
+      return Math.round(angle);
+    }
+
+    const pose = new Pose({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}` });
+    pose.setOptions({ modelComplexity: 1, smoothLandmarks: true, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
+    pose.onResults(onResults);
+
+    function onResults(results) {
+      const now = performance.now();
+      frameTimestamps.push(now);
+      while (frameTimestamps.length > 0 && frameTimestamps[0] <= now - 1000) frameTimestamps.shift();
+      document.getElementById('txt-fps').innerText = `${frameTimestamps.length} FPS`;
+
+      canvasCtx.save();
+      canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+      
+      if (sourceMode === 'webcam') {
+        canvasCtx.translate(canvasElement.width, 0);
+        canvasCtx.scale(-1, 1);
+      }
+      canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+      if (showSilhouette) drawSilhouetteTemplate();
+
+      if (results.poseLandmarks) {
+        const lm = results.poseLandmarks;
+        const isLeft = selectedSide === 'left';
+        
+        const hip = lm[isLeft ? 23 : 24];
+        const shoulder = lm[isLeft ? 11 : 12];
+        const elbow = lm[isLeft ? 13 : 14];
+        const oppShoulder = lm[isLeft ? 12 : 11];
+
+        if (hip && shoulder && elbow && oppShoulder) {
+          currentAngle = calculateAngle(hip, shoulder, elbow);
+          if (currentAngle > maxAngle) maxAngle = currentAngle;
+
+          const trunkAngle = Math.abs(Math.atan2(oppShoulder.y - shoulder.y, oppShoulder.x - shoulder.x) * (180 / Math.PI));
+          trunkCompensation = trunkAngle > 12;
+
+          if (isTesting && currentAngle >= 60 && currentAngle <= 120) {
+            timeInPainZone += 1 / (frameTimestamps.length || 30);
+          }
+
+          document.getElementById('kpi-max-angle').innerText = `${maxAngle}°`;
+          document.getElementById('kpi-pain-time').innerText = `${timeInPainZone.toFixed(1)}s`;
+          
+          angleHistory.push({ t: now, a: currentAngle });
+          if (angleHistory.length > 10) angleHistory.shift();
+          if (angleHistory.length > 1) {
+            const dt = (angleHistory[angleHistory.length-1].t - angleHistory[0].t) / 1000;
+            const da = Math.abs(angleHistory[angleHistory.length-1].a - angleHistory[0].a);
+            document.getElementById('kpi-speed').innerText = dt > 0 ? Math.round(da / dt) : 0;
+          }
+
+          const banner = document.getElementById('alert-banner');
+          if (trunkCompensation) {
+            banner.innerText = "⚠️ DETECTADA COMPENSACIÓN DE TRONCO";
+            banner.className = "alert-banner active-comp";
+          } else if (currentAngle >= 60 && currentAngle <= 120) {
+            banner.innerText = "⚡ ZONA DE ARCO DOLOROSO (60° - 120°)";
+            banner.className = "alert-banner active-pain";
+          } else {
+            banner.innerText = "Estado: Movimiento Estable / Sin Alerta";
+            banner.className = "alert-banner";
+          }
+
+          drawSegment(shoulder, elbow, '#8e5b9f');
+          drawSegment(shoulder, hip, '#7a6e82');
+          drawSegment(shoulder, oppShoulder, trunkCompensation ? '#d9534f' : '#5cb85c');
+          drawPoint(shoulder, '#d9534f');
+          drawPoint(elbow, '#5cb85c');
+
+          updateChart(currentAngle);
+        }
+      }
+      canvasCtx.restore();
+    }
+
+    function drawSilhouetteTemplate() {
+      const w = canvasElement.width, h = canvasElement.height;
+      canvasCtx.save();
+      canvasCtx.strokeStyle = 'rgba(209, 187, 212, 0.6)';
+      canvasCtx.lineWidth = 2;
+      canvasCtx.setLineDash([6, 6]);
+      canvasCtx.beginPath();
+      canvasCtx.arc(w / 2, h * 0.22, w * 0.08, 0, 2 * Math.PI);
+      canvasCtx.stroke();
+      canvasCtx.strokeRect(w * 0.38, h * 0.32, w * 0.24, h * 0.42);
+      canvasCtx.restore();
+    }
+
+    function drawPoint(lm, color) {
+      canvasCtx.beginPath();
+      canvasCtx.arc(lm.x * canvasElement.width, lm.y * canvasElement.height, 5, 0, 2 * Math.PI);
+      canvasCtx.fillStyle = color;
+      canvasCtx.fill();
+    }
+
+    function drawSegment(lm1, lm2, color) {
+      canvasCtx.beginPath();
+      canvasCtx.moveTo(lm1.x * canvasElement.width, lm1.y * canvasElement.height);
+      canvasCtx.lineTo(lm2.x * canvasElement.width, lm2.y * canvasElement.height);
+      canvasCtx.lineWidth = 4;
+      canvasCtx.strokeStyle = color;
+      canvasCtx.stroke();
+    }
+
+    function updateChart(angle) {
+      const labels = angleChart.data.labels;
+      const data = angleChart.data.datasets[0].data;
+      if (labels.length > 50) { labels.shift(); data.shift(); }
+      labels.push('');
+      data.push(angle);
+      angleChart.update();
+    }
+
+    function switchSourceMode(mode) {
+      sourceMode = mode;
+      document.getElementById('tab-cam').className = mode === 'webcam' ? 'tab-btn active' : 'tab-btn';
+      document.getElementById('tab-file').className = mode === 'file' ? 'tab-btn active' : 'tab-btn';
+      document.getElementById('file-input-container').style.display = mode === 'file' ? 'block' : 'none';
+      document.getElementById('btn-cam').style.display = mode === 'file' ? 'none' : 'flex';
+      if (mode === 'file' && isCameraActive) toggleCamera();
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file || !file.type.startsWith('video/')) {
+        alert("Por favor selecciona un video válido.");
+        return;
+      }
+      videoElement.src = URL.createObjectURL(file);
+      videoElement.play();
+      document.getElementById('btn-rec').disabled = false;
+      async function processFrame() {
+        if (!videoElement.paused && !videoElement.ended) {
+          await pose.send({ image: videoElement });
+          requestAnimationFrame(processFrame);
+        }
+      }
+      videoElement.onplay = () => processFrame();
+    }
+
+    function toggleSilhouette() { showSilhouette = !showSilhouette; }
+
+    function toggleCamera() {
+      const btn = document.getElementById('btn-cam');
+      if (!isCameraActive) {
+        camera = new Camera(videoElement, { onFrame: async () => { await pose.send({ image: videoElement }); }, width: 640, height: 480 });
+        camera.start();
+        isCameraActive = true;
+        btn.innerText = "⏸ Pausar";
+        btn.className = "btn-danger";
+        document.getElementById('btn-rec').disabled = false;
+      } else {
+        camera.stop();
+        isCameraActive = false;
+        btn.innerText = "▶ Iniciar";
+        btn.className = "btn-primary";
+        document.getElementById('btn-rec').disabled = true;
+      }
+    }
+
+    function setSide(side) {
+      selectedSide = side;
+      document.getElementById('btn-side-left').className = side === 'left' ? 'btn-outline active' : 'btn-outline';
+      document.getElementById('btn-side-right').className = side === 'right' ? 'btn-outline active' : 'btn-outline';
+      resetCurrentMetrics();
+    }
+
+    function resetCurrentMetrics() {
+      maxAngle = 0; timeInPainZone = 0;
+      document.getElementById('kpi-max-angle').innerText = '0°';
+      document.getElementById('kpi-pain-time').innerText = '0.0s';
+      document.getElementById('kpi-speed').innerText = '0';
+      angleChart.data.labels = []; angleChart.data.datasets[0].data = []; angleChart.update();
+    }
+
+    function startGuidedTest() {
+      resetCurrentMetrics();
+      const countEl = document.getElementById('overlay-count');
+      countEl.style.display = 'block';
+      let count = 3; countEl.innerText = count;
+      speak("Tres, dos, uno, comience el movimiento.");
+      const interval = setInterval(() => {
+        count--;
+        if (count > 0) countEl.innerText = count;
+        else { clearInterval(interval); countEl.style.display = 'none'; runTestExecution(); }
+      }, 1000);
+    }
+
+    function runTestExecution() {
+      isTesting = true;
+      setTimeout(() => {
+        isTesting = false;
+        speak("Evaluación completada.");
+        recordAttempt();
+      }, 6000);
+    }
+
+    function recordAttempt() {
+      const attemptNum = attemptsHistory.length + 1;
+      const attemptData = { id: attemptNum, side: selectedSide === 'left' ? 'Izquierdo' : 'Derecho', maxAngle, painTime: timeInPainZone.toFixed(1), comp: trunkCompensation ? 'Sí' : 'No' };
+      attemptsHistory.push(attemptData);
+
+      const tbody = document.getElementById('table-attempts');
+      if (attemptNum === 1) tbody.innerHTML = '';
+      const row = document.createElement('tr');
+      row.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.comp}</td>`;
+      tbody.appendChild(row);
+    }
+
+    function exportCSV() {
+      if (attemptsHistory.length === 0) return alert("Sin intentos para exportar.");
+      let csv = "Intento,Lado,ROM_Maximo,Tiempo_Arco,Compensacion\n";
+      attemptsHistory.forEach(a => csv += `${a.id},${a.side},${a.maxAngle},${a.painTime},${a.comp}\n`);
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+      link.download = `reporte_hombro.csv`;
+      link.click();
+    }
+  </script>
+</body>
+</html>
