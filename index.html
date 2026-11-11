@@ -34,7 +34,7 @@
     }
     .sidebar-overlay.active { display: block; }
 
-    /* BARRA LATERAL (SIDEBAR ESTILO KINEARC) */
+    /* BARRA LATERAL (SIDEBAR KINEARC) */
     aside {
       width: 265px;
       background: var(--card-bg);
@@ -267,9 +267,10 @@
 
     .form-group { display: flex; flex-direction: column; gap: 6px; }
     .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-    .form-group input, .form-group textarea { padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; background: var(--bg); color: var(--text); outline: none; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); background: #fff; }
+    .form-group input, .form-group textarea, .form-group select { padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; background: var(--bg); color: var(--text); outline: none; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); background: #fff; }
     .form-row { display: flex; gap: 12px; }
+    @media (max-width: 600px) { .form-row { flex-direction: column; } }
 
     /* SECCIÓN GUÍA Y EVIDENCIA */
     .guide-banner { background: linear-gradient(135deg, var(--primary-light), var(--bg-accent)); border-radius: 12px; padding: 22px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
@@ -279,6 +280,15 @@
     .guide-card .num { font-size: 1.5rem; font-weight: 900; color: var(--bg-accent); }
     .guide-card h3 { font-size: 1rem; color: var(--primary-dark); margin: 4px 0 8px 0; }
     .guide-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+
+    /* ESTILOS DE IMPRESIÓN (PDF LIMPIO) */
+    @media print {
+      aside, header, .no-print, .btn-group, .btn-toggle-sidebar { display: none !important; }
+      body, main { background: #fff !important; height: auto !important; overflow: visible !important; }
+      .view-content { display: block !important; padding: 0 !important; }
+      .grid-layout { display: block !important; }
+      .card { border: none !important; box-shadow: none !important; padding: 0 !important; margin-bottom: 20px; }
+    }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
@@ -289,7 +299,7 @@
 
   <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
 
-  <!-- BARRA LATERAL CON IDENTIDAD KINEARC -->
+  <!-- BARRA LATERAL -->
   <aside id="sidebar">
     <div class="sidebar-header">
       <div class="brand-box">
@@ -559,7 +569,7 @@
       <div class="grid-layout">
         
         <!-- FICHA PRINCIPAL DEL REPORTE -->
-        <div class="card" style="gap: 20px;">
+        <div class="card" style="gap: 20px;" id="printable-report">
           <div class="card-title">
             <span>REPORTE DE EVALUACIÓN</span>
             <span class="badge" style="background: var(--primary-light);">REGISTRO POR CÁMARA</span>
@@ -582,7 +592,7 @@
             </div>
             <div class="report-meta-item">
               <div class="label">Estado</div>
-              <div class="val" style="color: #b97a29; font-weight: 700;">Pendiente de revisión profesional</div>
+              <div class="val" id="rep-status" style="color: #b97a29; font-weight: 700;">Pendiente de revisión profesional</div>
             </div>
           </div>
 
@@ -603,7 +613,7 @@
           </div>
 
           <div class="clinical-note-box">
-            Las métricas describen movimiento proyectado en 2D y no constituyen una predicción individual de caídas o diagnóstico aislado. % ref. utiliza distancia nariz-suelo o tronco como escala.
+            Las métricas describen movimiento proyectado en 2D y no constituyen una predicción individual de caídas o diagnóstico aislado. La referencia utiliza el torso como escala cinemática.
           </div>
 
           <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
@@ -612,13 +622,39 @@
         </div>
 
         <!-- PANEL DE COMPLETAR REPORTE -->
-        <div class="card">
+        <div class="card no-print">
           <div class="card-title">Completar reporte</div>
           
           <div style="display: flex; flex-direction: column; gap: 14px;">
+            
+            <div class="form-group">
+              <label>Código de persona / ID</label>
+              <input type="text" id="input-code" placeholder="Ej: PAC-1092" oninput="updateReportMeta()">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group" style="flex: 1;">
+                <label>Edad</label>
+                <input type="text" id="input-age" placeholder="Ej: 34 años" oninput="updateReportMeta()">
+              </div>
+              <div class="form-group" style="flex: 1;">
+                <label>Profesional</label>
+                <input type="text" id="input-pro" placeholder="Ej: Kine. J. Pérez" oninput="updateReportMeta()">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Estado de revisión</label>
+              <select id="input-status" onchange="updateReportMeta()">
+                <option value="Pendiente de revisión profesional">Pendiente de revisión profesional</option>
+                <option value="Evaluación aprobada y validada">Evaluación aprobada y validada</option>
+                <option value="Requiere reevaluación">Requiere reevaluación</option>
+              </select>
+            </div>
+
             <div class="form-group">
               <label>Observaciones clínicas</label>
-              <textarea id="input-obs" rows="5" placeholder="Estrategia observada, tolerancia, ayuda requerida y contexto clínico..." onchange="updateReportMeta()"></textarea>
+              <textarea id="input-obs" rows="4" placeholder="Estrategia observada, tolerancia, ayuda requerida y contexto clínico..." oninput="updateReportMeta()"></textarea>
             </div>
 
             <div style="display: flex; align-items: flex-start; gap: 10px;">
@@ -716,9 +752,28 @@
       closeSidebar();
     }
 
-    // ACTUALIZAR OBSERVACIONES DEL REPORTE
+    // ACTUALIZAR DATOS Y OBSERVACIONES DEL REPORTE EN TIEMPO REAL
     function updateReportMeta() {
+      const code = document.getElementById('input-code').value || 'Sin informar';
+      const age = document.getElementById('input-age').value || 'Sin informar';
+      const pro = document.getElementById('input-pro').value || 'Sin informar';
+      const status = document.getElementById('input-status').value;
       const obs = document.getElementById('input-obs').value || 'Sin observaciones.';
+
+      document.getElementById('rep-code').innerText = code;
+      document.getElementById('rep-age').innerText = age;
+      document.getElementById('rep-pro').innerText = pro;
+      
+      const statusEl = document.getElementById('rep-status');
+      statusEl.innerText = status;
+      if (status.includes('aprobada')) {
+        statusEl.style.color = 'var(--success)';
+      } else if (status.includes('reevaluación')) {
+        statusEl.style.color = 'var(--danger)';
+      } else {
+        statusEl.style.color = '#b97a29';
+      }
+
       document.getElementById('rep-obs-display').innerText = obs;
     }
 
@@ -1053,6 +1108,9 @@
       const sessionData = {
         app: "KineArc",
         date: new Date().toISOString(),
+        code: document.getElementById('input-code').value,
+        age: document.getElementById('input-age').value,
+        pro: document.getElementById('input-pro').value,
         maxLeft, maxRight,
         obs: document.getElementById('input-obs').value,
         attempts: attemptsHistory
@@ -1073,9 +1131,13 @@
         reader.onload = event => {
           try {
             const data = JSON.parse(event.target.result);
+            if (data.code) document.getElementById('input-code').value = data.code;
+            if (data.age) document.getElementById('input-age').value = data.age;
+            if (data.pro) document.getElementById('input-pro').value = data.pro;
             if (data.maxLeft) { maxLeft = data.maxLeft; document.getElementById('rep-max-left').innerText = `${maxLeft}°`; }
             if (data.maxRight) { maxRight = data.maxRight; document.getElementById('rep-max-right').innerText = `${maxRight}°`; }
-            if (data.obs) { document.getElementById('input-obs').value = data.obs; updateReportMeta(); }
+            if (data.obs) document.getElementById('input-obs').value = data.obs;
+            updateReportMeta();
             alert("Sesión cargada exitosamente.");
           } catch(err) { alert("Archivo JSON no válido."); }
         };
