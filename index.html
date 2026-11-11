@@ -21,15 +21,67 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+    body { background-color: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; position: relative; }
 
-    /* BARRA LATERAL (SIDEBAR STYLE APOYO MONOPODAL) */
-    aside { width: 260px; background: var(--card-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 20px; gap: 20px; flex-shrink: 0; }
+    /* OVERLAY PARA MÓVIL */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(44, 37, 48, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 90;
+    }
+    .sidebar-overlay.active { display: block; }
+
+    /* BARRA LATERAL (SIDEBAR) */
+    aside {
+      width: 260px;
+      background: var(--card-bg);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      gap: 20px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
     .brand { font-size: 1.1rem; font-weight: 800; color: var(--primary-dark); display: flex; flex-direction: column; }
     .brand span { font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; }
 
+    .btn-close-sidebar {
+      display: none;
+      background: transparent;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0 4px;
+      line-height: 1;
+    }
+
     nav { display: flex; flex-direction: column; gap: 6px; }
-    .nav-btn { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: none; background: transparent; border-radius: 8px; color: var(--text-muted); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: left; }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      padding: 12px 14px;
+      border: none;
+      background: transparent;
+      border-radius: 8px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: left;
+    }
     .nav-btn:hover { background: var(--primary-light); color: var(--primary-dark); }
     .nav-btn.active { background: var(--primary-light); color: var(--primary); font-weight: 700; border-left: 4px solid var(--primary); }
 
@@ -37,13 +89,40 @@
     .sidebar-footer strong { display: block; margin-bottom: 2px; }
 
     /* CONTENEDOR PRINCIPAL */
-    main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
-    header { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); }
-    .badge { background: var(--bg-accent); color: var(--primary-dark); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+    main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; width: 100%; }
+    header { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    
+    .header-left { display: flex; align-items: center; gap: 12px; }
+    .btn-toggle-sidebar {
+      display: none;
+      background: var(--primary-light);
+      border: 1px solid var(--border);
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-    .view-content { padding: 24px; max-width: 1300px; margin: 0 auto; width: 100%; display: none; flex-direction: column; gap: 20px; }
+    header h1 { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); }
+    .badge { background: var(--bg-accent); color: var(--primary-dark); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+
+    .view-content { padding: 20px; max-width: 1300px; margin: 0 auto; width: 100%; display: none; flex-direction: column; gap: 20px; }
     .view-content.active { display: flex; }
+
+    /* RESPONSIVE MÓVIL */
+    @media (max-width: 768px) {
+      aside {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 16px rgba(0,0,0,0.1);
+      }
+      aside.open { transform: translateX(0); }
+      .btn-close-sidebar { display: block; }
+      .btn-toggle-sidebar { display: flex; align-items: center; justify-content: center; }
+      header h1 { font-size: 0.95rem; }
+    }
 
     /* LAYOUT GRID */
     .grid-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
@@ -98,8 +177,9 @@
     th { font-weight: 700; color: var(--text-muted); background: var(--primary-light); }
 
     /* SECCIÓN GUÍA Y EVIDENCIA */
-    .guide-banner { background: linear-gradient(135deg, var(--primary-light), var(--bg-accent)); border-radius: 12px; padding: 24px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; }
+    .guide-banner { background: linear-gradient(135deg, var(--primary-light), var(--bg-accent)); border-radius: 12px; padding: 20px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (max-width: 600px) { .guide-grid { grid-template-columns: 1fr; } }
     .guide-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
     .guide-card .num { font-size: 1.5rem; font-weight: 900; color: var(--bg-accent); }
     .guide-card h3 { font-size: 1rem; color: var(--primary-dark); margin: 4px 0 8px 0; }
@@ -112,22 +192,29 @@
 </head>
 <body>
 
-  <!-- BARRA LATERAL ESTILO APOYO MONOPODAL -->
-  <aside>
-    <div class="brand">
-      HOMBRO <span>MOVIMIENTO · CLÍNICA</span>
+  <div id="sidebar-overlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <!-- BARRA LATERAL -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="brand">
+        HOMBRO <span>MOVIMIENTO · CLÍNICA</span>
+      </div>
+      <button class="btn-close-sidebar" onclick="closeSidebar()">✕</button>
     </div>
+    
     <nav>
       <button class="nav-btn active" onclick="showView('evaluacion', this)">
-        <span>📷</span> Evaluación
+        Evaluación
       </button>
       <button class="nav-btn" onclick="showView('resultados', this)">
-        <span>📈</span> Resultados y Validación
+        Resultados y Validación
       </button>
       <button class="nav-btn" onclick="showView('guia', this)">
-        <span>📖</span> Guía y Evidencia
+        Guía y Evidencia
       </button>
     </nav>
+
     <div class="sidebar-footer">
       <strong>Procesamiento local</strong>
       El video y los datos permanecen en esta pestaña (MediaPipe Pose).
@@ -137,11 +224,14 @@
   <!-- CONTENIDO PRINCIPAL -->
   <main>
     <header>
-      <h1>Evaluación del Arco Doloroso · Manguito Rotador</h1>
+      <div class="header-left">
+        <button class="btn-toggle-sidebar" onclick="openSidebar()">☰</button>
+        <h1>Evaluación de Hombro</h1>
+      </div>
       <div class="badge">Espacio Clínico</div>
     </header>
 
-    <!-- VISTA 1: EVALUACIÓN EN VIVO Y ARCHIVO -->
+    <!-- VISTA 1: EVALUACIÓN -->
     <div id="view-evaluacion" class="view-content active">
       <div class="grid-layout">
         
@@ -153,8 +243,8 @@
             </div>
 
             <div class="source-tabs">
-              <button id="tab-cam" class="tab-btn active" onclick="switchSourceMode('webcam')">📹 Cámara en Vivo</button>
-              <button id="tab-file" class="tab-btn" onclick="switchSourceMode('file')">📁 Cargar Video Local</button>
+              <button id="tab-cam" class="tab-btn active" onclick="switchSourceMode('webcam')">Cámara en Vivo</button>
+              <button id="tab-file" class="tab-btn" onclick="switchSourceMode('file')">Video Local</button>
             </div>
 
             <div class="video-viewport">
@@ -169,10 +259,10 @@
             </div>
 
             <div class="btn-group">
-              <button id="btn-cam" class="btn-primary" onclick="toggleCamera()">▶ Iniciar Cámara</button>
-              <button id="btn-silhouette" class="btn-outline" onclick="toggleSilhouette()">👁️ Silueta On/Off</button>
-              <button id="btn-rec" class="btn-outline" onclick="startGuidedTest()" disabled>⏱ Iniciar Intento</button>
-              <button class="btn-danger" onclick="resetCurrentMetrics()">↺ Resetear</button>
+              <button id="btn-cam" class="btn-primary" onclick="toggleCamera()">Iniciar Cámara</button>
+              <button id="btn-silhouette" class="btn-outline" onclick="toggleSilhouette()">Silueta On/Off</button>
+              <button id="btn-rec" class="btn-outline" onclick="startGuidedTest()" disabled>Iniciar Intento</button>
+              <button class="btn-danger" onclick="resetCurrentMetrics()">Resetear</button>
             </div>
           </div>
 
@@ -230,7 +320,7 @@
           <div class="card">
             <div class="card-title">
               <span>Historial de Intentos</span>
-              <button onclick="exportCSV()" class="btn-outline" style="padding: 4px 8px; font-size: 0.75rem;">📥 CSV</button>
+              <button onclick="exportCSV()" class="btn-outline" style="padding: 4px 8px; font-size: 0.75rem;">Exportar CSV</button>
             </div>
             <table>
               <thead>
@@ -253,10 +343,10 @@
       </div>
     </div>
 
-    <!-- VISTA 2: RESULTADOS Y VALIDACIÓN CUANTITATIVA -->
+    <!-- VISTA 2: RESULTADOS -->
     <div id="view-resultados" class="view-content">
       <div class="card">
-        <div class="card-title">Tabla de Validación Cuantitativa (Exigencia Rúbrica Criterio I5)</div>
+        <div class="card-title">Tabla de Validación Cuantitativa (Criterio I5)</div>
         <p style="font-size: 0.85rem; color: var(--text-muted);">Comparación del sistema de visión artificial frente a medición goniométrica de referencia (2 registros de prueba).</p>
         <table>
           <thead>
@@ -303,7 +393,7 @@
       </div>
     </div>
 
-    <!-- VISTA 3: GUÍA Y EVIDENCIA -->
+    <!-- VISTA 3: GUÍA -->
     <div id="view-guia" class="view-content">
       <div class="guide-banner">
         <div>
@@ -311,7 +401,7 @@
           <p>Medir el arco doloroso. Observar la estrategia de compensación de tronco.</p>
         </div>
         <div class="btn-group" style="flex: initial;">
-          <button class="btn-primary" onclick="speak('Protocolo de abducción de hombro. Asegure plano frontal y realice el movimiento continuo.')">🔊 Escuchar Instrucciones</button>
+          <button class="btn-primary" onclick="speak('Protocolo de abducción de hombro. Asegure plano frontal y realice el movimiento continuo.')">Escuchar Instrucciones</button>
         </div>
       </div>
 
@@ -342,12 +432,24 @@
   </main>
 
   <script>
-    // CAMBIO DE VISTAS (MENÚ LATERAL)
+    // CONTROL DEL MENÚ LATERAL EN MÓVIL
+    function openSidebar() {
+      document.getElementById('sidebar').classList.add('open');
+      document.getElementById('sidebar-overlay').classList.add('active');
+    }
+
+    function closeSidebar() {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+    }
+
+    // CAMBIO DE VISTAS
     function showView(viewId, btn) {
       document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`view-${viewId}`).classList.add('active');
       btn.classList.add('active');
+      closeSidebar();
     }
 
     // VARIABLES GLOBALES
@@ -370,7 +472,7 @@
     let angleHistory = [];
     let attemptsHistory = [];
 
-    // GRÁFICO CON FR ANJA DE ARCO DOLOROSO
+    // GRÁFICO
     const ctxChart = document.getElementById('angleChart').getContext('2d');
     const painZonePlugin = {
       id: 'painZone',
@@ -379,7 +481,7 @@
         const yTop = y.getPixelForValue(120);
         const yBottom = y.getPixelForValue(60);
         ctx.save();
-        ctx.fillStyle = 'rgba(209, 187, 212, 0.35)'; // Tono lila transparente
+        ctx.fillStyle = 'rgba(209, 187, 212, 0.35)';
         ctx.fillRect(chart.chartArea.left, yTop, width, yBottom - yTop);
         ctx.restore();
       }
@@ -480,10 +582,10 @@
 
           const banner = document.getElementById('alert-banner');
           if (trunkCompensation) {
-            banner.innerText = "⚠️ DETECTADA COMPENSACIÓN DE TRONCO";
+            banner.innerText = "DETECTADA COMPENSACIÓN DE TRONCO";
             banner.className = "alert-banner active-comp";
           } else if (currentAngle >= 60 && currentAngle <= 120) {
-            banner.innerText = "⚡ ZONA DE ARCO DOLOROSO (60° - 120°)";
+            banner.innerText = "ZONA DE ARCO DOLOROSO (60° - 120°)";
             banner.className = "alert-banner active-pain";
           } else {
             banner.innerText = "Estado: Movimiento Estable / Sin Alerta";
@@ -575,13 +677,13 @@
         camera = new Camera(videoElement, { onFrame: async () => { await pose.send({ image: videoElement }); }, width: 640, height: 480 });
         camera.start();
         isCameraActive = true;
-        btn.innerText = "⏸ Pausar";
+        btn.innerText = "Pausar";
         btn.className = "btn-danger";
         document.getElementById('btn-rec').disabled = false;
       } else {
         camera.stop();
         isCameraActive = false;
-        btn.innerText = "▶ Iniciar";
+        btn.innerText = "Iniciar";
         btn.className = "btn-primary";
         document.getElementById('btn-rec').disabled = true;
       }
