@@ -401,7 +401,8 @@
           <p>Medir el arco doloroso. Observar la estrategia de compensación de tronco.</p>
         </div>
         <div class="btn-group" style="flex: initial;">
-          <button class="btn-primary" onclick="speak('Protocolo de abducción de hombro. Asegure plano frontal y realice el movimiento continuo.')">Escuchar Instrucciones</button>
+          <button class="btn-primary" onclick="speakFullInstructions()">Escuchar Instrucciones</button>
+          <button class="btn-outline" onclick="stopSpeech()">Detener Audio</button>
         </div>
       </div>
 
@@ -513,11 +514,31 @@
       plugins: [painZonePlugin]
     });
 
+    // SÍNTESIS DE VOZ AMPLIADA
     function speak(text) {
       if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'es-ES';
+        utterance.rate = 0.95;
         window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    function speakFullInstructions() {
+      const fullText = 
+        "Protocolo de evaluación cinemática de abducción de hombro. " +
+        "Paso uno, preparación: ubique la cámara en plano frontal a una distancia de uno punto cinco a dos metros, asegurando que el tronco, las caderas y ambos brazos sean completamente visibles. " +
+        "Paso dos, posición inicial: mantenga la postura erguida con los brazos relajados al costado del cuerpo durante tres segundos para calibrar la línea media del tronco. " +
+        "Paso tres, ejecución: eleve lateralmente el brazo seleccionado de forma continua y controlada hasta el máximo rango tolerado, pasando por el arco de sesenta a ciento veinte grados, y luego descienda suavemente. " +
+        "Evite inclinar el tronco hacia el lado contrario y detenga la prueba inmediatamente si aparece dolor agudo o inseguridad. " +
+        "Finalmente, repita el procedimiento en el hombro contralateral para comparar los resultados.";
+      speak(fullText);
+    }
+
+    function stopSpeech() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
       }
     }
 
@@ -709,7 +730,7 @@
       const countEl = document.getElementById('overlay-count');
       countEl.style.display = 'block';
       let count = 3; countEl.innerText = count;
-      speak("Tres, dos, uno, comience el movimiento.");
+      speak("Mantenga postura neutra. Tres, dos, uno, eleve el brazo lateralmente.");
       const interval = setInterval(() => {
         count--;
         if (count > 0) countEl.innerText = count;
@@ -721,7 +742,7 @@
       isTesting = true;
       setTimeout(() => {
         isTesting = false;
-        speak("Evaluación completada.");
+        speak("Evaluación completada. Descienda el brazo suavemente.");
         recordAttempt();
       }, 6000);
     }
