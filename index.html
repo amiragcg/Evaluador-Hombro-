@@ -280,20 +280,13 @@
     .guide-card .num { font-size: 1.5rem; font-weight: 900; color: var(--bg-accent); }
     .guide-card h3 { font-size: 1rem; color: var(--primary-dark); margin: 4px 0 8px 0; }
     .guide-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
-
-    /* ESTILOS DE IMPRESIÓN (PDF LIMPIO) */
-    @media print {
-      aside, header, .no-print, .btn-group, .btn-toggle-sidebar { display: none !important; }
-      body, main { background: #fff !important; height: auto !important; overflow: visible !important; }
-      .view-content { display: block !important; padding: 0 !important; }
-      .grid-layout { display: block !important; }
-      .card { border: none !important; box-shadow: none !important; padding: 0 !important; margin-bottom: 20px; }
-    }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- LIBRERÍA JSPDF PARA DESCARGA REAL DE PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -569,7 +562,7 @@
       <div class="grid-layout">
         
         <!-- FICHA PRINCIPAL DEL REPORTE -->
-        <div class="card" style="gap: 20px;" id="printable-report">
+        <div class="card" style="gap: 20px;">
           <div class="card-title">
             <span>REPORTE DE EVALUACIÓN</span>
             <span class="badge" style="background: var(--primary-light);">REGISTRO POR CÁMARA</span>
@@ -598,13 +591,31 @@
 
           <div class="report-summary-cards">
             <div class="summary-box">
-              <div class="title">Mejor tiempo / ROM · derecha</div>
+              <div class="title">Mejor ROM · derecha</div>
               <div class="big-val" id="rep-max-right">— °</div>
             </div>
             <div class="summary-box">
-              <div class="title">Mejor tiempo / ROM · izquierda</div>
+              <div class="title">Mejor ROM · izquierda</div>
               <div class="big-val" id="rep-max-left">— °</div>
             </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Tabla de Intentos Registrados</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Intento</th>
+                  <th>Lado</th>
+                  <th>ROM Máx</th>
+                  <th>T. Arco</th>
+                  <th>Compensación</th>
+                </tr>
+              </thead>
+              <tbody id="report-table-attempts">
+                <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Sin intentos registrados aún</td></tr>
+              </tbody>
+            </table>
           </div>
 
           <div>
@@ -613,16 +624,12 @@
           </div>
 
           <div class="clinical-note-box">
-            Las métricas describen movimiento proyectado en 2D y no constituyen una predicción individual de caídas o diagnóstico aislado. La referencia utiliza el torso como escala cinemática.
+            Las métricas describen movimiento proyectado en 2D y no constituyen una predicción médica aislada. El PDF generado incorpora datos del paciente, gráfico de abducción y la tabla completa de intentos.
           </div>
-
-          <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
-            El PDF incorpora curvas, distribuciones, intentos, calidad, eventos y fuentes. Las señales CSV conservan los valores crudos y filtrados.
-          </p>
         </div>
 
         <!-- PANEL DE COMPLETAR REPORTE -->
-        <div class="card no-print">
+        <div class="card">
           <div class="card-title">Completar reporte</div>
           
           <div style="display: flex; flex-direction: column; gap: 14px;">
@@ -663,7 +670,7 @@
             </div>
 
             <div class="btn-group" style="flex-direction: column; gap: 8px; margin-top: 6px;">
-              <button class="btn-primary" onclick="window.print()" style="background: #62a398; border-color: #62a398;">
+              <button class="btn-primary" onclick="downloadRealPDF()" style="background: #62a398; border-color: #62a398;">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                   <polyline points="7 10 12 15 17 10"/>
@@ -775,6 +782,141 @@
       }
 
       document.getElementById('rep-obs-display').innerText = obs;
+    }
+
+    // GENERACIÓN Y DESCARGA DIRECTA DE ARCHIVO PDF CLÍNICO
+    function downloadRealPDF() {
+      if (!window.jspdf) {
+        alert("Cargando motor PDF, intenta en un segundo.");
+        return;
+      }
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // ENCABEZADO DE MARCA
+      doc.setFillColor(243, 234, 245); // Lila suave
+      doc.rect(0, 0, 210, 32, 'F');
+      
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(20);
+      doc.setTextColor(110, 65, 126); // Morado oscuro
+      doc.text("KineArc · Reporte Clínico Cinemático", 14, 18);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9);
+      doc.setTextColor(122, 110, 130);
+      const fechaHoy = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+      doc.text(`Evaluación de Abducción de Hombro (Arco Doloroso 60°-120°)  |  Emitido: ${fechaHoy}`, 14, 26);
+
+      // SECCIÓN 1: DATOS DEL PACIENTE
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.setTextColor(44, 37, 48);
+      doc.text("1. IDENTIFICACIÓN DEL PACIENTE Y EVALUACIÓN", 14, 44);
+      doc.setDrawColor(230, 219, 233);
+      doc.line(14, 46, 196, 46);
+
+      const code = document.getElementById('rep-code').innerText;
+      const age = document.getElementById('rep-age').innerText;
+      const pro = document.getElementById('rep-pro').innerText;
+      const status = document.getElementById('rep-status').innerText;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.text(`Código / ID Paciente: ${code}`, 14, 54);
+      doc.text(`Edad: ${age}`, 110, 54);
+      doc.text(`Profesional Evaluador: ${pro}`, 14, 62);
+      doc.text(`Estado de Revisión: ${status}`, 110, 62);
+
+      // SECCIÓN 2: RESUMEN DE RANGO DE MOVIMIENTO (ROM)
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("2. INDICADORES PRINCIPALES (ROM MÁXIMO BILATERAL)", 14, 76);
+      doc.line(14, 78, 196, 78);
+
+      doc.setFillColor(251, 249, 252);
+      doc.roundedRect(14, 82, 86, 22, 2, 2, 'FD');
+      doc.roundedRect(110, 82, 86, 22, 2, 2, 'FD');
+
+      doc.setFontSize(9);
+      doc.setTextColor(122, 110, 130);
+      doc.text("MEJOR ROM · HOMBRO DERECHO", 18, 89);
+      doc.text("MEJOR ROM · HOMBRO IZQUIERDO", 114, 89);
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(15);
+      doc.setTextColor(110, 65, 126);
+      doc.text(document.getElementById('rep-max-right').innerText, 18, 99);
+      doc.text(document.getElementById('rep-max-left').innerText, 114, 99);
+
+      // SECCIÓN 3: GRÁFICO CINEMÁTICO
+      let yPos = 116;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.setTextColor(44, 37, 48);
+      doc.text("3. CURVA CINEMÁTICA DE ABDUCCIÓN (° vs Tiempo)", 14, yPos);
+      doc.line(14, yPos + 2, 196, yPos + 2);
+
+      const chartCanvas = document.getElementById('angleChart');
+      if (chartCanvas) {
+        const chartImg = chartCanvas.toDataURL('image/png', 1.0);
+        doc.addImage(chartImg, 'PNG', 14, yPos + 5, 182, 48);
+        yPos += 60;
+      }
+
+      // SECCIÓN 4: TABLA DE INTENTOS REGISTRADOS
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("4. DETALLE DE INTENTOS REGISTRADOS", 14, yPos);
+      doc.line(14, yPos + 2, 196, yPos + 2);
+      yPos += 9;
+
+      doc.setFontSize(9);
+      doc.setFillColor(243, 234, 245);
+      doc.rect(14, yPos - 5, 182, 7, 'F');
+      doc.text("Intento", 16, yPos);
+      doc.text("Lado Evaluado", 48, yPos);
+      doc.text("ROM Máximo", 92, yPos);
+      doc.text("Tiempo en Arco", 130, yPos);
+      doc.text("Compensación", 168, yPos);
+      yPos += 7;
+
+      doc.setFont("helvetica", "normal");
+      if (attemptsHistory.length === 0) {
+        doc.text("No se registraron intentos durante esta sesión.", 16, yPos);
+        yPos += 8;
+      } else {
+        attemptsHistory.forEach(att => {
+          doc.text(`Intento ${att.id}`, 16, yPos);
+          doc.text(att.side, 48, yPos);
+          doc.text(`${att.maxAngle}°`, 92, yPos);
+          doc.text(`${att.painTime} s`, 130, yPos);
+          doc.text(att.comp, 168, yPos);
+          yPos += 6;
+        });
+      }
+
+      // SECCIÓN 5: OBSERVACIONES CLÍNICAS
+      yPos += 6;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("5. OBSERVACIONES CLÍNICAS", 14, yPos);
+      doc.line(14, yPos + 2, 196, yPos + 2);
+      yPos += 8;
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(9.5);
+      const obsText = document.getElementById('rep-obs-display').innerText;
+      const splitObs = doc.splitTextToSize(obsText, 180);
+      doc.text(splitObs, 14, yPos);
+
+      // PIE DE PÁGINA METODOLÓGICO
+      doc.setFontSize(8);
+      doc.setTextColor(122, 110, 130);
+      doc.text("Nota: Métricas obtenidas mediante seguimiento articular 2D (MediaPipe Pose). No reemplaza diagnóstico médico.", 14, 285);
+
+      const fileName = code !== 'Sin informar' ? `Reporte_KineArc_${code}.pdf` : `Reporte_Clinico_KineArc.pdf`;
+      doc.save(fileName);
     }
 
     // VARIABLES GLOBALES
@@ -1087,11 +1229,19 @@
       const attemptData = { id: attemptNum, side: selectedSide === 'left' ? 'Izquierdo' : 'Derecho', maxAngle, painTime: timeInPainZone.toFixed(1), comp: trunkCompensation ? 'Sí' : 'No' };
       attemptsHistory.push(attemptData);
 
+      // Actualizar tabla en Evaluación
       const tbody = document.getElementById('table-attempts');
       if (attemptNum === 1) tbody.innerHTML = '';
       const row = document.createElement('tr');
       row.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.comp}</td>`;
       tbody.appendChild(row);
+
+      // Actualizar tabla en Reporte Clínico
+      const repTbody = document.getElementById('report-table-attempts');
+      if (attemptNum === 1) repTbody.innerHTML = '';
+      const repRow = document.createElement('tr');
+      repRow.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.comp}</td>`;
+      repTbody.appendChild(repRow);
     }
 
     function exportCSV() {
