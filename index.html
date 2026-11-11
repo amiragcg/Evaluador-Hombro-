@@ -23,7 +23,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; position: relative; }
 
-    /* OVERLAY PARA MÓVIL */
+    /* OVERLAY MÓVIL */
     .sidebar-overlay {
       display: none;
       position: fixed;
@@ -34,7 +34,7 @@
     }
     .sidebar-overlay.active { display: block; }
 
-    /* BARRA LATERAL (SIDEBAR KINEARC) */
+    /* SIDEBAR KINEARC */
     aside {
       width: 265px;
       background: var(--card-bg);
@@ -48,244 +48,211 @@
       z-index: 100;
     }
 
-    .sidebar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .brand-box {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
+    .sidebar-header { display: flex; justify-content: space-between; align-items: center; }
+    .brand-box { display: flex; align-items: center; gap: 12px; }
     .brand-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary-light);
-      color: var(--primary);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      width: 40px; height: 40px;
+      background: var(--primary-light); color: var(--primary);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
     .brand { font-size: 1.25rem; font-weight: 800; color: var(--text); display: flex; flex-direction: column; line-height: 1.1; letter-spacing: -0.3px; }
     .brand span { font-size: 0.65rem; font-weight: 600; letter-spacing: 1.2px; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
 
-    .btn-close-sidebar {
-      display: none;
-      background: transparent;
-      border: none;
-      font-size: 1.3rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      padding: 4px;
-      line-height: 1;
-      min-width: auto;
-      flex: initial;
-    }
+    .btn-close-sidebar { display: none; background: transparent; border: none; font-size: 1.3rem; color: var(--text-muted); cursor: pointer; padding: 4px; }
 
-    .nav-section-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      padding-left: 12px;
-      margin-bottom: 4px;
-    }
-
+    .nav-section-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.2px; color: var(--text-muted); text-transform: uppercase; padding-left: 12px; margin-bottom: 4px; }
     nav { display: flex; flex-direction: column; gap: 6px; }
     .nav-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 11px 14px;
-      border: none;
-      background: transparent;
-      border-radius: 10px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.2s;
-      text-align: left;
-      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 14px; border: none; background: transparent; border-radius: 10px;
+      color: var(--text-muted); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: 0.2s; text-align: left; width: 100%;
     }
-    .nav-btn-content {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .nav-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      flex-shrink: 0;
-    }
+    .nav-btn-content { display: flex; align-items: center; gap: 12px; }
+    .nav-btn svg { width: 18px; height: 18px; stroke: currentColor; flex-shrink: 0; }
     .nav-btn:hover { background: var(--primary-light); color: var(--primary-dark); }
     .nav-btn.active { background: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
-    .nav-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--primary);
-      display: none;
-    }
+    .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); display: none; }
     .nav-btn.active .nav-dot { display: block; }
 
     .sidebar-footer {
-      margin-top: auto;
-      padding: 16px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin-top: auto; padding: 16px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 8px;
     }
-    .shield-badge {
-      width: 32px;
-      height: 32px;
-      background: var(--primary-light);
-      color: var(--primary);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    .shield-badge { width: 32px; height: 32px; background: var(--primary-light); color: var(--primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .sidebar-footer strong { display: block; color: var(--text); font-size: 0.82rem; }
     .sidebar-footer .version { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* CONTENEDOR PRINCIPAL */
+    /* MAIN AREA */
     main { flex: 1; display: flex; flex-direction: column; overflow-y: auto; width: 100%; }
-    header { background: var(--card-bg); border-bottom: 1px solid var(--border); padding: 15px 24px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
-    
-    .header-left { display: flex; align-items: center; gap: 12px; }
-    .btn-toggle-sidebar {
-      display: none;
-      background: var(--primary-light);
-      border: 1px solid var(--border);
-      color: var(--primary-dark);
-      padding: 7px 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      min-width: auto;
-      flex: initial;
+    .mobile-topbar {
+      display: none; background: var(--card-bg); border-bottom: 1px solid var(--border);
+      padding: 12px 18px; justify-content: space-between; align-items: center;
     }
+    .btn-toggle-sidebar { background: var(--primary-light); border: 1px solid var(--border); color: var(--primary-dark); padding: 6px 10px; border-radius: 8px; cursor: pointer; }
 
-    header h1 { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); }
-    .badge { background: var(--bg-accent); color: var(--primary-dark); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
-
-    .view-content { padding: 24px; max-width: 1300px; margin: 0 auto; width: 100%; display: none; flex-direction: column; gap: 20px; }
-    .view-content.active { display: flex; }
-
-    /* RESPONSIVE MÓVIL */
     @media (max-width: 768px) {
-      aside {
-        position: fixed;
-        top: 0; left: 0; bottom: 0;
-        transform: translateX(-100%);
-        box-shadow: 4px 0 16px rgba(0,0,0,0.1);
-      }
+      aside { position: fixed; top: 0; left: 0; bottom: 0; transform: translateX(-100%); box-shadow: 4px 0 16px rgba(0,0,0,0.1); }
       aside.open { transform: translateX(0); }
       .btn-close-sidebar { display: block; }
-      .btn-toggle-sidebar { display: flex; align-items: center; justify-content: center; }
-      header h1 { font-size: 0.95rem; }
+      .mobile-topbar { display: flex; }
     }
 
-    /* LAYOUT GRID */
-    .grid-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
-    @media (max-width: 992px) { .grid-layout { grid-template-columns: 1fr; } }
+    .view-content { padding: 28px 32px; max-width: 1360px; margin: 0 auto; width: 100%; display: none; flex-direction: column; gap: 22px; }
+    .view-content.active { display: flex; }
+    @media (max-width: 768px) { .view-content { padding: 18px; } }
 
-    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.04); display: flex; flex-direction: column; gap: 15px; }
-    .card-title { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    /* ENCABEZADO DE SECCIÓN CLÍNICA (ESTILO APOYO MONOPODAL) */
+    .page-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
+    .page-kicker { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.2px; color: var(--primary); text-transform: uppercase; margin-bottom: 4px; }
+    .page-title { font-size: 2rem; font-weight: 800; color: var(--text); letter-spacing: -0.5px; line-height: 1.15; }
+    .page-title span { color: var(--primary); }
+    .page-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
+    .page-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-    /* VISOR DE VIDEO */
-    .video-viewport { position: relative; width: 100%; background: #1a161c; border-radius: 8px; overflow: hidden; aspect-ratio: 4/3; display: flex; justify-content: center; align-items: center; }
+    /* BANNER DE SEGURIDAD */
+    .safety-banner {
+      background: var(--primary-light); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 16px; display: flex; align-items: center; gap: 12px; font-size: 0.82rem; color: var(--primary-dark);
+    }
+
+    .status-strip { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-muted); }
+    .status-indicator { display: flex; align-items: center; gap: 8px; }
+    .dot-live { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
+
+    /* 4 TARJETAS KPI SUPERIORES */
+    .kpi-row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 992px) { .kpi-row-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .kpi-row-4 { grid-template-columns: 1fr; } }
+
+    .kpi-box {
+      background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
+      padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+      box-shadow: 0 2px 8px rgba(142, 91, 159, 0.03);
+    }
+    .kpi-box-top { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
+    .kpi-box-val { font-size: 1.75rem; font-weight: 800; color: var(--text); }
+    .kpi-box-val small { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
+    .kpi-box-foot { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* GRID PRINCIPAL: CÁMARA (IZQ) + PREPARAR EVALUACIÓN (DER) */
+    .eval-main-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: start; }
+    @media (max-width: 1024px) { .eval-main-grid { grid-template-columns: 1fr; } }
+
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 22px; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.03); display: flex; flex-direction: column; gap: 16px; }
+    .card-header-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .card-h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .card-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* PESTAÑAS PLANO FRONTAL / ESCAPULAR */
+    .pill-switch { display: flex; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 3px; }
+    .pill-btn { padding: 5px 12px; border: none; background: transparent; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); cursor: pointer; }
+    .pill-btn.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+    /* VISOR DE VIDEO OSCURO CLÍNICO */
+    .camera-stage {
+      position: relative; width: 100%; background: #142224; border-radius: 12px; overflow: hidden;
+      aspect-ratio: 16/10; display: flex; justify-content: center; align-items: center;
+    }
     video { display: none; }
     canvas { width: 100%; height: 100%; object-fit: contain; }
 
-    .overlay-status { position: absolute; top: 12px; left: 12px; background: rgba(44, 37, 48, 0.8); color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; backdrop-filter: blur(4px); }
+    .cam-badge-tl {
+      position: absolute; top: 14px; left: 14px; background: rgba(20, 34, 36, 0.75); color: #cbd5e1;
+      padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px;
+      display: flex; align-items: center; gap: 6px; backdrop-filter: blur(4px);
+    }
+    .cam-badge-tl .dot { width: 6px; height: 6px; border-radius: 50%; background: #94a3b8; }
+    .cam-badge-tl.live .dot { background: #4ade80; }
+
+    .cam-badge-tr {
+      position: absolute; top: 14px; right: 14px; background: rgba(20, 34, 36, 0.75); color: #cbd5e1;
+      padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; backdrop-filter: blur(4px);
+    }
+
+    .cam-guide-box {
+      position: absolute; bottom: 14px; right: 14px; background: rgba(20, 34, 36, 0.85); border: 1px solid rgba(255,255,255,0.12);
+      color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 0.75rem; max-width: 210px;
+    }
+    .cam-guide-box strong { display: block; margin-bottom: 2px; font-size: 0.78rem; }
+    .cam-guide-box span { color: #94a3b8; font-size: 0.7rem; }
+
+    .cam-foot-left { position: absolute; bottom: 14px; left: 14px; font-size: 0.68rem; color: #94a3b8; }
     .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: var(--bg-accent); text-shadow: 0 0 20px rgba(0,0,0,0.8); }
 
-    /* BOTONES Y PESTAÑAS */
-    .source-tabs { display: flex; gap: 6px; background: var(--primary-light); padding: 4px; border-radius: 8px; }
-    .tab-btn { flex: 1; padding: 8px; border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--text-muted); transition: 0.2s; }
-    .tab-btn.active { background: #fff; color: var(--primary-dark); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    /* CONTROLES INFERIORES DE CÁMARA */
+    .cam-controls-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .cam-device-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); }
+    .cam-buttons { display: flex; gap: 10px; align-items: center; }
 
-    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    button { flex: 1; min-width: 120px; padding: 10px 14px; border: 1px solid transparent; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
-    button.btn-primary { background: var(--primary); color: white; }
-    button.btn-primary:hover { background: var(--primary-dark); }
-    button.btn-danger { background: #fff; color: var(--danger); border-color: var(--danger); }
-    button.btn-danger:hover { background: var(--danger); color: white; }
-    button.btn-outline { background: #fff; color: var(--text); border-color: var(--border); }
-    button.btn-outline.active { background: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+    .audio-prompt-box {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; font-size: 0.8rem; color: var(--text-muted); line-height: 1.45;
+    }
 
-    /* PROTOCOLO PASO A PASO */
-    .protocol-steps { display: flex; justify-content: space-between; gap: 8px; }
-    .step-item { flex: 1; padding: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; text-align: center; font-size: 0.75rem; color: var(--text-muted); font-weight: 600; }
-    .step-item.active { background: var(--primary-light); border-color: var(--primary); color: var(--primary-dark); }
+    /* BOTONES */
+    button { padding: 9px 16px; border-radius: 8px; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid transparent; }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-outline { background: #fff; color: var(--text); border-color: var(--border); }
+    .btn-outline:hover { background: var(--primary-light); border-color: var(--primary); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: none; padding: 6px 10px; }
+    .btn-ghost:hover { color: var(--primary-dark); }
 
-    /* KPIS */
-    .kpi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .kpi-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
-    .kpi-card .label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-    .kpi-card .val { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin: 2px 0; }
-    .kpi-card .unit { font-size: 0.75rem; color: var(--text-muted); }
+    /* FORMULARIO PREPARAR EVALUACIÓN */
+    .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; color: var(--text); background: #fff; outline: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
 
-    .alert-banner { padding: 10px; border-radius: 8px; font-weight: 700; font-size: 0.85rem; text-align: center; background: var(--bg); color: var(--text-muted); transition: 0.3s; }
-    .alert-banner.active-pain { background: #fdf2f2; color: #a94442; border: 1px solid #ebccd1; }
-    .alert-banner.active-comp { background: #fcf8e3; color: #8a6d3b; border: 1px solid #faebcc; }
+    /* GUÍA DE AUDIO EN PANEL DERECHO */
+    .audio-panel { border-top: 1px solid var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; }
+    .audio-panel-header { display: flex; justify-content: space-between; align-items: center; }
+    .audio-links { display: flex; gap: 14px; font-size: 0.78rem; font-weight: 600; }
+    .audio-links a { color: var(--primary); text-decoration: none; cursor: pointer; }
+    .audio-links a:hover { text-decoration: underline; }
 
-    .chart-box { height: 200px; width: 100%; }
+    /* LISTA DE PASOS PROTOCOLO */
+    .step-list { display: flex; flex-direction: column; gap: 8px; margin: 6px 0; }
+    .step-row { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--text-muted); }
+    .step-circle { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
+    .step-row.active { color: var(--primary-dark); font-weight: 600; }
+    .step-row.active .step-circle { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* TABLAS */
+    /* SECCIÓN INFERIOR: EL MOVIMIENTO, EN DETALLE */
+    .detail-section { margin-top: 12px; display: flex; flex-direction: column; gap: 16px; }
+    .detail-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .detail-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 900px) { .detail-grid-2 { grid-template-columns: 1fr; } }
+
+    .chart-container { height: 210px; width: 100%; position: relative; }
+    .empty-placeholder {
+      border: 1px dashed var(--border); border-radius: 10px; height: 180px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; color: var(--text-muted);
+    }
+    .empty-placeholder strong { font-size: 0.85rem; color: var(--text); margin-bottom: 4px; }
+    .empty-placeholder span { font-size: 0.75rem; }
+
+    /* TABLAS Y REPORTE */
     table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
     th { font-weight: 700; color: var(--text-muted); background: var(--primary-light); }
 
-    /* ESTILOS REPORTE CLÍNICO */
-    .report-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 10px; }
+    .report-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     @media (max-width: 768px) { .report-meta-grid { grid-template-columns: repeat(2, 1fr); } }
     .report-meta-item .label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .report-meta-item .val { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 4px; }
-
-    .report-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 15px 0; }
-    @media (max-width: 600px) { .report-summary-cards { grid-template-columns: 1fr; } }
+    .report-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .summary-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-    .summary-box .title { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
-    .summary-box .big-val { font-size: 2rem; font-weight: 900; color: var(--primary-dark); margin: 6px 0; }
-
-    .clinical-note-box { background: #fffcf5; border: 1px solid #f0e6d2; border-radius: 8px; padding: 14px; font-size: 0.8rem; color: #786643; line-height: 1.45; }
-
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-group label { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-    .form-group input, .form-group textarea, .form-group select { padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; background: var(--bg); color: var(--text); outline: none; }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); background: #fff; }
-    .form-row { display: flex; gap: 12px; }
-    @media (max-width: 600px) { .form-row { flex-direction: column; } }
-
-    /* SECCIÓN GUÍA Y EVIDENCIA */
-    .guide-banner { background: linear-gradient(135deg, var(--primary-light), var(--bg-accent)); border-radius: 12px; padding: 22px; color: var(--primary-dark); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
-    .guide-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    @media (max-width: 600px) { .guide-grid { grid-template-columns: 1fr; } }
-    .guide-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
-    .guide-card .num { font-size: 1.5rem; font-weight: 900; color: var(--bg-accent); }
-    .guide-card h3 { font-size: 1rem; color: var(--primary-dark); margin: 4px 0 8px 0; }
-    .guide-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+    .summary-box .big-val { font-size: 2rem; font-weight: 900; color: var(--primary-dark); margin-top: 4px; }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- LIBRERÍA JSPDF PARA DESCARGA REAL DE PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
@@ -308,7 +275,7 @@
           kinearc <span>MOVIMIENTO · CLÍNICA</span>
         </div>
       </div>
-      <button class="btn-close-sidebar" onclick="closeSidebar()" aria-label="Cerrar menú">✕</button>
+      <button class="btn-close-sidebar" onclick="closeSidebar()">✕</button>
     </div>
     
     <div>
@@ -317,10 +284,8 @@
         <button class="nav-btn active" onclick="showView('evaluacion', this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7" rx="1.5"/>
-              <rect x="14" y="3" width="7" height="7" rx="1.5"/>
-              <rect x="14" y="14" width="7" height="7" rx="1.5"/>
-              <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/>
             </svg>
             <span>Evaluación</span>
           </div>
@@ -330,8 +295,7 @@
         <button class="nav-btn" onclick="showView('resultados', this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 3v18h18"/>
-              <path d="m19 9-5 5-4-4-3 3"/>
+              <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
             </svg>
             <span>Resultados</span>
           </div>
@@ -342,9 +306,7 @@
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
             </svg>
             <span>Reporte clínico</span>
           </div>
@@ -367,8 +329,7 @@
     <div class="sidebar-footer">
       <div class="shield-badge">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>
         </svg>
       </div>
       <div>
@@ -379,139 +340,301 @@
     </div>
   </aside>
 
-  <!-- CONTENIDO PRINCIPAL -->
   <main>
-    <header>
-      <div class="header-left">
-        <button class="btn-toggle-sidebar" onclick="openSidebar()" aria-label="Abrir menú">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="6" x2="21" y2="6"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-        </button>
-        <h1>Evaluación de Hombro · KineArc</h1>
-      </div>
-      <div class="badge">Espacio Clínico</div>
-    </header>
+    <div class="mobile-topbar">
+      <button class="btn-toggle-sidebar" onclick="openSidebar()">☰ Menú</button>
+      <strong style="color: var(--primary-dark);">KineArc</strong>
+      <span style="font-size: 0.75rem; color: var(--text-muted);">Clínica</span>
+    </div>
 
-    <!-- VISTA 1: EVALUACIÓN -->
+    <!-- ==========================================
+         VISTA 1: EVALUACIÓN (DISEÑO CLÍNICO)
+         ========================================== -->
     <div id="view-evaluacion" class="view-content active">
-      <div class="grid-layout">
+      
+      <!-- ENCABEZADO SUPERIOR -->
+      <div class="page-header">
+        <div>
+          <div class="page-kicker">EVALUACIÓN CINEMÁTICA DEL HOMBRO</div>
+          <h1 class="page-title">Abducción de hombro<span>.</span></h1>
+          <p class="page-subtitle">Mide el arco doloroso (60°–120°). Comprende la estrategia de movimiento.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn-outline" onclick="resetSession()">+ Nueva evaluación</button>
+          <button class="btn-primary" onclick="downloadRealPDF()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Reporte PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- BANNER DE SUPERVISIÓN -->
+      <div class="safety-banner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Prueba supervisada. Mantén un encuadre estable y detén la elevación ante dolor agudo o inseguridad.</span>
+      </div>
+
+      <!-- BARRA DE ESTADO DE SESIÓN -->
+      <div class="status-strip">
+        <div class="status-indicator">
+          <span class="dot-live"></span>
+          <span id="strip-patient-info">Evaluación clínica · Sin código</span>
+        </div>
+        <span id="strip-date"></span>
+      </div>
+
+      <!-- 4 TARJETAS KPI SUPERIORES -->
+      <div class="kpi-row-4">
+        <div class="kpi-box">
+          <div class="kpi-box-top">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span>ROM máximo</span>
+          </div>
+          <div class="kpi-box-val" id="kpi-max-angle">— <small>°</small></div>
+          <div class="kpi-box-foot" id="kpi-side-label">Sin intento</div>
+        </div>
+
+        <div class="kpi-box">
+          <div class="kpi-box-top">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Tiempo en arco</span>
+          </div>
+          <div class="kpi-box-val" id="kpi-pain-time">— <small>s</small></div>
+          <div class="kpi-box-foot">Zona 60° – 120°</div>
+        </div>
+
+        <div class="kpi-box">
+          <div class="kpi-box-top">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+            <span>Inclinación tronco</span>
+          </div>
+          <div class="kpi-box-val" id="kpi-trunk-angle">— <small>° DE</small></div>
+          <div class="kpi-box-foot" id="kpi-comp-status">Sin compensación</div>
+        </div>
+
+        <div class="kpi-box">
+          <div class="kpi-box-top">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+            <span>Velocidad angular</span>
+          </div>
+          <div class="kpi-box-val" id="kpi-speed">— <small>°/s</small></div>
+          <div class="kpi-box-foot" id="txt-fps">0 FPS en vivo</div>
+        </div>
+      </div>
+
+      <!-- GRID PRINCIPAL: CAPTURA DE MOVIMIENTO + PREPARAR EVALUACIÓN -->
+      <div class="eval-main-grid">
         
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          <div class="card">
-            <div class="card-title">
-              <span>Captura de Movimiento</span>
-              <span id="txt-fps">0 FPS</span>
+        <!-- COLUMNA IZQUIERDA: CÁMARA -->
+        <div class="card">
+          <div class="card-header-flex">
+            <div>
+              <div class="card-h3">Captura de movimiento</div>
+              <div class="card-sub">Tronco y extremidad superior · cámara fija</div>
             </div>
-
-            <div class="source-tabs">
-              <button id="tab-cam" class="tab-btn active" onclick="switchSourceMode('webcam')">Cámara en Vivo</button>
-              <button id="tab-file" class="tab-btn" onclick="switchSourceMode('file')">Video Local</button>
-            </div>
-
-            <div class="video-viewport">
-              <video id="webcam" playsinline></video>
-              <canvas id="output_canvas" width="640" height="480"></canvas>
-              <div class="overlay-status" id="overlay-status">Cámara Apagada</div>
-              <div class="overlay-countdown" id="overlay-count" style="display: none;">3</div>
-            </div>
-
-            <div id="file-input-container" style="display: none; background: var(--primary-light); padding: 10px; border-radius: 6px; border: 1px dashed var(--border);">
-              <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/quicktime" onchange="handleFileUpload(event)">
-            </div>
-
-            <div class="btn-group">
-              <button id="btn-cam" class="btn-primary" onclick="toggleCamera()">Iniciar Cámara</button>
-              <button id="btn-silhouette" class="btn-outline" onclick="toggleSilhouette()">Silueta On/Off</button>
-              <button id="btn-rec" class="btn-outline" onclick="startGuidedTest()" disabled>Iniciar Intento</button>
-              <button class="btn-danger" onclick="resetCurrentMetrics()">Resetear</button>
+            <div class="pill-switch">
+              <button class="pill-btn active" id="btn-plane-front" onclick="setPlane('Frontal')">Frontal</button>
+              <button class="pill-btn" id="btn-plane-scap" onclick="setPlane('Escapular')">Escapular</button>
             </div>
           </div>
 
+          <div class="camera-stage">
+            <video id="webcam" playsinline></video>
+            <canvas id="output_canvas" width="640" height="480"></canvas>
+            
+            <div class="cam-badge-tl" id="cam-status-pill">
+              <span class="dot"></span>
+              <span id="cam-status-text">SIN CÁMARA</span>
+            </div>
+            <div class="cam-badge-tr" id="cam-signal-pill">SIN SEÑAL</div>
+
+            <div class="overlay-countdown" id="overlay-count" style="display: none;">3</div>
+
+            <div class="cam-foot-left" id="cam-plane-foot">PLANO FRONTAL · Video local</div>
+            <div class="cam-guide-box">
+              <strong>Prepara la cámara</strong>
+              <span>Incluye cabeza, tronco, caderas y ambos brazos.</span>
+            </div>
+          </div>
+
+          <div id="file-input-container" style="display: none; background: var(--primary-light); padding: 10px; border-radius: 8px; border: 1px dashed var(--primary);">
+            <input type="file" id="video-file-input" accept="video/mp4,video/webm,video/quicktime" onchange="handleFileUpload(event)">
+          </div>
+
+          <div class="cam-controls-bar">
+            <div class="cam-device-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+              <span>Cámara predeterminada</span>
+              <button class="btn-ghost" onclick="toggleSilhouette()" style="font-size: 0.75rem;">[Silueta guía]</button>
+            </div>
+            <div class="cam-buttons">
+              <button id="btn-cam" class="btn-outline" onclick="toggleCamera()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                <span>Activar cámara</span>
+              </button>
+              <button class="btn-ghost" onclick="toggleFileBox()">Cargar video</button>
+            </div>
+          </div>
+
+          <div class="audio-prompt-box">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+            <span>Esta prueba debe ser supervisada por su kinesiólogo o kinesióloga. Colóquese de frente con los brazos relajados al costado. Cuando se lo indiquen, eleve lateralmente el brazo evaluado hasta el máximo rango tolerado y descienda suavemente.</span>
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: PREPARAR EVALUACIÓN -->
+        <div class="card">
+          <div class="card-header-flex">
+            <div>
+              <div class="card-h3">Preparar evaluación</div>
+              <div class="card-sub">Protocolo por intento</div>
+            </div>
+            <span id="protocol-counter" style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">01 / 03</span>
+          </div>
+
+          <!-- DATOS DEL PACIENTE SINCRONIZADOS CON REPORTE -->
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px;">
+            <div class="form-group">
+              <label>Código de persona</label>
+              <input type="text" id="input-code" placeholder="Ej. HM-001" oninput="syncPatientData()">
+            </div>
+            <div class="form-group">
+              <label>Edad</label>
+              <input type="text" id="input-age" placeholder="Años" oninput="syncPatientData()">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Profesional</label>
+            <input type="text" id="input-pro" placeholder="Nombre del kinesiólogo/a" oninput="syncPatientData()">
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label>Hombro a evaluar</label>
+              <select id="select-side" onchange="setSide(this.value)">
+                <option value="right">Derecho</option>
+                <option value="left">Izquierdo</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Duración registro</label>
+              <select id="select-duration">
+                <option value="6000">6 segundos</option>
+                <option value="10000">10 segundos</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- GUÍA DE AUDIO -->
+          <div class="audio-panel">
+            <div class="audio-panel-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                <div>
+                  <strong style="font-size: 0.82rem; display: block;">Guía de audio</strong>
+                  <span style="font-size: 0.7rem; color: var(--text-muted);" id="audio-status-lbl">Español · instrucciones listas</span>
+                </div>
+              </div>
+            </div>
+            <div class="audio-links">
+              <a onclick="speakFullInstructions()">Escuchar guía</a>
+              <a onclick="stopSpeech()" style="color: var(--text-muted);">Silenciar voz</a>
+            </div>
+          </div>
+
+          <!-- PASOS DEL PROTOCOLO -->
+          <div class="step-list">
+            <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Cámara y tronco completo</span></div>
+            <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Postura neutra en reposo</span></div>
+            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Abducción y registro del arco</span></div>
+          </div>
+
+          <button class="btn-outline" onclick="calibrateNeutral()" style="width: 100%;">Calibrar postura · 3 s</button>
+          <button id="btn-rec" class="btn-primary" onclick="startGuidedTest()" disabled style="width: 100%; padding: 12px;">
+            <span>▶ Preparar intento</span>
+          </button>
+          <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.35;">
+            El profesional supervisa la elevación y descenso. Los avisos de arco doloroso y compensación se registran automáticamente.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- SECCIÓN INFERIOR: EL MOVIMIENTO, EN DETALLE -->
+      <div class="detail-section">
+        <div class="detail-header">
+          <div>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text);">El movimiento, en detalle</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Señales cinemáticas y eventos del intento seleccionado.</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Intento:</span>
+            <select id="select-attempt-detail" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.8rem; background: #fff;">
+              <option>Sin intentos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="detail-grid-2">
+          <!-- TARJETA 1: CURVA DE ABDUCCIÓN -->
           <div class="card">
-            <div class="card-title">Dinámica Temporal de Abducción (° vs s)</div>
-            <div class="chart-box">
+            <div class="card-header-flex">
+              <div>
+                <div class="card-h3">Dinámica de abducción glenohumeral</div>
+                <div class="card-sub">Ángulo proyectado (°) · Franja lila indica Arco Doloroso (60°–120°)</div>
+              </div>
+              <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary);">● Hombro</span>
+            </div>
+            <div class="chart-container">
               <canvas id="angleChart"></canvas>
             </div>
           </div>
+
+          <!-- TARJETA 2: HISTORIAL Y EVENTOS DEL INTENTO -->
+          <div class="card">
+            <div class="card-header-flex">
+              <div>
+                <div class="card-h3">Eventos e intentos registrados</div>
+                <div class="card-sub">Observaciones cinemáticas que requieren revisión clínica</div>
+              </div>
+              <button class="btn-outline" onclick="exportCSV()" style="padding: 4px 10px; font-size: 0.72rem;">Exportar CSV</button>
+            </div>
+            <div style="overflow-x: auto;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Intento</th>
+                    <th>Lado</th>
+                    <th>ROM Máx</th>
+                    <th>T. Arco</th>
+                    <th>Compensación</th>
+                  </tr>
+                </thead>
+                <tbody id="table-attempts">
+                  <tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar este indicador.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          
-          <div class="card">
-            <div class="card-title">
-              <span>Preparar evaluación · Protocolo por intento</span>
-              <span id="protocol-counter" style="color: var(--primary);">01 / 03</span>
-            </div>
-            
-            <div class="protocol-steps">
-              <div id="step-1" class="step-item active">1. Encuadre</div>
-              <div id="step-2" class="step-item">2. Calibración</div>
-              <div id="step-3" class="step-item">3. Registro</div>
-            </div>
-
-            <div class="btn-group" style="margin-top: 10px;">
-              <button id="btn-side-left" class="btn-outline active" onclick="setSide('left')">Hombro Izquierdo</button>
-              <button id="btn-side-right" class="btn-outline" onclick="setSide('right')">Hombro Derecho</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">Indicadores Cinemáticos (KPIs)</div>
-            <div class="kpi-grid">
-              <div class="kpi-card">
-                <div class="label">ROM Máx</div>
-                <div class="val" id="kpi-max-angle">0°</div>
-                <div class="unit">Alcanzado</div>
-              </div>
-              <div class="kpi-card">
-                <div class="label">T. en Arco</div>
-                <div class="val" id="kpi-pain-time">0.0s</div>
-                <div class="unit">60° - 120°</div>
-              </div>
-              <div class="kpi-card">
-                <div class="label">Vel. Angular</div>
-                <div class="val" id="kpi-speed">0</div>
-                <div class="unit">°/s (Media)</div>
-              </div>
-            </div>
-
-            <div id="alert-banner" class="alert-banner">Estado: Reposo / Sin conflicto</div>
-          </div>
-
-          <div class="card">
-            <div class="card-title">
-              <span>Historial de Intentos</span>
-              <button onclick="exportCSV()" class="btn-outline" style="padding: 4px 10px; font-size: 0.75rem; min-width: auto; flex: initial;">Exportar CSV</button>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Intento</th>
-                  <th>Lado</th>
-                  <th>ROM Máx</th>
-                  <th>T. Arco</th>
-                  <th>Compensación</th>
-                </tr>
-              </thead>
-              <tbody id="table-attempts">
-                <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Sin intentos registrados</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div>
-
       </div>
+
     </div>
 
-    <!-- VISTA 2: RESULTADOS Y VALIDACIÓN -->
+    <!-- ==========================================
+         VISTA 2: RESULTADOS Y VALIDACIÓN
+         ========================================== -->
     <div id="view-resultados" class="view-content">
+      <div class="page-header">
+        <div>
+          <div class="page-kicker">VALIDACIÓN METODOLÓGICA</div>
+          <h1 class="page-title">Resultados y validación<span>.</span></h1>
+          <p class="page-subtitle">Comparación cuantitativa frente a medición goniométrica de referencia.</p>
+        </div>
+      </div>
+
       <div class="card">
-        <div class="card-title">Tabla de Validación Cuantitativa (Criterio I5)</div>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Comparación del sistema de visión artificial frente a medición goniométrica de referencia (2 registros de prueba).</p>
         <table>
           <thead>
             <tr>
@@ -557,200 +680,97 @@
       </div>
     </div>
 
-    <!-- VISTA 3: REPORTE CLÍNICO COMPLETO -->
+    <!-- ==========================================
+         VISTA 3: REPORTE CLÍNICO
+         ========================================== -->
     <div id="view-reporte" class="view-content">
-      <div class="grid-layout">
-        
-        <!-- FICHA PRINCIPAL DEL REPORTE -->
-        <div class="card" style="gap: 20px;">
-          <div class="card-title">
-            <span>REPORTE DE EVALUACIÓN</span>
-            <span class="badge" style="background: var(--primary-light);">REGISTRO POR CÁMARA</span>
-          </div>
+      <div class="page-header">
+        <div>
+          <div class="page-kicker">DOCUMENTACIÓN CLÍNICA</div>
+          <h1 class="page-title">Reporte clínico<span>.</span></h1>
+          <p class="page-subtitle">Ficha resumen bilateral y exportación oficial en PDF o CSV.</p>
+        </div>
+      </div>
 
-          <h2 style="font-size: 1.5rem; color: var(--text); font-weight: 800;">Abducción de Hombro</h2>
-          
+      <div class="eval-main-grid">
+        <div class="card">
+          <div class="card-header-flex">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary);">REPORTE DE EVALUACIÓN</span>
+            <span style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;">REGISTRO POR CÁMARA</span>
+          </div>
+          <h2 style="font-size: 1.4rem; font-weight: 800;">Abducción de Hombro</h2>
+
           <div class="report-meta-grid">
-            <div class="report-meta-item">
-              <div class="label">Código de persona</div>
-              <div class="val" id="rep-code">Sin informar</div>
-            </div>
-            <div class="report-meta-item">
-              <div class="label">Edad</div>
-              <div class="val" id="rep-age">Sin informar</div>
-            </div>
-            <div class="report-meta-item">
-              <div class="label">Profesional</div>
-              <div class="val" id="rep-pro">Sin informar</div>
-            </div>
-            <div class="report-meta-item">
-              <div class="label">Estado</div>
-              <div class="val" id="rep-status" style="color: #b97a29; font-weight: 700;">Pendiente de revisión profesional</div>
-            </div>
+            <div class="report-meta-item"><div class="label">Código de persona</div><div class="val" id="rep-code">Sin informar</div></div>
+            <div class="report-meta-item"><div class="label">Edad</div><div class="val" id="rep-age">Sin informar</div></div>
+            <div class="report-meta-item"><div class="label">Profesional</div><div class="val" id="rep-pro">Sin informar</div></div>
+            <div class="report-meta-item"><div class="label">Estado</div><div class="val" id="rep-status" style="color: #b97a29;">Pendiente de revisión profesional</div></div>
           </div>
 
           <div class="report-summary-cards">
-            <div class="summary-box">
-              <div class="title">Mejor ROM · derecha</div>
-              <div class="big-val" id="rep-max-right">— °</div>
-            </div>
-            <div class="summary-box">
-              <div class="title">Mejor ROM · izquierda</div>
-              <div class="big-val" id="rep-max-left">— °</div>
-            </div>
+            <div class="summary-box"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Mejor ROM · derecha</div><div class="big-val" id="rep-max-right">— °</div></div>
+            <div class="summary-box"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Mejor ROM · izquierda</div><div class="big-val" id="rep-max-left">— °</div></div>
           </div>
 
           <div>
-            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Tabla de Intentos Registrados</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Intento</th>
-                  <th>Lado</th>
-                  <th>ROM Máx</th>
-                  <th>T. Arco</th>
-                  <th>Compensación</th>
-                </tr>
-              </thead>
-              <tbody id="report-table-attempts">
-                <tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Sin intentos registrados aún</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div>
-            <h3 style="font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px;">Observaciones clínicas</h3>
+            <strong style="font-size: 0.85rem; display: block; margin-bottom: 6px;">Observaciones clínicas</strong>
             <p id="rep-obs-display" style="font-size: 0.85rem; color: var(--text-muted);">Sin observaciones.</p>
           </div>
-
-          <div class="clinical-note-box">
-            Las métricas describen movimiento proyectado en 2D y no constituyen una predicción médica aislada. El PDF generado incorpora datos del paciente, gráfico de abducción y la tabla completa de intentos.
-          </div>
         </div>
 
-        <!-- PANEL DE COMPLETAR REPORTE -->
         <div class="card">
-          <div class="card-title">Completar reporte</div>
-          
-          <div style="display: flex; flex-direction: column; gap: 14px;">
-            
-            <div class="form-group">
-              <label>Código de persona / ID</label>
-              <input type="text" id="input-code" placeholder="Ej: PAC-1092" oninput="updateReportMeta()">
-            </div>
-
-            <div class="form-row">
-              <div class="form-group" style="flex: 1;">
-                <label>Edad</label>
-                <input type="text" id="input-age" placeholder="Ej: 34 años" oninput="updateReportMeta()">
-              </div>
-              <div class="form-group" style="flex: 1;">
-                <label>Profesional</label>
-                <input type="text" id="input-pro" placeholder="Ej: Kine. J. Pérez" oninput="updateReportMeta()">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Estado de revisión</label>
-              <select id="input-status" onchange="updateReportMeta()">
-                <option value="Pendiente de revisión profesional">Pendiente de revisión profesional</option>
-                <option value="Evaluación aprobada y validada">Evaluación aprobada y validada</option>
-                <option value="Requiere reevaluación">Requiere reevaluación</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Observaciones clínicas</label>
-              <textarea id="input-obs" rows="4" placeholder="Estrategia observada, tolerancia, ayuda requerida y contexto clínico..." oninput="updateReportMeta()"></textarea>
-            </div>
-
-            <div style="display: flex; align-items: flex-start; gap: 10px;">
-              <input type="checkbox" id="chk-review" style="margin-top: 3px; cursor: pointer;">
-              <label for="chk-review" style="font-size: 0.8rem; color: var(--text-muted); cursor: pointer; line-height: 1.3;">He revisado el registro y sus eventos</label>
-            </div>
-
-            <div class="btn-group" style="flex-direction: column; gap: 8px; margin-top: 6px;">
-              <button class="btn-primary" onclick="downloadRealPDF()" style="background: #62a398; border-color: #62a398;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                <span>Descargar reporte PDF</span>
-              </button>
-              
-              <button class="btn-outline" onclick="exportCSV()">Descargar señales CSV</button>
-              <button class="btn-outline" onclick="exportJSON()">Guardar sesión JSON</button>
-            </div>
-
-            <div style="text-align: center; margin-top: 4px;">
-              <a href="#" onclick="importJSON(); return false;" style="font-size: 0.75rem; color: var(--text-muted); text-decoration: underline;">Recuperar sesión JSON</a>
-            </div>
+          <div class="card-h3">Completar reporte</div>
+          <div class="form-group">
+            <label>Estado de revisión</label>
+            <select id="input-status" onchange="syncPatientData()">
+              <option value="Pendiente de revisión profesional">Pendiente de revisión profesional</option>
+              <option value="Evaluación aprobada y validada">Evaluación aprobada y validada</option>
+              <option value="Requiere reevaluación">Requiere reevaluación</option>
+            </select>
           </div>
+          <div class="form-group">
+            <label>Observaciones clínicas</label>
+            <textarea id="input-obs" rows="4" placeholder="Estrategia observada, tolerancia, dolor percibido..." oninput="syncPatientData()"></textarea>
+          </div>
+          <button class="btn-primary" onclick="downloadRealPDF()" style="width: 100%; padding: 12px;">Descargar reporte PDF</button>
+          <button class="btn-outline" onclick="exportCSV()" style="width: 100%;">Descargar señales CSV</button>
         </div>
-
       </div>
     </div>
 
-    <!-- VISTA 4: GUÍA Y EVIDENCIA -->
+    <!-- ==========================================
+         VISTA 4: GUÍA Y EVIDENCIA
+         ========================================== -->
     <div id="view-guia" class="view-content">
-      <div class="guide-banner">
+      <div class="page-header">
         <div>
-          <h2>Un Protocolo Reproducible</h2>
-          <p>Medir el arco doloroso. Observar la estrategia de compensación de tronco.</p>
+          <div class="page-kicker">FUNDAMENTO BIOMECÁNICO</div>
+          <h1 class="page-title">Guía y evidencia<span>.</span></h1>
+          <p class="page-subtitle">Protocolo estandarizado basado en Kessel & Watson (Arco Doloroso 60°–120°).</p>
         </div>
-        <div class="btn-group" style="flex: initial;">
-          <button class="btn-primary" onclick="speakFullInstructions()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-              <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-            </svg>
-            <span>Escuchar instrucciones</span>
-          </button>
+        <div class="page-actions">
+          <button class="btn-primary" onclick="speakFullInstructions()">Escuchar instrucciones</button>
           <button class="btn-outline" onclick="stopSpeech()">Detener audio</button>
         </div>
       </div>
 
-      <div class="guide-grid">
-        <div class="guide-card">
-          <div class="num">01</div>
-          <h3>Preparación del Encuadre</h3>
-          <p>Cámara fija en plano frontal a 1.5 - 2 metros. Mantener iluminación uniforme y visibilidad completa del tronco y brazo.</p>
-        </div>
-        <div class="guide-card">
-          <div class="num">02</div>
-          <h3>Posición Neutra y Registro</h3>
-          <p>Calibrar 3 segundos en posición de reposo con los brazos al costado. El software fija el cero del tronco e inicia la evaluación.</p>
-        </div>
-        <div class="guide-card">
-          <div class="num">03</div>
-          <h3>Comparación Bilateral</h3>
-          <p>Realizar hasta tres intentos por hombro (izquierdo vs. derecho) para registrar asimetrías cinemáticas y velocidad angular.</p>
-        </div>
-        <div class="guide-card">
-          <div class="num">04</div>
-          <h3>Interpretación Clínica</h3>
-          <p>El intervalo entre 60° y 120° corresponde a la zona de conflicto mecánico subacromial descrita por Kessel & Watson.</p>
-        </div>
+      <div class="detail-grid-2">
+        <div class="card"><strong style="color: var(--primary);">01 · Preparación</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Cámara fija en plano frontal a 1.5 - 2 metros. Visibilidad completa del tronco y ambas extremidades superiores.</p></div>
+        <div class="card"><strong style="color: var(--primary);">02 · Calibración Neutra</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Mantener 3 segundos en bipedestación con brazos al costado para fijar la vertical del tronco.</p></div>
+        <div class="card"><strong style="color: var(--primary);">03 · Comparación Bilateral</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Evaluar hombro derecho e izquierdo por separado para detectar asimetrías de rango y velocidad.</p></div>
+        <div class="card"><strong style="color: var(--primary);">04 · Arco Doloroso</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Entre 60° y 120° ocurre el mayor compromiso del espacio subacromial y tendón del supraespinoso.</p></div>
       </div>
     </div>
 
   </main>
 
   <script>
-    // CONTROL DEL MENÚ LATERAL EN MÓVIL
-    function openSidebar() {
-      document.getElementById('sidebar').classList.add('open');
-      document.getElementById('sidebar-overlay').classList.add('active');
-    }
+    // FECHA ACTUAL EN ESPAÑOL
+    document.getElementById('strip-date').innerText = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
-    function closeSidebar() {
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebar-overlay').classList.remove('active');
-    }
+    function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebar-overlay').classList.add('active'); }
+    function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('active'); }
 
-    // CAMBIO DE VISTAS
     function showView(viewId, btn) {
       document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -759,167 +779,114 @@
       closeSidebar();
     }
 
-    // ACTUALIZAR DATOS Y OBSERVACIONES DEL REPORTE EN TIEMPO REAL
-    function updateReportMeta() {
+    // SINCRONIZAR DATOS DEL PACIENTE ENTRE EVALUACIÓN Y REPORTE
+    function syncPatientData() {
       const code = document.getElementById('input-code').value || 'Sin informar';
       const age = document.getElementById('input-age').value || 'Sin informar';
       const pro = document.getElementById('input-pro').value || 'Sin informar';
       const status = document.getElementById('input-status').value;
       const obs = document.getElementById('input-obs').value || 'Sin observaciones.';
 
+      document.getElementById('strip-patient-info').innerText = code !== 'Sin informar' ? `Evaluación clínica · Código: ${code}` : 'Evaluación clínica · Sin código';
       document.getElementById('rep-code').innerText = code;
       document.getElementById('rep-age').innerText = age;
       document.getElementById('rep-pro').innerText = pro;
-      
-      const statusEl = document.getElementById('rep-status');
-      statusEl.innerText = status;
-      if (status.includes('aprobada')) {
-        statusEl.style.color = 'var(--success)';
-      } else if (status.includes('reevaluación')) {
-        statusEl.style.color = 'var(--danger)';
-      } else {
-        statusEl.style.color = '#b97a29';
-      }
-
+      document.getElementById('rep-status').innerText = status;
       document.getElementById('rep-obs-display').innerText = obs;
     }
 
-    // GENERACIÓN Y DESCARGA DIRECTA DE ARCHIVO PDF CLÍNICO
+    function setPlane(plane) {
+      document.getElementById('btn-plane-front').className = plane === 'Frontal' ? 'pill-btn active' : 'pill-btn';
+      document.getElementById('btn-plane-scap').className = plane === 'Escapular' ? 'pill-btn active' : 'pill-btn';
+      document.getElementById('cam-plane-foot').innerText = `PLANO ${plane.toUpperCase()} · Video local`;
+    }
+
+    function toggleFileBox() {
+      const box = document.getElementById('file-input-container');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // GENERAR PDF REAL CON JSPDF
     function downloadRealPDF() {
-      if (!window.jspdf) {
-        alert("Cargando motor PDF, intenta en un segundo.");
-        return;
-      }
+      if (!window.jspdf) return alert("Cargando generador PDF, intenta nuevamente.");
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
-      // ENCABEZADO DE MARCA
-      doc.setFillColor(243, 234, 245); // Lila suave
+      doc.setFillColor(243, 234, 245);
       doc.rect(0, 0, 210, 32, 'F');
-      
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(20);
-      doc.setTextColor(110, 65, 126); // Morado oscuro
-      doc.text("KineArc · Reporte Clínico Cinemático", 14, 18);
+      doc.setFontSize(19);
+      doc.setTextColor(110, 65, 126);
+      doc.text("KineArc · Reporte Clínico de Hombro", 14, 18);
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(9);
       doc.setTextColor(122, 110, 130);
-      const fechaHoy = new Date().toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-      doc.text(`Evaluación de Abducción de Hombro (Arco Doloroso 60°-120°)  |  Emitido: ${fechaHoy}`, 14, 26);
+      doc.text(`Evaluación Cinemática de Abducción  |  Fecha: ${document.getElementById('strip-date').innerText}`, 14, 26);
 
-      // SECCIÓN 1: DATOS DEL PACIENTE
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.setTextColor(44, 37, 48);
-      doc.text("1. IDENTIFICACIÓN DEL PACIENTE Y EVALUACIÓN", 14, 44);
-      doc.setDrawColor(230, 219, 233);
+      doc.text("1. DATOS DEL PACIENTE", 14, 44);
       doc.line(14, 46, 196, 46);
-
-      const code = document.getElementById('rep-code').innerText;
-      const age = document.getElementById('rep-age').innerText;
-      const pro = document.getElementById('rep-pro').innerText;
-      const status = document.getElementById('rep-status').innerText;
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text(`Código / ID Paciente: ${code}`, 14, 54);
-      doc.text(`Edad: ${age}`, 110, 54);
-      doc.text(`Profesional Evaluador: ${pro}`, 14, 62);
-      doc.text(`Estado de Revisión: ${status}`, 110, 62);
+      doc.text(`Código: ${document.getElementById('rep-code').innerText}`, 14, 54);
+      doc.text(`Edad: ${document.getElementById('rep-age').innerText}`, 110, 54);
+      doc.text(`Profesional: ${document.getElementById('rep-pro').innerText}`, 14, 62);
+      doc.text(`Estado: ${document.getElementById('rep-status').innerText}`, 110, 62);
 
-      // SECCIÓN 2: RESUMEN DE RANGO DE MOVIMIENTO (ROM)
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.text("2. INDICADORES PRINCIPALES (ROM MÁXIMO BILATERAL)", 14, 76);
+      doc.text("2. RANGO DE MOVIMIENTO MÁXIMO (BILATERAL)", 14, 76);
       doc.line(14, 78, 196, 78);
 
       doc.setFillColor(251, 249, 252);
-      doc.roundedRect(14, 82, 86, 22, 2, 2, 'FD');
-      doc.roundedRect(110, 82, 86, 22, 2, 2, 'FD');
-
+      doc.roundedRect(14, 82, 86, 20, 2, 2, 'FD');
+      doc.roundedRect(110, 82, 86, 20, 2, 2, 'FD');
       doc.setFontSize(9);
-      doc.setTextColor(122, 110, 130);
-      doc.text("MEJOR ROM · HOMBRO DERECHO", 18, 89);
-      doc.text("MEJOR ROM · HOMBRO IZQUIERDO", 114, 89);
-
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(15);
+      doc.text("HOMBRO DERECHO", 18, 89);
+      doc.text("HOMBRO IZQUIERDO", 114, 89);
+      doc.setFontSize(14);
       doc.setTextColor(110, 65, 126);
-      doc.text(document.getElementById('rep-max-right').innerText, 18, 99);
-      doc.text(document.getElementById('rep-max-left').innerText, 114, 99);
+      doc.text(document.getElementById('rep-max-right').innerText, 18, 98);
+      doc.text(document.getElementById('rep-max-left').innerText, 114, 98);
 
-      // SECCIÓN 3: GRÁFICO CINEMÁTICO
-      let yPos = 116;
+      const chartImg = document.getElementById('angleChart').toDataURL('image/png', 1.0);
+      doc.addImage(chartImg, 'PNG', 14, 110, 182, 48);
+
+      let y = 170;
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.setTextColor(44, 37, 48);
-      doc.text("3. CURVA CINEMÁTICA DE ABDUCCIÓN (° vs Tiempo)", 14, yPos);
-      doc.line(14, yPos + 2, 196, yPos + 2);
-
-      const chartCanvas = document.getElementById('angleChart');
-      if (chartCanvas) {
-        const chartImg = chartCanvas.toDataURL('image/png', 1.0);
-        doc.addImage(chartImg, 'PNG', 14, yPos + 5, 182, 48);
-        yPos += 60;
-      }
-
-      // SECCIÓN 4: TABLA DE INTENTOS REGISTRADOS
-      doc.setFont("helvetica", "bold");
-      doc.setFontSize(11);
-      doc.text("4. DETALLE DE INTENTOS REGISTRADOS", 14, yPos);
-      doc.line(14, yPos + 2, 196, yPos + 2);
-      yPos += 9;
-
-      doc.setFontSize(9);
-      doc.setFillColor(243, 234, 245);
-      doc.rect(14, yPos - 5, 182, 7, 'F');
-      doc.text("Intento", 16, yPos);
-      doc.text("Lado Evaluado", 48, yPos);
-      doc.text("ROM Máximo", 92, yPos);
-      doc.text("Tiempo en Arco", 130, yPos);
-      doc.text("Compensación", 168, yPos);
-      yPos += 7;
-
+      doc.text("3. REGISTRO DE INTENTOS", 14, y);
+      y += 8;
       doc.setFont("helvetica", "normal");
+      doc.setFontSize(9.5);
       if (attemptsHistory.length === 0) {
-        doc.text("No se registraron intentos durante esta sesión.", 16, yPos);
-        yPos += 8;
+        doc.text("Sin intentos registrados en la sesión.", 14, y);
+        y += 8;
       } else {
-        attemptsHistory.forEach(att => {
-          doc.text(`Intento ${att.id}`, 16, yPos);
-          doc.text(att.side, 48, yPos);
-          doc.text(`${att.maxAngle}°`, 92, yPos);
-          doc.text(`${att.painTime} s`, 130, yPos);
-          doc.text(att.comp, 168, yPos);
-          yPos += 6;
+        attemptsHistory.forEach(a => {
+          doc.text(`Intento ${a.id} (${a.side}): ROM Máx ${a.maxAngle}° | Tiempo en arco: ${a.painTime}s | Compensación: ${a.comp}`, 14, y);
+          y += 6;
         });
       }
 
-      // SECCIÓN 5: OBSERVACIONES CLÍNICAS
-      yPos += 6;
+      y += 6;
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.text("5. OBSERVACIONES CLÍNICAS", 14, yPos);
-      doc.line(14, yPos + 2, 196, yPos + 2);
-      yPos += 8;
-
+      doc.text("4. OBSERVACIONES CLÍNICAS", 14, y);
+      y += 7;
       doc.setFont("helvetica", "normal");
       doc.setFontSize(9.5);
-      const obsText = document.getElementById('rep-obs-display').innerText;
-      const splitObs = doc.splitTextToSize(obsText, 180);
-      doc.text(splitObs, 14, yPos);
+      doc.text(doc.splitTextToSize(document.getElementById('rep-obs-display').innerText, 180), 14, y);
 
-      // PIE DE PÁGINA METODOLÓGICO
-      doc.setFontSize(8);
-      doc.setTextColor(122, 110, 130);
-      doc.text("Nota: Métricas obtenidas mediante seguimiento articular 2D (MediaPipe Pose). No reemplaza diagnóstico médico.", 14, 285);
-
-      const fileName = code !== 'Sin informar' ? `Reporte_KineArc_${code}.pdf` : `Reporte_Clinico_KineArc.pdf`;
-      doc.save(fileName);
+      doc.save(`Reporte_KineArc_${document.getElementById('rep-code').innerText}.pdf`);
     }
 
-    // VARIABLES GLOBALES
+    // VARIABLES DE VISIÓN ARTIFICIAL
     const videoElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('output_canvas');
     const canvasCtx = canvasElement.getContext('2d');
@@ -927,7 +894,7 @@
     let camera = null;
     let isCameraActive = false;
     let sourceMode = 'webcam';
-    let selectedSide = 'left';
+    let selectedSide = 'right';
     let showSilhouette = true;
     let isTesting = false;
     
@@ -941,7 +908,7 @@
     let angleHistory = [];
     let attemptsHistory = [];
 
-    // GRÁFICO
+    // GRÁFICO CHART.JS
     const ctxChart = document.getElementById('angleChart').getContext('2d');
     const painZonePlugin = {
       id: 'painZone',
@@ -973,16 +940,12 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        scales: {
-          y: { min: 0, max: 180, title: { display: true, text: 'Grados (°)' } },
-          x: { display: false }
-        },
+        scales: { y: { min: 0, max: 180 }, x: { display: false } },
         animation: false
       },
       plugins: [painZonePlugin]
     });
 
-    // SÍNTESIS DE VOZ AMPLIADA
     function speak(text) {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
@@ -994,21 +957,15 @@
     }
 
     function speakFullInstructions() {
-      const fullText = 
+      speak(
         "Protocolo de evaluación cinemática de abducción de hombro en KineArc. " +
-        "Paso uno, preparación: ubique la cámara en plano frontal a una distancia de uno punto cinco a dos metros, asegurando que el tronco, las caderas y ambos brazos sean completamente visibles. " +
-        "Paso dos, posición inicial: mantenga la postura erguida con los brazos relajados al costado del cuerpo durante tres segundos para calibrar la línea media del tronco. " +
-        "Paso tres, ejecución: eleve lateralmente el brazo seleccionado de forma continua y controlada hasta el máximo rango tolerado, pasando por el arco de sesenta a ciento veinte grados, y luego descienda suavemente. " +
-        "Evite inclinar el tronco hacia el lado contrario y detenga la prueba inmediatamente si aparece dolor agudo o inseguridad. " +
-        "Finalmente, repita el procedimiento en el hombro contralateral para comparar los resultados.";
-      speak(fullText);
+        "Paso uno: ubique la cámara en plano frontal asegurando visibilidad completa de tronco y brazos. " +
+        "Paso dos: mantenga postura neutra en reposo durante tres segundos para calibrar. " +
+        "Paso tres: eleve lateralmente el brazo seleccionado pasando por el arco de sesenta a ciento veinte grados y descienda suavemente sin inclinar el tronco."
+      );
     }
 
-    function stopSpeech() {
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-    }
+    function stopSpeech() { if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
 
     function calculateAngle(p1, p2, p3) {
       const radians = Math.atan2(p3.y - p2.y, p3.x - p2.x) - Math.atan2(p1.y - p2.y, p1.x - p2.x);
@@ -1025,7 +982,7 @@
       const now = performance.now();
       frameTimestamps.push(now);
       while (frameTimestamps.length > 0 && frameTimestamps[0] <= now - 1000) frameTimestamps.shift();
-      document.getElementById('txt-fps').innerText = `${frameTimestamps.length} FPS`;
+      document.getElementById('txt-fps').innerText = `${frameTimestamps.length} FPS en vivo`;
 
       canvasCtx.save();
       canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
@@ -1039,6 +996,7 @@
       if (showSilhouette) drawSilhouetteTemplate();
 
       if (results.poseLandmarks) {
+        document.getElementById('cam-signal-pill').innerText = "POSE DETECTADA";
         const lm = results.poseLandmarks;
         const isLeft = selectedSide === 'left';
         
@@ -1051,43 +1009,28 @@
           currentAngle = calculateAngle(hip, shoulder, elbow);
           if (currentAngle > maxAngle) {
             maxAngle = currentAngle;
-            if (isLeft && maxAngle > maxLeft) {
-              maxLeft = maxAngle;
-              document.getElementById('rep-max-left').innerText = `${maxLeft}°`;
-            } else if (!isLeft && maxAngle > maxRight) {
-              maxRight = maxAngle;
-              document.getElementById('rep-max-right').innerText = `${maxRight}°`;
-            }
+            if (isLeft && maxAngle > maxLeft) { maxLeft = maxAngle; document.getElementById('rep-max-left').innerText = `${maxLeft}°`; }
+            else if (!isLeft && maxAngle > maxRight) { maxRight = maxAngle; document.getElementById('rep-max-right').innerText = `${maxRight}°`; }
           }
 
-          const trunkAngle = Math.abs(Math.atan2(oppShoulder.y - shoulder.y, oppShoulder.x - shoulder.x) * (180 / Math.PI));
+          const trunkAngle = Math.round(Math.abs(Math.atan2(oppShoulder.y - shoulder.y, oppShoulder.x - shoulder.x) * (180 / Math.PI)));
           trunkCompensation = trunkAngle > 12;
 
           if (isTesting && currentAngle >= 60 && currentAngle <= 120) {
             timeInPainZone += 1 / (frameTimestamps.length || 30);
           }
 
-          document.getElementById('kpi-max-angle').innerText = `${maxAngle}°`;
-          document.getElementById('kpi-pain-time').innerText = `${timeInPainZone.toFixed(1)}s`;
+          document.getElementById('kpi-max-angle').innerHTML = `${maxAngle} <small>°</small>`;
+          document.getElementById('kpi-pain-time').innerHTML = `${timeInPainZone.toFixed(1)} <small>s</small>`;
+          document.getElementById('kpi-trunk-angle').innerHTML = `${trunkAngle} <small>° DE</small>`;
+          document.getElementById('kpi-comp-status').innerText = trunkCompensation ? "Compensación detectada" : "Tronco estable";
           
           angleHistory.push({ t: now, a: currentAngle });
           if (angleHistory.length > 10) angleHistory.shift();
           if (angleHistory.length > 1) {
             const dt = (angleHistory[angleHistory.length-1].t - angleHistory[0].t) / 1000;
             const da = Math.abs(angleHistory[angleHistory.length-1].a - angleHistory[0].a);
-            document.getElementById('kpi-speed').innerText = dt > 0 ? Math.round(da / dt) : 0;
-          }
-
-          const banner = document.getElementById('alert-banner');
-          if (trunkCompensation) {
-            banner.innerText = "DETECTADA COMPENSACIÓN DE TRONCO";
-            banner.className = "alert-banner active-comp";
-          } else if (currentAngle >= 60 && currentAngle <= 120) {
-            banner.innerText = "ZONA DE ARCO DOLOROSO (60° - 120°)";
-            banner.className = "alert-banner active-pain";
-          } else {
-            banner.innerText = "Estado: Movimiento Estable / Sin Alerta";
-            banner.className = "alert-banner";
+            document.getElementById('kpi-speed').innerHTML = `${dt > 0 ? Math.round(da / dt) : 0} <small>°/s</small>`;
           }
 
           drawSegment(shoulder, elbow, '#8e5b9f');
@@ -1105,13 +1048,10 @@
     function drawSilhouetteTemplate() {
       const w = canvasElement.width, h = canvasElement.height;
       canvasCtx.save();
-      canvasCtx.strokeStyle = 'rgba(209, 187, 212, 0.6)';
+      canvasCtx.strokeStyle = 'rgba(209, 187, 212, 0.35)';
       canvasCtx.lineWidth = 2;
       canvasCtx.setLineDash([6, 6]);
-      canvasCtx.beginPath();
-      canvasCtx.arc(w / 2, h * 0.22, w * 0.08, 0, 2 * Math.PI);
-      canvasCtx.stroke();
-      canvasCtx.strokeRect(w * 0.38, h * 0.32, w * 0.24, h * 0.42);
+      canvasCtx.strokeRect(w * 0.34, h * 0.14, w * 0.32, h * 0.72);
       canvasCtx.restore();
     }
 
@@ -1140,24 +1080,14 @@
       angleChart.update();
     }
 
-    function switchSourceMode(mode) {
-      sourceMode = mode;
-      document.getElementById('tab-cam').className = mode === 'webcam' ? 'tab-btn active' : 'tab-btn';
-      document.getElementById('tab-file').className = mode === 'file' ? 'tab-btn active' : 'tab-btn';
-      document.getElementById('file-input-container').style.display = mode === 'file' ? 'block' : 'none';
-      document.getElementById('btn-cam').style.display = mode === 'file' ? 'none' : 'flex';
-      if (mode === 'file' && isCameraActive) toggleCamera();
-    }
-
     function handleFileUpload(event) {
       const file = event.target.files[0];
-      if (!file || !file.type.startsWith('video/')) {
-        alert("Por favor selecciona un video válido.");
-        return;
-      }
+      if (!file) return;
+      sourceMode = 'file';
       videoElement.src = URL.createObjectURL(file);
       videoElement.play();
       document.getElementById('btn-rec').disabled = false;
+      document.getElementById('cam-status-text').innerText = "VIDEO LOCAL";
       async function processFrame() {
         if (!videoElement.paused && !videoElement.ended) {
           await pose.send({ image: videoElement });
@@ -1171,39 +1101,59 @@
 
     function toggleCamera() {
       const btn = document.getElementById('btn-cam');
+      const pill = document.getElementById('cam-status-pill');
       if (!isCameraActive) {
+        sourceMode = 'webcam';
         camera = new Camera(videoElement, { onFrame: async () => { await pose.send({ image: videoElement }); }, width: 640, height: 480 });
         camera.start();
         isCameraActive = true;
-        btn.innerText = "Pausar";
-        btn.className = "btn-danger";
+        btn.innerHTML = `<span>Pausar cámara</span>`;
+        pill.classList.add('live');
+        document.getElementById('cam-status-text').innerText = "CÁMARA ACTIVA";
         document.getElementById('btn-rec').disabled = false;
+        document.getElementById('step-row-1').classList.add('active');
       } else {
         camera.stop();
         isCameraActive = false;
-        btn.innerText = "Iniciar";
-        btn.className = "btn-primary";
+        btn.innerHTML = `<span>Activar cámara</span>`;
+        pill.classList.remove('live');
+        document.getElementById('cam-status-text').innerText = "SIN CÁMARA";
         document.getElementById('btn-rec').disabled = true;
       }
     }
 
     function setSide(side) {
       selectedSide = side;
-      document.getElementById('btn-side-left').className = side === 'left' ? 'btn-outline active' : 'btn-outline';
-      document.getElementById('btn-side-right').className = side === 'right' ? 'btn-outline active' : 'btn-outline';
+      document.getElementById('kpi-side-label').innerText = side === 'left' ? 'Hombro izquierdo' : 'Hombro derecho';
       resetCurrentMetrics();
+    }
+
+    function calibrateNeutral() {
+      document.getElementById('step-row-2').classList.add('active');
+      speak("Calibrando postura neutra por tres segundos.");
     }
 
     function resetCurrentMetrics() {
       maxAngle = 0; timeInPainZone = 0;
-      document.getElementById('kpi-max-angle').innerText = '0°';
-      document.getElementById('kpi-pain-time').innerText = '0.0s';
-      document.getElementById('kpi-speed').innerText = '0';
+      document.getElementById('kpi-max-angle').innerHTML = '— <small>°</small>';
+      document.getElementById('kpi-pain-time').innerHTML = '— <small>s</small>';
+      document.getElementById('kpi-trunk-angle').innerHTML = '— <small>° DE</small>';
+      document.getElementById('kpi-speed').innerHTML = '— <small>°/s</small>';
       angleChart.data.labels = []; angleChart.data.datasets[0].data = []; angleChart.update();
+    }
+
+    function resetSession() {
+      resetCurrentMetrics();
+      attemptsHistory = [];
+      maxLeft = 0; maxRight = 0;
+      document.getElementById('rep-max-left').innerText = '— °';
+      document.getElementById('rep-max-right').innerText = '— °';
+      document.getElementById('table-attempts').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar este indicador.</td></tr>';
     }
 
     function startGuidedTest() {
       resetCurrentMetrics();
+      document.getElementById('step-row-3').classList.add('active');
       const countEl = document.getElementById('overlay-count');
       countEl.style.display = 'block';
       let count = 3; countEl.innerText = count;
@@ -1217,31 +1167,36 @@
 
     function runTestExecution() {
       isTesting = true;
+      const duration = parseInt(document.getElementById('select-duration').value) || 6000;
       setTimeout(() => {
         isTesting = false;
         speak("Evaluación completada. Descienda el brazo suavemente.");
         recordAttempt();
-      }, 6000);
+      }, duration);
     }
 
     function recordAttempt() {
       const attemptNum = attemptsHistory.length + 1;
-      const attemptData = { id: attemptNum, side: selectedSide === 'left' ? 'Izquierdo' : 'Derecho', maxAngle, painTime: timeInPainZone.toFixed(1), comp: trunkCompensation ? 'Sí' : 'No' };
+      const attemptData = {
+        id: attemptNum,
+        side: selectedSide === 'left' ? 'Izquierdo' : 'Derecho',
+        maxAngle,
+        painTime: timeInPainZone.toFixed(1),
+        comp: trunkCompensation ? 'Sí' : 'No'
+      };
       attemptsHistory.push(attemptData);
 
-      // Actualizar tabla en Evaluación
       const tbody = document.getElementById('table-attempts');
       if (attemptNum === 1) tbody.innerHTML = '';
       const row = document.createElement('tr');
       row.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.comp}</td>`;
       tbody.appendChild(row);
 
-      // Actualizar tabla en Reporte Clínico
-      const repTbody = document.getElementById('report-table-attempts');
-      if (attemptNum === 1) repTbody.innerHTML = '';
-      const repRow = document.createElement('tr');
-      repRow.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.comp}</td>`;
-      repTbody.appendChild(repRow);
+      const sel = document.getElementById('select-attempt-detail');
+      if (attemptNum === 1) sel.innerHTML = '';
+      const opt = document.createElement('option');
+      opt.text = `Intento ${attemptData.id} · ${attemptData.side}`;
+      sel.add(opt);
     }
 
     function exportCSV() {
@@ -1252,48 +1207,6 @@
       link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
       link.download = `reporte_hombro_kinearc.csv`;
       link.click();
-    }
-
-    function exportJSON() {
-      const sessionData = {
-        app: "KineArc",
-        date: new Date().toISOString(),
-        code: document.getElementById('input-code').value,
-        age: document.getElementById('input-age').value,
-        pro: document.getElementById('input-pro').value,
-        maxLeft, maxRight,
-        obs: document.getElementById('input-obs').value,
-        attempts: attemptsHistory
-      };
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(new Blob([JSON.stringify(sessionData, null, 2)], { type: 'application/json' }));
-      link.download = `sesion_kinearc.json`;
-      link.click();
-    }
-
-    function importJSON() {
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.accept = 'application/json';
-      input.onchange = e => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = event => {
-          try {
-            const data = JSON.parse(event.target.result);
-            if (data.code) document.getElementById('input-code').value = data.code;
-            if (data.age) document.getElementById('input-age').value = data.age;
-            if (data.pro) document.getElementById('input-pro').value = data.pro;
-            if (data.maxLeft) { maxLeft = data.maxLeft; document.getElementById('rep-max-left').innerText = `${maxLeft}°`; }
-            if (data.maxRight) { maxRight = data.maxRight; document.getElementById('rep-max-right').innerText = `${maxRight}°`; }
-            if (data.obs) document.getElementById('input-obs').value = data.obs;
-            updateReportMeta();
-            alert("Sesión cargada exitosamente.");
-          } catch(err) { alert("Archivo JSON no válido."); }
-        };
-        reader.readAsText(file);
-      };
-      input.click();
     }
   </script>
 </body>
