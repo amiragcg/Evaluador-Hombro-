@@ -101,7 +101,7 @@
     .view-content.active { display: flex; }
     @media (max-width: 768px) { .view-content { padding: 18px; } }
 
-    /* ENCABEZADO DE SECCIÓN CLÍNICA (ESTILO APOYO MONOPODAL) */
+    /* ENCABEZADO DE SECCIÓN CLÍNICA */
     .page-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; }
     .page-kicker { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.2px; color: var(--primary); text-transform: uppercase; margin-bottom: 4px; }
     .page-title { font-size: 2rem; font-weight: 800; color: var(--text); letter-spacing: -0.5px; line-height: 1.15; }
@@ -168,6 +168,7 @@
       position: absolute; top: 14px; right: 14px; background: rgba(20, 34, 36, 0.75); color: #cbd5e1;
       padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; backdrop-filter: blur(4px);
     }
+    .cam-badge-tr.recording { background: rgba(217, 83, 79, 0.9); color: #fff; }
 
     .cam-guide-box {
       position: absolute; bottom: 14px; right: 14px; background: rgba(20, 34, 36, 0.85); border: 1px solid rgba(255,255,255,0.12);
@@ -194,6 +195,7 @@
     .btn-primary { background: var(--primary); color: #fff; }
     .btn-primary:hover { background: var(--primary-dark); }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-danger { background: var(--danger); color: #fff; border-color: var(--danger); }
     .btn-outline { background: #fff; color: var(--text); border-color: var(--border); }
     .btn-outline:hover { background: var(--primary-light); border-color: var(--primary); }
     .btn-ghost { background: transparent; color: var(--text-muted); border: none; padding: 6px 10px; }
@@ -229,12 +231,6 @@
     @media (max-width: 900px) { .detail-grid-2 { grid-template-columns: 1fr; } }
 
     .chart-container { height: 210px; width: 100%; position: relative; }
-    .empty-placeholder {
-      border: 1px dashed var(--border); border-radius: 10px; height: 180px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; color: var(--text-muted);
-    }
-    .empty-placeholder strong { font-size: 0.85rem; color: var(--text); margin-bottom: 4px; }
-    .empty-placeholder span { font-size: 0.75rem; }
 
     /* TABLAS Y REPORTE */
     table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
@@ -348,11 +344,10 @@
     </div>
 
     <!-- ==========================================
-         VISTA 1: EVALUACIÓN (DISEÑO CLÍNICO)
+         VISTA 1: EVALUACIÓN
          ========================================== -->
     <div id="view-evaluacion" class="view-content active">
       
-      <!-- ENCABEZADO SUPERIOR -->
       <div class="page-header">
         <div>
           <div class="page-kicker">EVALUACIÓN CINEMÁTICA DEL HOMBRO</div>
@@ -368,13 +363,11 @@
         </div>
       </div>
 
-      <!-- BANNER DE SUPERVISIÓN -->
       <div class="safety-banner">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <span>Prueba supervisada. Mantén un encuadre estable y detén la elevación ante dolor agudo o inseguridad.</span>
+        <span>Prueba supervisada. Realiza la elevación de forma lenta y controlada; detén la prueba ante dolor agudo o inseguridad.</span>
       </div>
 
-      <!-- BARRA DE ESTADO DE SESIÓN -->
       <div class="status-strip">
         <div class="status-indicator">
           <span class="dot-live"></span>
@@ -383,7 +376,6 @@
         <span id="strip-date"></span>
       </div>
 
-      <!-- 4 TARJETAS KPI SUPERIORES -->
       <div class="kpi-row-4">
         <div class="kpi-box">
           <div class="kpi-box-top">
@@ -391,7 +383,7 @@
             <span>ROM máximo</span>
           </div>
           <div class="kpi-box-val" id="kpi-max-angle">— <small>°</small></div>
-          <div class="kpi-box-foot" id="kpi-side-label">Sin intento</div>
+          <div class="kpi-box-foot" id="kpi-side-label">Hombro derecho</div>
         </div>
 
         <div class="kpi-box">
@@ -422,10 +414,8 @@
         </div>
       </div>
 
-      <!-- GRID PRINCIPAL: CAPTURA DE MOVIMIENTO + PREPARAR EVALUACIÓN -->
       <div class="eval-main-grid">
         
-        <!-- COLUMNA IZQUIERDA: CÁMARA -->
         <div class="card">
           <div class="card-header-flex">
             <div>
@@ -478,11 +468,10 @@
 
           <div class="audio-prompt-box">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-            <span>Esta prueba debe ser supervisada por su kinesiólogo o kinesióloga. Colóquese de frente con los brazos relajados al costado. Cuando se lo indiquen, eleve lateralmente el brazo evaluado hasta el máximo rango tolerado y descienda suavemente.</span>
+            <span>Esta prueba debe ser supervisada por su kinesiólogo o kinesióloga. Colóquese de frente con los brazos relajados al costado. Cuando se lo indiquen, eleve lateralmente y de forma lenta el brazo evaluado hasta el máximo rango tolerado y descienda suavemente.</span>
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA: PREPARAR EVALUACIÓN -->
         <div class="card">
           <div class="card-header-flex">
             <div>
@@ -492,7 +481,6 @@
             <span id="protocol-counter" style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">01 / 03</span>
           </div>
 
-          <!-- DATOS DEL PACIENTE SINCRONIZADOS CON REPORTE -->
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px;">
             <div class="form-group">
               <label>Código de persona</label>
@@ -518,15 +506,16 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Duración registro</label>
+              <label>Duración máxima</label>
               <select id="select-duration">
-                <option value="6000">6 segundos</option>
-                <option value="10000">10 segundos</option>
+                <option value="12000" selected>12 segundos (Lento)</option>
+                <option value="15000">15 segundos (Muy lento)</option>
+                <option value="20000">20 segundos</option>
+                <option value="8000">8 segundos (Rápido)</option>
               </select>
             </div>
           </div>
 
-          <!-- GUÍA DE AUDIO -->
           <div class="audio-panel">
             <div class="audio-panel-header">
               <div style="display: flex; align-items: center; gap: 8px;">
@@ -543,25 +532,23 @@
             </div>
           </div>
 
-          <!-- PASOS DEL PROTOCOLO -->
           <div class="step-list">
             <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Cámara y tronco completo</span></div>
             <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Postura neutra en reposo</span></div>
-            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Abducción y registro del arco</span></div>
+            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Abducción lenta y registro completo</span></div>
           </div>
 
           <button class="btn-outline" onclick="calibrateNeutral()" style="width: 100%;">Calibrar postura · 3 s</button>
-          <button id="btn-rec" class="btn-primary" onclick="startGuidedTest()" disabled style="width: 100%; padding: 12px;">
+          <button id="btn-rec" class="btn-primary" onclick="handleTestButton()" disabled style="width: 100%; padding: 12px;">
             <span>▶ Preparar intento</span>
           </button>
           <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.35;">
-            El profesional supervisa la elevación y descenso. Los avisos de arco doloroso y compensación se registran automáticamente.
+            El registro dura el tiempo configurado para permitir un movimiento lento, o puedes finalizarlo manualmente cuando completes el descenso.
           </p>
         </div>
 
       </div>
 
-      <!-- SECCIÓN INFERIOR: EL MOVIMIENTO, EN DETALLE -->
       <div class="detail-section">
         <div class="detail-header">
           <div>
@@ -577,7 +564,6 @@
         </div>
 
         <div class="detail-grid-2">
-          <!-- TARJETA 1: CURVA DE ABDUCCIÓN -->
           <div class="card">
             <div class="card-header-flex">
               <div>
@@ -591,7 +577,6 @@
             </div>
           </div>
 
-          <!-- TARJETA 2: HISTORIAL Y EVENTOS DEL INTENTO -->
           <div class="card">
             <div class="card-header-flex">
               <div>
@@ -765,7 +750,6 @@
   </main>
 
   <script>
-    // FECHA ACTUAL EN ESPAÑOL
     document.getElementById('strip-date').innerText = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
     function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebar-overlay').classList.add('active'); }
@@ -779,7 +763,6 @@
       closeSidebar();
     }
 
-    // SINCRONIZAR DATOS DEL PACIENTE ENTRE EVALUACIÓN Y REPORTE
     function syncPatientData() {
       const code = document.getElementById('input-code').value || 'Sin informar';
       const age = document.getElementById('input-age').value || 'Sin informar';
@@ -806,7 +789,6 @@
       box.style.display = box.style.display === 'none' ? 'block' : 'none';
     }
 
-    // GENERAR PDF REAL CON JSPDF
     function downloadRealPDF() {
       if (!window.jspdf) return alert("Cargando generador PDF, intenta nuevamente.");
       const { jsPDF } = window.jspdf;
@@ -897,6 +879,8 @@
     let selectedSide = 'right';
     let showSilhouette = true;
     let isTesting = false;
+    let testTimeout = null;
+    let countdownInterval = null;
     
     let currentAngle = 0;
     let maxAngle = 0;
@@ -908,7 +892,6 @@
     let angleHistory = [];
     let attemptsHistory = [];
 
-    // GRÁFICO CHART.JS
     const ctxChart = document.getElementById('angleChart').getContext('2d');
     const painZonePlugin = {
       id: 'painZone',
@@ -961,7 +944,7 @@
         "Protocolo de evaluación cinemática de abducción de hombro en KineArc. " +
         "Paso uno: ubique la cámara en plano frontal asegurando visibilidad completa de tronco y brazos. " +
         "Paso dos: mantenga postura neutra en reposo durante tres segundos para calibrar. " +
-        "Paso tres: eleve lateralmente el brazo seleccionado pasando por el arco de sesenta a ciento veinte grados y descienda suavemente sin inclinar el tronco."
+        "Paso tres: eleve lateralmente y de forma lenta el brazo seleccionado hasta el máximo rango tolerado y descienda suavemente sin inclinar el tronco."
       );
     }
 
@@ -996,7 +979,9 @@
       if (showSilhouette) drawSilhouetteTemplate();
 
       if (results.poseLandmarks) {
-        document.getElementById('cam-signal-pill').innerText = "POSE DETECTADA";
+        if (!isTesting) {
+          document.getElementById('cam-signal-pill').innerText = "POSE DETECTADA";
+        }
         const lm = results.poseLandmarks;
         const isLeft = selectedSide === 'left';
         
@@ -1007,20 +992,22 @@
 
         if (hip && shoulder && elbow && oppShoulder) {
           currentAngle = calculateAngle(hip, shoulder, elbow);
-          if (currentAngle > maxAngle) {
-            maxAngle = currentAngle;
-            if (isLeft && maxAngle > maxLeft) { maxLeft = maxAngle; document.getElementById('rep-max-left').innerText = `${maxLeft}°`; }
-            else if (!isLeft && maxAngle > maxRight) { maxRight = maxAngle; document.getElementById('rep-max-right').innerText = `${maxRight}°`; }
+          
+          if (isTesting) {
+            if (currentAngle > maxAngle) {
+              maxAngle = currentAngle;
+            }
+            if (currentAngle >= 60 && currentAngle <= 120) {
+              timeInPainZone += 1 / (frameTimestamps.length || 30);
+            }
+            updateChart(currentAngle);
           }
 
           const trunkAngle = Math.round(Math.abs(Math.atan2(oppShoulder.y - shoulder.y, oppShoulder.x - shoulder.x) * (180 / Math.PI)));
           trunkCompensation = trunkAngle > 12;
 
-          if (isTesting && currentAngle >= 60 && currentAngle <= 120) {
-            timeInPainZone += 1 / (frameTimestamps.length || 30);
-          }
-
-          document.getElementById('kpi-max-angle').innerHTML = `${maxAngle} <small>°</small>`;
+          const displayAngle = isTesting ? maxAngle : currentAngle;
+          document.getElementById('kpi-max-angle').innerHTML = `${displayAngle} <small>°</small>`;
           document.getElementById('kpi-pain-time').innerHTML = `${timeInPainZone.toFixed(1)} <small>s</small>`;
           document.getElementById('kpi-trunk-angle').innerHTML = `${trunkAngle} <small>° DE</small>`;
           document.getElementById('kpi-comp-status').innerText = trunkCompensation ? "Compensación detectada" : "Tronco estable";
@@ -1038,8 +1025,6 @@
           drawSegment(shoulder, oppShoulder, trunkCompensation ? '#d9534f' : '#5cb85c');
           drawPoint(shoulder, '#d9534f');
           drawPoint(elbow, '#5cb85c');
-
-          updateChart(currentAngle);
         }
       }
       canvasCtx.restore();
@@ -1074,7 +1059,6 @@
     function updateChart(angle) {
       const labels = angleChart.data.labels;
       const data = angleChart.data.datasets[0].data;
-      if (labels.length > 50) { labels.shift(); data.shift(); }
       labels.push('');
       data.push(angle);
       angleChart.update();
@@ -1143,6 +1127,7 @@
     }
 
     function resetSession() {
+      if (isTesting) finishTestExecution();
       resetCurrentMetrics();
       attemptsHistory = [];
       maxLeft = 0; maxRight = 0;
@@ -1151,28 +1136,66 @@
       document.getElementById('table-attempts').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar este indicador.</td></tr>';
     }
 
+    // CONTROL INTELIGENTE DEL BOTÓN INICIAR / FINALIZAR INTENTO
+    function handleTestButton() {
+      if (isTesting) {
+        finishTestExecution();
+      } else {
+        startGuidedTest();
+      }
+    }
+
     function startGuidedTest() {
       resetCurrentMetrics();
       document.getElementById('step-row-3').classList.add('active');
       const countEl = document.getElementById('overlay-count');
       countEl.style.display = 'block';
       let count = 3; countEl.innerText = count;
-      speak("Mantenga postura neutra. Tres, dos, uno, eleve el brazo lateralmente.");
-      const interval = setInterval(() => {
+      speak("Mantenga postura neutra. Tres, dos, uno, eleve el brazo lentamente.");
+      
+      if (countdownInterval) clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
         count--;
         if (count > 0) countEl.innerText = count;
-        else { clearInterval(interval); countEl.style.display = 'none'; runTestExecution(); }
+        else { 
+          clearInterval(countdownInterval); 
+          countEl.style.display = 'none'; 
+          runTestExecution(); 
+        }
       }, 1000);
     }
 
     function runTestExecution() {
       isTesting = true;
-      const duration = parseInt(document.getElementById('select-duration').value) || 6000;
-      setTimeout(() => {
-        isTesting = false;
-        speak("Evaluación completada. Descienda el brazo suavemente.");
-        recordAttempt();
+      const signalPill = document.getElementById('cam-signal-pill');
+      signalPill.innerText = "● GRABANDO INTENTO";
+      signalPill.classList.add('recording');
+
+      const btnRec = document.getElementById('btn-rec');
+      btnRec.className = "btn-danger";
+      btnRec.innerHTML = `<span>⏹ Finalizar intento ahora</span>`;
+
+      const duration = parseInt(document.getElementById('select-duration').value) || 12000;
+      if (testTimeout) clearTimeout(testTimeout);
+      testTimeout = setTimeout(() => {
+        if (isTesting) finishTestExecution();
       }, duration);
+    }
+
+    function finishTestExecution() {
+      isTesting = false;
+      if (testTimeout) clearTimeout(testTimeout);
+      
+      const signalPill = document.getElementById('cam-signal-pill');
+      signalPill.innerText = "POSE DETECTADA";
+      signalPill.classList.remove('recording');
+
+      const btnRec = document.getElementById('btn-rec');
+      btnRec.className = "btn-primary";
+      btnRec.innerHTML = `<span>▶ Preparar intento</span>`;
+
+      speak("Evaluación completada.");
+      recordAttempt();
     }
 
     function recordAttempt() {
@@ -1185,6 +1208,14 @@
         comp: trunkCompensation ? 'Sí' : 'No'
       };
       attemptsHistory.push(attemptData);
+
+      if (selectedSide === 'left' && maxAngle > maxLeft) {
+        maxLeft = maxAngle;
+        document.getElementById('rep-max-left').innerText = `${maxLeft}°`;
+      } else if (selectedSide === 'right' && maxAngle > maxRight) {
+        maxRight = maxAngle;
+        document.getElementById('rep-max-right').innerText = `${maxRight}°`;
+      }
 
       const tbody = document.getElementById('table-attempts');
       if (attemptNum === 1) tbody.innerHTML = '';
