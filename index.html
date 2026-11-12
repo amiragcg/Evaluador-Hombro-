@@ -209,8 +209,8 @@
       border: 1px solid var(--border);
     }
     .hero-stat-icon {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
       background: var(--primary-light);
       color: var(--primary-dark);
@@ -218,6 +218,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 800;
+      font-size: 0.78rem;
       flex-shrink: 0;
     }
     .home-features-grid {
@@ -250,6 +251,33 @@
     .page-title span { color: var(--primary); }
     .page-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
     .page-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    /* BANNER DE MODO EJEMPLO */
+    .demo-mode-banner {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 4px solid var(--secondary);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #1e3a8a;
+      font-size: 0.84rem;
+    }
+    .demo-badge {
+      background: var(--secondary);
+      color: #ffffff;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-right: 8px;
+    }
 
     /* TARJETA DE PERSONA ACTIVA */
     .active-person-banner {
@@ -340,9 +368,20 @@
     .cam-foot-left { position: absolute; bottom: 14px; left: 14px; font-size: 0.68rem; color: #94a3b8; }
     .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 24px rgba(50, 130, 246, 0.95); }
 
-    .cam-controls-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-    .cam-device-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); }
-    .cam-buttons { display: flex; gap: 10px; align-items: center; }
+    .cam-controls-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .cam-device-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap; }
+    .cam-buttons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+    .btn-sensor-on {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: #93c5fd;
+    }
+    .btn-sensor-off {
+      background: #f8fafc;
+      color: #64748b;
+      border-color: #cbd5e1;
+    }
 
     .audio-prompt-box {
       background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
@@ -398,6 +437,19 @@
     tr.row-unselected { opacity: 0.45; background: #fafafa; }
     input[type="checkbox"].attempt-chk { width: 16px; height: 16px; accent-color: var(--primary); cursor: pointer; }
 
+    .report-selector-bar {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
     .report-meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
     @media (max-width: 768px) { .report-meta-grid { grid-template-columns: repeat(2, 1fr); } }
     .report-meta-item .label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
@@ -407,17 +459,17 @@
     .empty-state-box {
       padding: 48px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px;
     }
-    .empty-smiley {
-      width: 48px; height: 48px; border-radius: 50%; border: 2px solid #cbd5e1; color: #94a3b8;
-      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    .empty-icon-circle {
+      width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--border); color: var(--primary);
+      background: var(--primary-light); display: flex; align-items: center; justify-content: center;
     }
-    .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 16px; }
     .person-card {
-      border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: var(--bg);
-      display: flex; flex-direction: column; gap: 12px; transition: 0.2s;
+      border: 1px solid var(--border); border-radius: 12px; padding: 18px; background: var(--bg);
+      display: flex; flex-direction: column; gap: 12px; transition: 0.25s;
     }
     .person-card:hover { border-color: var(--primary); background: #fff; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.08); }
-    .person-card.selected { border: 2px solid var(--primary); background: #fff; }
+    .person-card.selected { border: 2px solid var(--primary); background: #fff; box-shadow: 0 6px 18px rgba(142, 91, 159, 0.14); }
 
     /* MODALES */
     .modal-backdrop {
@@ -448,8 +500,8 @@
 
     .photo-upload-row { display: flex; align-items: center; gap: 14px; }
     .photo-preview {
-      width: 56px; height: 56px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center; overflow: hidden; color: var(--text-muted); font-size: 1.3rem; flex-shrink: 0;
+      width: 56px; height: 56px; border-radius: 50%; background: var(--primary-light); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; overflow: hidden; color: var(--primary); flex-shrink: 0;
     }
     .photo-preview img { width: 100%; height: 100%; object-fit: cover; }
   </style>
@@ -560,16 +612,16 @@
         </svg>
       </div>
       <div>
-        <strong>Control gestual activo</strong>
+        <strong>Control gestual modular</strong>
         Palma opuesta inicia cuenta regresiva; brazos pegados detienen.
       </div>
-      <div class="version">KineArc · Kinesiología 2° Año</div>
+      <div class="version">Kinesiología · Universidad de Chile</div>
     </div>
   </aside>
 
   <main>
     <div class="mobile-topbar">
-      <button class="btn-toggle-sidebar" onclick="openSidebar()">☰ Menú</button>
+      <button class="btn-toggle-sidebar" onclick="openSidebar()">Menú</button>
       <strong style="color: var(--primary-dark);">KineArc</strong>
       <span style="font-size: 0.75rem; color: var(--text-muted);">Clínica</span>
     </div>
@@ -588,7 +640,7 @@
             Una aplicación web diseñada para evaluar objetivamente la cinemática de <strong>abducción de hombro</strong> en tiempo real mediante visión computacional. Permite medir el rango de movimiento (ROM), identificar el <strong>arco doloroso (60°–120°)</strong>, detectar compensaciones axiales del tronco y comparar ambos brazos de forma rápida y accesible.
           </p>
           <div class="hero-team-note">
-            <strong>Proyecto académico y clínico:</strong> Desarrollada por <strong>estudiantes de Kinesiología de segundo año</strong> con el objetivo de acercar herramientas cuantitativas de evaluación funcional a la práctica formativa y clínica, sin necesidad de sensores externos.
+            <strong>Proyecto académico y clínico:</strong> Desarrollada por <strong>estudiantes de Kinesiología de segundo año de la Universidad de Chile</strong>, integrando fundamentos de biomecánica articular y visión computacional para acercar herramientas cuantitativas de evaluación funcional a la práctica clínica.
           </div>
           <div class="hero-actions">
             <button class="btn-hero-cta" onclick="goToEvaluation()">
@@ -609,26 +661,42 @@
           </div>
 
           <div class="hero-stat-item">
-            <div class="hero-stat-icon">60°–120°</div>
+            <div class="hero-stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
             <div>
-              <strong style="font-size: 0.9rem; display: block;">Detección de Arco Doloroso</strong>
-              <span style="font-size: 0.76rem; color: var(--text-muted);">Cronometraje automático de permanencia en zona crítica de pinzamiento.</span>
+              <strong style="font-size: 0.9rem; display: block;">Detección de Arco Doloroso (60°–120°)</strong>
+              <span style="font-size: 0.76rem; color: var(--text-muted);">Cronometraje automático de permanencia en zona crítica de pinzamiento subacromial.</span>
             </div>
           </div>
 
           <div class="hero-stat-item">
-            <div class="hero-stat-icon">✋</div>
+            <div class="hero-stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+                <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+                <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+                <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+              </svg>
+            </div>
             <div>
-              <strong style="font-size: 0.9rem; display: block;">Control Manos Libres</strong>
+              <strong style="font-size: 0.9rem; display: block;">Control Manos Libres Opcional</strong>
               <span style="font-size: 0.76rem; color: var(--text-muted);">Inicia con la palma contraria y detiene al bajar ambos brazos al cuerpo.</span>
             </div>
           </div>
 
           <div class="hero-stat-item">
-            <div class="hero-stat-icon">PDF</div>
+            <div class="hero-stat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
             <div>
-              <strong style="font-size: 0.9rem; display: block;">Comparativa Bilateral</strong>
-              <span style="font-size: 0.76rem; color: var(--text-muted);">Superposición de curvas derecho vs. izquierdo y reporte clínico descargable.</span>
+              <strong style="font-size: 0.9rem; display: block;">Comparativa Bilateral y Reportes</strong>
+              <span style="font-size: 0.76rem; color: var(--text-muted);">Superposición de curvas derecho vs. izquierdo y reporte clínico descargable en PDF.</span>
             </div>
           </div>
         </div>
@@ -681,30 +749,41 @@
         </div>
       </div>
 
+      <!-- AVISO DE MODO EJEMPLO (SE MUESTRA SI NO HAY PERSONA SELECCIONADA) -->
+      <div class="demo-mode-banner" id="demo-mode-banner">
+        <div>
+          <span class="demo-badge">Vista de ejemplo</span>
+          <strong>Estás visualizando datos ilustrativos de demostración.</strong> Estos valores muestran cómo se verán los KPI, curvas y tabla bilateral. Haz clic en <strong>"+ Nueva evaluación"</strong> para seleccionar una persona existente o registrar una nueva.
+        </div>
+        <button class="btn-primary" style="background: var(--secondary);" onclick="openNewEvaluationModal()">Comenzar con persona real</button>
+      </div>
+
       <!-- BANNER DE PERSONA SELECCIONADA -->
-      <div class="active-person-banner">
+      <div class="active-person-banner" id="active-person-banner">
         <div class="person-banner-left">
-          <div class="avatar-circle" id="active-person-avatar">👤</div>
+          <div class="avatar-circle" id="active-person-avatar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
           <div>
-            <div style="font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.8px;">Persona en evaluación</div>
-            <div style="font-size: 1.05rem; font-weight: 800; color: var(--text);" id="active-person-name">Sin persona seleccionada</div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);" id="active-person-details">Haz clic en "+ Nueva evaluación" para seleccionar o registrar una persona.</div>
+            <div style="font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.8px;" id="active-person-kicker">Ejemplo de demostración (No es una persona real)</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--text);" id="active-person-name">Sujeto de Ejemplo (Vista previa)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);" id="active-person-details">Edad: 21 años · Masa: 65 kg · Demostración cinemática bilateral</div>
           </div>
         </div>
         <div style="display: flex; gap: 8px;">
-          <button class="btn-outline" onclick="openNewEvaluationModal()">Cambiar / Registrar persona</button>
+          <button class="btn-outline" onclick="openNewEvaluationModal()">Seleccionar / Registrar persona</button>
         </div>
       </div>
 
       <div class="safety-banner">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <span><strong>Control sin manos:</strong> Muestra la palma de la mano contraria para iniciar la cuenta de 3s. Baja ambos brazos pegados al cuerpo para detener y guardar.</span>
+        <span><strong>Control sin manos:</strong> Con el sensor de mano activado, muestra la palma de la mano contraria para iniciar la cuenta de 3s. Baja ambos brazos pegados al cuerpo para detener y guardar.</span>
       </div>
 
       <div class="status-strip">
         <div class="status-indicator">
           <span class="dot-live"></span>
-          <span id="strip-patient-info">Evaluación clínica · Sin persona asignada</span>
+          <span id="strip-patient-info">Evaluación clínica · Vista de ejemplo</span>
         </div>
         <span id="strip-date"></span>
       </div>
@@ -719,8 +798,8 @@
             </div>
             <span class="kpi-lock-pill" id="kpi-state-badge" style="display:none;">Registrado</span>
           </div>
-          <div class="kpi-box-val" id="kpi-max-angle">— <small>°</small></div>
-          <div class="kpi-box-foot" id="kpi-side-label">Hombro derecho</div>
+          <div class="kpi-box-val" id="kpi-max-angle">142 <small>°</small></div>
+          <div class="kpi-box-foot" id="kpi-side-label">Hombro derecho (Ejemplo)</div>
         </div>
 
         <div class="kpi-box" id="card-kpi-time">
@@ -730,7 +809,7 @@
               <span>Tiempo en arco</span>
             </div>
           </div>
-          <div class="kpi-box-val" id="kpi-pain-time">— <small>s</small></div>
+          <div class="kpi-box-val" id="kpi-pain-time">2.1 <small>s</small></div>
           <div class="kpi-box-foot">Zona 60° – 120°</div>
         </div>
 
@@ -741,7 +820,7 @@
               <span>Desviación línea media</span>
             </div>
           </div>
-          <div class="kpi-box-val" id="kpi-trunk-angle">— <small>°</small></div>
+          <div class="kpi-box-val" id="kpi-trunk-angle">3 <small>°</small></div>
           <div class="kpi-box-foot" id="kpi-comp-status">Tronco alineado (≤ 5°)</div>
         </div>
 
@@ -752,7 +831,7 @@
               <span>Velocidad angular</span>
             </div>
           </div>
-          <div class="kpi-box-val" id="kpi-speed">— <small>°/s</small></div>
+          <div class="kpi-box-val" id="kpi-speed">34 <small>°/s</small></div>
           <div class="kpi-box-foot" id="txt-fps">0 FPS en vivo</div>
         </div>
       </div>
@@ -785,7 +864,7 @@
 
             <div class="cam-foot-left" id="cam-plane-foot">PLANO FRONTAL · Video local</div>
             <div class="cam-guide-box" id="cam-gesture-guide">
-              <strong>Control Gestual Listo</strong>
+              <strong id="cam-gesture-title">Sensor de mano activo</strong>
               <span id="cam-gesture-hint">Muestra la palma izquierda para iniciar Hombro Derecho.</span>
             </div>
           </div>
@@ -796,8 +875,15 @@
 
           <div class="cam-controls-bar">
             <div class="cam-device-label">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-              <span>Cámara predeterminada</span>
+              <button type="button" id="btn-toggle-hand-sensor" class="btn-sensor-on" onclick="toggleHandSensor()" style="padding: 6px 11px; font-size: 0.76rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/>
+                  <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/>
+                  <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/>
+                  <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>
+                </svg>
+                <span id="txt-hand-sensor-status">Sensor mano: ON</span>
+              </button>
               <button class="btn-ghost" onclick="toggleSilhouette()" style="font-size: 0.75rem;">[Silueta guía]</button>
             </div>
             <div class="cam-buttons">
@@ -866,13 +952,13 @@
 
           <div class="step-list">
             <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Seleccionar persona y activar cámara</span></div>
-            <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Mostrar palma contraria (Cuenta 3s)</span></div>
+            <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Mostrar palma contraria o presionar iniciar</span></div>
             <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Bajar ambos brazos al cuerpo para detener</span></div>
           </div>
 
           <button class="btn-outline" onclick="calibrateNeutral()" style="width: 100%;">Calibrar postura · 3 s</button>
           <button id="btn-rec" class="btn-primary" onclick="handleTestButton()" disabled style="width: 100%; padding: 12px;">
-            <span>▶ Preparar intento (o mostrar palma)</span>
+            <span>Iniciar intento</span>
           </button>
         </div>
 
@@ -927,9 +1013,7 @@
                     <th style="width: 36px;"></th>
                   </tr>
                 </thead>
-                <tbody id="table-attempts">
-                  <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar.</td></tr>
-                </tbody>
+                <tbody id="table-attempts"></tbody>
               </table>
             </div>
           </div>
@@ -1022,7 +1106,26 @@
         <div>
           <div class="page-kicker">DOCUMENTACIÓN CLÍNICA</div>
           <h1 class="page-title">Reporte clínico<span>.</span></h1>
-          <p class="page-subtitle">Tabla comparativa bilateral y exportación oficial en PDF de los intentos seleccionados.</p>
+          <p class="page-subtitle">Selecciona a la persona evaluada para revisar su tabla comparativa bilateral y descargar su informe en PDF.</p>
+        </div>
+      </div>
+
+      <!-- SELECTOR DE PERSONA EN REPORTE CLÍNICO -->
+      <div class="report-selector-bar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="avatar-circle" id="report-person-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <div style="font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Seleccionar persona para reporte</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);" id="report-selector-hint">Elige una persona registrada de la lista</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+          <select id="report-person-select" onchange="onReportPersonChange(this.value)" style="padding: 9px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.86rem; font-weight: 600; min-width: 240px;">
+            <option value="">-- Seleccionar persona --</option>
+          </select>
+          <button class="btn-outline" onclick="openPersonCreatorModal()">+ Registrar persona</button>
         </div>
       </div>
 
@@ -1118,7 +1221,7 @@
       </div>
 
       <div class="detail-grid-2">
-        <div class="card"><strong style="color: var(--primary);">01 · Inicio Manos Libres</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Muestra la palma abierta de la mano opuesta al hombro que vas a evaluar para activar automáticamente la cuenta regresiva de 3 segundos.</p></div>
+        <div class="card"><strong style="color: var(--primary);">01 · Inicio Manos Libres</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Muestra la palma abierta de la mano opuesta al hombro que vas a evaluar (con el sensor de mano activado) para iniciar la cuenta regresiva de 3 segundos.</p></div>
         <div class="card"><strong style="color: var(--primary);">02 · Término Automático</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Al finalizar la elevación, desciende el brazo y mantén ambas manos y brazos pegados a los laterales de las caderas para detener el registro.</p></div>
         <div class="card"><strong style="color: var(--primary);">03 · Selección de Intentos</strong><p style="font-size: 0.85rem; color: var(--text-muted);">En el historial puedes marcar o desmarcar cada intento o eliminarlo. Solo los intentos seleccionados se incluyen en el PDF y gráfico.</p></div>
         <div class="card"><strong style="color: var(--primary);">04 · Compensación de Tronco</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Una inclinación lateral superior a 5° respecto a la vertical indica estrategia compensatoria del tronco.</p></div>
@@ -1138,13 +1241,13 @@
       </div>
 
       <div class="modal-tabs">
-        <button class="modal-tab-btn active" id="tab-btn-existing" onclick="switchEvalModalTab('existing')">Seleccionar existente</button>
-        <button class="modal-tab-btn" id="tab-btn-new" onclick="switchEvalModalTab('new')">+ Nueva persona</button>
+        <button class="modal-tab-btn active" id="tab-btn-existing" onclick="switchEvalModalTab('existing')">Persona existente</button>
+        <button class="modal-tab-btn" id="tab-btn-new" onclick="switchEvalModalTab('new')">+ Crear persona nueva</button>
       </div>
 
       <div id="eval-tab-existing" style="display: flex; flex-direction: column; gap: 12px;">
         <div class="form-group">
-          <label>Buscar persona registrada</label>
+          <label>Selecciona una persona registrada (te llevará a su perfil en Personas)</label>
           <input type="text" id="search-person-input" placeholder="Buscar por apellido, nombre o deporte..." oninput="renderSearchDropdown()">
         </div>
         <div class="person-select-list" id="search-person-list"></div>
@@ -1179,7 +1282,7 @@
           <label>Prueba / Posición / Diagnóstico</label>
           <input type="text" id="quick-position" placeholder="Ej. Hombro doloroso derecho">
         </div>
-        <button class="btn-primary" onclick="createPersonFromQuickModal()" style="width: 100%; padding: 12px; margin-top: 4px;">Crear y comenzar evaluación</button>
+        <button class="btn-primary" onclick="createPersonFromQuickModal()" style="width: 100%; padding: 12px; margin-top: 4px;">Crear persona e ir a evaluar</button>
       </div>
     </div>
   </div>
@@ -1227,9 +1330,11 @@
       </div>
 
       <div class="form-group">
-        <label>Foto</label>
+        <label>Foto (Opcional)</label>
         <div class="photo-upload-row">
-          <div class="photo-preview" id="new-photo-preview">😊</div>
+          <div class="photo-preview" id="new-photo-preview">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
           <input type="file" id="new-photo-input" accept="image/*" style="display: none;" onchange="previewPersonPhoto(event)">
           <button type="button" class="btn-outline" onclick="document.getElementById('new-photo-input').click()">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -1252,14 +1357,52 @@
     const STORAGE_KEY = 'kinearc_people_db_v1';
 
     let peopleDB = [];
-    let activePersonId = null;
+    let activePersonId = null; // null = Modo Ejemplo ilustrativo
     let tempPhotoBase64 = null;
     let lockedKpiState = null;
+    let isHandSensorEnabled = true;
+
+    // DATOS DE DEMOSTRACIÓN PARA VISTA DE EJEMPLO (NO SON PERSONAS REALES)
+    const DEMO_RIGHT_POINTS = [
+      {x: 0.0, y: 12}, {x: 0.8, y: 38}, {x: 1.6, y: 74}, {x: 2.5, y: 112},
+      {x: 3.4, y: 142}, {x: 4.3, y: 118}, {x: 5.2, y: 68}, {x: 6.2, y: 15}
+    ];
+    const DEMO_LEFT_POINTS = [
+      {x: 0.0, y: 10}, {x: 0.9, y: 42}, {x: 1.8, y: 82}, {x: 2.7, y: 126},
+      {x: 3.6, y: 154}, {x: 4.5, y: 122}, {x: 5.4, y: 72}, {x: 6.3, y: 14}
+    ];
+    const DEMO_ATTEMPTS = [
+      { id: 1, side: 'Derecho', maxAngle: 142, painTime: '2.1', maxTrunk: 3, maxSpeed: 34, comp: 'No', points: DEMO_RIGHT_POINTS, selected: true, isDemo: true },
+      { id: 2, side: 'Izquierdo', maxAngle: 154, painTime: '1.8', maxTrunk: 2, maxSpeed: 38, comp: 'No', points: DEMO_LEFT_POINTS, selected: true, isDemo: true }
+    ];
 
     document.getElementById('strip-date').innerText = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
     function goToEvaluation() {
       showView('evaluacion', document.getElementById('nav-evaluacion'));
+    }
+
+    function toggleHandSensor() {
+      isHandSensorEnabled = !isHandSensorEnabled;
+      const btn = document.getElementById('btn-toggle-hand-sensor');
+      const txt = document.getElementById('txt-hand-sensor-status');
+      const titleEl = document.getElementById('cam-gesture-title');
+      const hintEl = document.getElementById('cam-gesture-hint');
+
+      if (isHandSensorEnabled) {
+        btn.className = 'btn-sensor-on';
+        txt.innerText = 'Sensor mano: ON';
+        titleEl.innerText = 'Sensor de mano activo';
+        hintEl.innerText = selectedSide === 'left'
+          ? 'Muestra la palma derecha para iniciar Hombro Izquierdo.'
+          : 'Muestra la palma izquierda para iniciar Hombro Derecho.';
+      } else {
+        btn.className = 'btn-sensor-off';
+        txt.innerText = 'Sensor mano: OFF';
+        titleEl.innerText = 'Sensor de mano desactivado';
+        hintEl.innerText = 'Usa el botón "Iniciar intento" para comenzar la evaluación.';
+        palmHoldFrames = 0;
+      }
     }
 
     function loadPeopleDB() {
@@ -1269,20 +1412,44 @@
       } catch (e) {
         peopleDB = [];
       }
-      if (peopleDB.length > 0 && !activePersonId) {
-        selectActivePerson(peopleDB[0].id);
-      } else {
-        updatePeopleUI();
-      }
+      enterDemoMode();
+      updatePeopleUI();
+      updateReportPersonSelector();
     }
 
     function savePeopleDB() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(peopleDB));
       updatePeopleUI();
+      updateReportPersonSelector();
     }
 
     function getActivePerson() {
       return peopleDB.find(p => p.id === activePersonId) || null;
+    }
+
+    function enterDemoMode() {
+      activePersonId = null;
+      attemptsHistory = JSON.parse(JSON.stringify(DEMO_ATTEMPTS));
+      rightArmData = { points: DEMO_RIGHT_POINTS, maxRom: 142, painTime: 2.1, maxTrunk: 3 };
+      leftArmData = { points: DEMO_LEFT_POINTS, maxRom: 154, painTime: 1.8, maxTrunk: 2 };
+
+      document.getElementById('demo-mode-banner').style.display = 'flex';
+      document.getElementById('active-person-kicker').innerText = 'Ejemplo ilustrativo (No es una persona real)';
+      document.getElementById('active-person-name').innerText = 'Sujeto de Ejemplo (Vista previa)';
+      document.getElementById('active-person-details').innerText = 'Datos de muestra para visualizar el funcionamiento del sistema';
+      document.getElementById('strip-patient-info').innerText = 'Evaluación clínica · Modo de ejemplo ilustrativo';
+      document.getElementById('active-person-avatar').innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+
+      lockKpisFromAttempt(DEMO_ATTEMPTS[0]);
+      document.getElementById('kpi-side-label').innerText = 'Hombro derecho (Ejemplo)';
+
+      angleChart.data.datasets[0].data = DEMO_RIGHT_POINTS;
+      angleChart.data.datasets[1].data = DEMO_LEFT_POINTS;
+      angleChart.update();
+
+      renderAttemptsTable();
+      updateComparativeTable();
+      syncPatientData();
     }
 
     // MODALES
@@ -1304,7 +1471,7 @@
       document.getElementById('new-mass').value = '';
       document.getElementById('new-sport').value = '';
       document.getElementById('new-position').value = '';
-      document.getElementById('new-photo-preview').innerHTML = '😊';
+      document.getElementById('new-photo-preview').innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
       openModal('modal-create-person');
     }
 
@@ -1397,6 +1564,9 @@
       document.getElementById('quick-mass').value = '';
       document.getElementById('quick-sport').value = '';
       document.getElementById('quick-position').value = '';
+
+      // Ir directo a Evaluación con la persona recién creada lista
+      showView('evaluacion', document.getElementById('nav-evaluacion'));
     }
 
     function renderSearchDropdown() {
@@ -1407,7 +1577,7 @@
       );
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">No se encontraron personas. Usa la pestaña "+ Nueva persona".</div>`;
+        container.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">No se encontraron personas. Usa la pestaña "+ Crear persona nueva".</div>`;
         return;
       }
 
@@ -1422,12 +1592,23 @@
     function selectPersonFromModal(personId) {
       selectActivePerson(personId);
       closeModal('modal-new-eval');
+      // Al seleccionar una persona existente, te lleva a su perfil en el apartado Personas
+      showView('personas', document.getElementById('nav-personas'));
+      setTimeout(() => {
+        const card = document.getElementById(`person-card-${personId}`);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 80);
     }
 
     function selectActivePerson(personId) {
       activePersonId = personId;
       const p = getActivePerson();
-      if (!p) return;
+      if (!p) {
+        enterDemoMode();
+        return;
+      }
+
+      document.getElementById('demo-mode-banner').style.display = 'none';
 
       attemptsHistory = (p.attempts || []).map(a => ({
         ...a,
@@ -1442,6 +1623,7 @@
         avatarEl.innerText = `${p.firstName[0]}${p.lastName[0]}`.toUpperCase();
       }
 
+      document.getElementById('active-person-kicker').innerText = 'Persona en evaluación';
       document.getElementById('active-person-name').innerText = `${p.lastName}, ${p.firstName}`;
       document.getElementById('active-person-details').innerText = `Edad: ${p.age} años · Masa: ${p.mass} kg · ${p.sport} (${p.position})`;
       document.getElementById('strip-patient-info').innerText = `Evaluación clínica · ${p.lastName}, ${p.firstName} (${p.mass} kg)`;
@@ -1457,6 +1639,7 @@
       recalculateFromSelectedAttempts();
       syncPatientData();
       updatePeopleUI();
+      updateReportPersonSelector();
     }
 
     function lockKpisFromAttempt(attempt) {
@@ -1473,7 +1656,9 @@
     function renderLockedKpis() {
       if (!lockedKpiState) return;
       document.getElementById('kpi-max-angle').innerHTML = `${lockedKpiState.maxRom} <small>°</small>`;
-      document.getElementById('kpi-side-label').innerText = `${lockedKpiState.sideLabel} (Último evaluado)`;
+      document.getElementById('kpi-side-label').innerText = activePersonId
+        ? `${lockedKpiState.sideLabel} (Último evaluado)`
+        : `${lockedKpiState.sideLabel} (Ejemplo)`;
       document.getElementById('kpi-pain-time').innerHTML = `${lockedKpiState.painTime} <small>s</small>`;
       document.getElementById('kpi-trunk-angle').innerHTML = `${lockedKpiState.maxTrunk} <small>°</small>`;
       const isComp = lockedKpiState.maxTrunk > TRUNK_LIMIT_DEG;
@@ -1483,6 +1668,7 @@
       document.getElementById('kpi-speed').innerHTML = `${lockedKpiState.maxSpeed} <small>°/s</small>`;
 
       document.getElementById('kpi-state-badge').style.display = 'inline-block';
+      document.getElementById('kpi-state-badge').innerText = activePersonId ? 'Registrado' : 'Ejemplo';
       document.querySelectorAll('.kpi-box').forEach(b => b.classList.add('locked'));
     }
 
@@ -1562,6 +1748,42 @@
       recalculateFromSelectedAttempts();
     }
 
+    // SELECTOR EN VISTA REPORTE CLÍNICO
+    function updateReportPersonSelector() {
+      const selectEl = document.getElementById('report-person-select');
+      const avatarEl = document.getElementById('report-person-avatar');
+      const hintEl = document.getElementById('report-selector-hint');
+
+      if (!selectEl) return;
+
+      const optionsHtml = ['<option value="">-- Seleccionar persona --</option>']
+        .concat(peopleDB.map(p => `<option value="${p.id}" ${p.id === activePersonId ? 'selected' : ''}>${p.lastName}, ${p.firstName} (${p.mass} kg · ${p.attempts.length} eval.)</option>`))
+        .join('');
+      selectEl.innerHTML = optionsHtml;
+
+      const p = getActivePerson();
+      if (p) {
+        if (p.photo) {
+          avatarEl.innerHTML = `<img src="${p.photo}" alt="${p.firstName}">`;
+        } else {
+          avatarEl.innerText = `${p.firstName[0]}${p.lastName[0]}`.toUpperCase();
+        }
+        hintEl.innerText = `${p.sport} · ${p.attempts.length} intentos registrados`;
+      } else {
+        avatarEl.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+        hintEl.innerText = peopleDB.length > 0 ? 'Elige una persona de la lista para ver su reporte' : 'Aún no hay personas registradas';
+      }
+    }
+
+    function onReportPersonChange(personId) {
+      if (!personId) {
+        enterDemoMode();
+        updateReportPersonSelector();
+        return;
+      }
+      selectActivePerson(personId);
+    }
+
     function updatePeopleUI() {
       document.getElementById('sidebar-people-count').innerText = peopleDB.length;
       document.getElementById('people-header-count').innerText = peopleDB.length;
@@ -1570,7 +1792,9 @@
       if (peopleDB.length === 0) {
         dirContainer.innerHTML = `
           <div class="empty-state-box">
-            <div class="empty-smiley">😊</div>
+            <div class="empty-icon-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+            </div>
             <div style="color: var(--text-muted); font-size: 0.9rem;">No hay personas registradas</div>
             <button class="btn-primary" onclick="openPersonCreatorModal()">Agregar Persona</button>
           </div>
@@ -1586,22 +1810,29 @@
               ? `<img src="${p.photo}" alt="${p.firstName}">`
               : `${p.firstName[0]}${p.lastName[0]}`.toUpperCase();
             return `
-              <div class="person-card ${isSelected ? 'selected' : ''}">
-                <div style="display: flex; align-items: center; gap: 12px;">
-                  <div class="avatar-circle">${avatarHtml}</div>
-                  <div>
-                    <strong style="font-size: 0.98rem; display: block;">${p.lastName}, ${p.firstName}</strong>
-                    <span style="font-size: 0.76rem; color: var(--text-muted);">${p.age} años · ${p.mass} kg</span>
+              <div id="person-card-${p.id}" class="person-card ${isSelected ? 'selected' : ''}">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div class="avatar-circle">${avatarHtml}</div>
+                    <div>
+                      <strong style="font-size: 0.98rem; display: block;">${p.lastName}, ${p.firstName}</strong>
+                      <span style="font-size: 0.76rem; color: var(--text-muted);">${p.age} años · ${p.mass} kg</span>
+                    </div>
                   </div>
+                  ${isSelected ? '<span style="background: var(--primary-light); color: var(--primary-dark); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;">Perfil activo</span>' : ''}
                 </div>
-                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                <div style="font-size: 0.78rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 3px;">
                   <div><strong>Actividad:</strong> ${p.sport}</div>
                   <div><strong>Detalle:</strong> ${p.position}</div>
                   <div><strong>Intentos registrados:</strong> ${p.attempts.length}</div>
+                  <div><strong>ROM Máx. (Der / Izq):</strong> ${p.rightArm && p.rightArm.maxRom !== null ? p.rightArm.maxRom + '°' : '—'} / ${p.leftArm && p.leftArm.maxRom !== null ? p.leftArm.maxRom + '°' : '—'}</div>
                 </div>
                 <div style="display: flex; gap: 8px; margin-top: auto;">
-                  <button class="btn-primary" style="flex: 1;" onclick="evaluatePerson('${p.id}')">Evaluar / Ver historial</button>
-                  <button class="btn-ghost" style="color: var(--danger);" onclick="deletePerson('${p.id}')" title="Eliminar">🗑</button>
+                  <button class="btn-primary" style="flex: 1;" onclick="evaluatePerson('${p.id}')">Ir a evaluar</button>
+                  <button class="btn-outline" onclick="openPersonReport('${p.id}')" title="Ver reporte clínico">Reporte</button>
+                  <button class="btn-ghost" style="color: var(--danger); padding: 6px 8px;" onclick="deletePerson('${p.id}')" title="Eliminar persona">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  </button>
                 </div>
               </div>
             `;
@@ -1615,14 +1846,23 @@
       showView('evaluacion', document.getElementById('nav-evaluacion'));
     }
 
+    function openPersonReport(personId) {
+      selectActivePerson(personId);
+      showView('reporte', document.getElementById('nav-reporte'));
+    }
+
     function deletePerson(personId) {
       if (!confirm("¿Eliminar esta persona y todas sus evaluaciones?")) return;
       peopleDB = peopleDB.filter(p => p.id !== personId);
       if (activePersonId === personId) {
-        activePersonId = peopleDB.length > 0 ? peopleDB[0].id : null;
+        activePersonId = null;
       }
       savePeopleDB();
-      if (activePersonId) selectActivePerson(activePersonId);
+      if (activePersonId) {
+        selectActivePerson(activePersonId);
+      } else {
+        enterDemoMode();
+      }
     }
 
     function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebar-overlay').classList.add('active'); }
@@ -1633,6 +1873,7 @@
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`view-${viewId}`).classList.add('active');
       if (btn) btn.classList.add('active');
+      if (viewId === 'reporte') updateReportPersonSelector();
       closeSidebar();
     }
 
@@ -1648,9 +1889,9 @@
         document.getElementById('rep-age-mass').innerText = `${p.age} años · ${p.mass} kg`;
         document.getElementById('rep-sport').innerText = `${p.sport} (${p.position})`;
       } else {
-        document.getElementById('rep-name').innerText = 'Sin persona seleccionada';
-        document.getElementById('rep-age-mass').innerText = '—';
-        document.getElementById('rep-sport').innerText = '—';
+        document.getElementById('rep-name').innerText = 'Sujeto de Ejemplo (Vista previa)';
+        document.getElementById('rep-age-mass').innerText = '21 años · 65 kg';
+        document.getElementById('rep-sport').innerText = 'Demostración cinemática';
       }
 
       document.getElementById('rep-status').innerText = status;
@@ -1670,6 +1911,10 @@
 
     function downloadRealPDF() {
       if (!window.jspdf) return alert("Cargando generador PDF, intenta nuevamente.");
+      const p = getActivePerson();
+      if (!p) {
+        return alert("Estás en la vista de ejemplo. Selecciona o registra una persona real antes de descargar su reporte PDF.");
+      }
       const selectedAttempts = attemptsHistory.filter(a => a.selected);
       if (attemptsHistory.length > 0 && selectedAttempts.length === 0) {
         return alert("Selecciona al menos un intento en la tabla para generar el reporte PDF.");
@@ -1677,7 +1922,6 @@
 
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      const p = getActivePerson();
 
       doc.setFillColor(243, 234, 245);
       doc.rect(0, 0, 210, 32, 'F');
@@ -1699,9 +1943,9 @@
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text(`Nombre: ${p ? p.lastName + ', ' + p.firstName : 'Sin informar'}`, 14, 52);
-      doc.text(`Edad / Masa: ${p ? p.age + ' años / ' + p.mass + ' kg' : 'Sin informar'}`, 110, 52);
-      doc.text(`Actividad: ${p ? p.sport + ' (' + p.position + ')' : 'Sin informar'}`, 14, 59);
+      doc.text(`Nombre: ${p.lastName}, ${p.firstName}`, 14, 52);
+      doc.text(`Edad / Masa: ${p.age} años / ${p.mass} kg`, 110, 52);
+      doc.text(`Actividad: ${p.sport} (${p.position})`, 14, 59);
       doc.text(`Profesional: ${document.getElementById('input-pro').value || 'Sin informar'}`, 110, 59);
 
       doc.setFont("helvetica", "bold");
@@ -1766,8 +2010,7 @@
       doc.setFontSize(9.5);
       doc.text(doc.splitTextToSize(document.getElementById('rep-obs-display').innerText, 180), 14, y);
 
-      const fileName = p ? `${p.lastName}_${p.firstName}` : 'Sin_Nombre';
-      doc.save(`Reporte_KineArc_${fileName}.pdf`);
+      doc.save(`Reporte_KineArc_${p.lastName}_${p.firstName}.pdf`);
     }
 
     // =========================================================
@@ -1880,8 +2123,8 @@
 
     function speakFullInstructions() {
       speak(
-        "Protocolo manos libres en KineArc. " +
-        "Para comenzar la cuenta regresiva de tres segundos, muestra la palma abierta de la mano contraria al hombro evaluado. " +
+        "Protocolo de evaluación en KineArc. " +
+        "Si el sensor de mano está activado, muestra la palma abierta de la mano contraria al hombro evaluado para iniciar la cuenta regresiva de tres segundos. " +
         "Realiza la elevación lateral lenta sin inclinar el tronco más de cinco grados. " +
         "Para detener y guardar la evaluación, desciende ambos brazos y pega ambas manos a los laterales de tus caderas."
       );
@@ -1987,7 +2230,7 @@
 
           if (!isTesting && !isCountingDown && getActivePerson()) {
             let nonEvalPalmDetected = false;
-            if (latestHandResults && latestHandResults.multiHandLandmarks && nonEvalWrist && nonEvalElbow) {
+            if (isHandSensorEnabled && latestHandResults && latestHandResults.multiHandLandmarks && nonEvalWrist && nonEvalElbow) {
               for (const handLm of latestHandResults.multiHandLandmarks) {
                 const handWrist = handLm[0];
                 const isNearNonEvalWrist = dist2D(handWrist, nonEvalWrist) < 0.14;
@@ -2001,7 +2244,7 @@
 
             if (nonEvalPalmDetected) {
               palmHoldFrames++;
-              document.getElementById('cam-signal-pill').innerText = "✋ PALMA DETECTADA · INICIANDO...";
+              document.getElementById('cam-signal-pill').innerText = "PALMA DETECTADA · INICIANDO...";
               document.getElementById('cam-signal-pill').classList.add('gesture-ready');
               if (palmHoldFrames >= 8) {
                 palmHoldFrames = 0;
@@ -2040,14 +2283,14 @@
 
               if (bothArmsDown && rightHandAtSide && leftHandAtSide) {
                 neutralHoldFrames++;
-                document.getElementById('cam-signal-pill').innerText = "⏹ POSTURA NEUTRA · DETENIENDO...";
+                document.getElementById('cam-signal-pill').innerText = "POSTURA NEUTRA · DETENIENDO...";
                 if (neutralHoldFrames >= 16) {
                   neutralHoldFrames = 0;
                   finishTestExecution();
                 }
               } else {
                 neutralHoldFrames = 0;
-                document.getElementById('cam-signal-pill').innerText = "● GRABANDO INTENTO";
+                document.getElementById('cam-signal-pill').innerText = "GRABANDO INTENTO";
               }
             }
           } else if (!lockedKpiState) {
@@ -2180,7 +2423,7 @@
       document.getElementById('cam-status-text').innerText = "VIDEO LOCAL";
       async function processFrame() {
         if (!videoElement.paused && !videoElement.ended) {
-          await hands.send({ image: videoElement });
+          if (isHandSensorEnabled) await hands.send({ image: videoElement });
           await pose.send({ image: videoElement });
           requestAnimationFrame(processFrame);
         }
@@ -2197,7 +2440,7 @@
         sourceMode = 'webcam';
         camera = new Camera(videoElement, {
           onFrame: async () => {
-            await hands.send({ image: videoElement });
+            if (isHandSensorEnabled) await hands.send({ image: videoElement });
             await pose.send({ image: videoElement });
           },
           width: 640,
@@ -2225,9 +2468,11 @@
       if (!lockedKpiState) {
         document.getElementById('kpi-side-label').innerText = side === 'left' ? 'Hombro izquierdo' : 'Hombro derecho';
       }
-      document.getElementById('cam-gesture-hint').innerText = side === 'left'
-        ? 'Muestra la palma derecha para iniciar Hombro Izquierdo.'
-        : 'Muestra la palma izquierda para iniciar Hombro Derecho.';
+      if (isHandSensorEnabled) {
+        document.getElementById('cam-gesture-hint').innerText = side === 'left'
+          ? 'Muestra la palma derecha para iniciar Hombro Izquierdo.'
+          : 'Muestra la palma izquierda para iniciar Hombro Derecho.';
+      }
     }
 
     function calibrateNeutral() {
@@ -2293,13 +2538,13 @@
       neutralHoldFrames = 0;
       testStartTime = performance.now();
       const signalPill = document.getElementById('cam-signal-pill');
-      signalPill.innerText = "● GRABANDO INTENTO";
+      signalPill.innerText = "GRABANDO INTENTO";
       signalPill.classList.remove('gesture-ready');
       signalPill.classList.add('recording');
 
       const btnRec = document.getElementById('btn-rec');
       btnRec.className = "btn-danger";
-      btnRec.innerHTML = `<span>⏹ Finalizar (o bajar ambos brazos)</span>`;
+      btnRec.innerHTML = `<span>Finalizar (o bajar ambos brazos)</span>`;
 
       const duration = parseInt(document.getElementById('select-duration').value) || 15000;
       if (testTimeout) clearTimeout(testTimeout);
@@ -2320,7 +2565,7 @@
 
       const btnRec = document.getElementById('btn-rec');
       btnRec.className = "btn-primary";
-      btnRec.innerHTML = `<span>▶ Preparar intento (o mostrar palma)</span>`;
+      btnRec.innerHTML = `<span>Iniciar intento</span>`;
 
       speak("Evaluación detenida y guardada.");
       recordAttempt();
@@ -2364,7 +2609,9 @@
       }
 
       const selectedCount = attemptsHistory.filter(a => a.selected).length;
-      summaryEl.innerText = `${selectedCount} de ${attemptsHistory.length} intentos seleccionados para reporte`;
+      summaryEl.innerText = activePersonId
+        ? `${selectedCount} de ${attemptsHistory.length} intentos seleccionados para reporte`
+        : 'Datos ilustrativos de ejemplo (No corresponden a una persona real)';
       if (chkAll) chkAll.checked = selectedCount === attemptsHistory.length;
 
       tbody.innerHTML = attemptsHistory.map((a, idx) => `
@@ -2378,7 +2625,9 @@
           <td>${a.painTime}s</td>
           <td>${a.maxTrunk}° (${a.comp})</td>
           <td>
-            <button class="btn-icon-del" onclick="deleteAttempt(${idx})" title="Borrar intento">🗑</button>
+            <button class="btn-icon-del" onclick="deleteAttempt(${idx})" title="Borrar intento">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
           </td>
         </tr>
       `).join('');
@@ -2413,10 +2662,11 @@
 
     function exportCSV() {
       const p = getActivePerson();
+      if (!p) return alert("Selecciona o registra una persona real antes de exportar datos en CSV.");
       const selectedAttempts = attemptsHistory.filter(a => a.selected);
       if (selectedAttempts.length === 0) return alert("Selecciona al menos un intento en la tabla para exportar.");
       let csv = "Persona,Intento,Brazo,ROM_Maximo,Tiempo_Arco_s,Desviacion_Tronco_deg,Velocidad_Max_deg_s,Compensacion_Mayor_5deg\n";
-      const pName = p ? `${p.lastName} ${p.firstName}` : 'Sin_Nombre';
+      const pName = `${p.lastName} ${p.firstName}`;
       selectedAttempts.forEach(a => csv += `"${pName}",${a.id},${a.side},${a.maxAngle},${a.painTime},${a.maxTrunk},${a.maxSpeed || 0},${a.comp}\n`);
       const link = document.createElement("a");
       link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
