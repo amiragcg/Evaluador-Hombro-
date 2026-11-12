@@ -9,6 +9,7 @@
       --primary: #8e5b9f;
       --primary-light: #f3eaf5;
       --primary-dark: #6e417e;
+      --secondary: #2b8a80;
       --bg-accent: #d1bbd4;
       --danger: #d9534f;
       --warning: #f0ad4e;
@@ -134,21 +135,21 @@
     .kpi-box-val small { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
     .kpi-box-foot { font-size: 0.75rem; color: var(--text-muted); }
 
-    /* GRID PRINCIPAL: CÁMARA (IZQ) + PREPARAR EVALUACIÓN (DER) */
+    /* GRID PRINCIPAL */
     .eval-main-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: start; }
     @media (max-width: 1024px) { .eval-main-grid { grid-template-columns: 1fr; } }
 
     .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 22px; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.03); display: flex; flex-direction: column; gap: 16px; }
-    .card-header-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .card-header-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
     .card-h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); }
     .card-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* PESTAÑAS PLANO FRONTAL / ESCAPULAR */
+    /* PESTAÑAS PLANO */
     .pill-switch { display: flex; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 3px; }
     .pill-btn { padding: 5px 12px; border: none; background: transparent; border-radius: 6px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); cursor: pointer; }
     .pill-btn.active { background: #fff; color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
 
-    /* VISOR DE VIDEO OSCURO CLÍNICO */
+    /* VISOR DE VIDEO */
     .camera-stage {
       position: relative; width: 100%; background: #142224; border-radius: 12px; overflow: hidden;
       aspect-ratio: 16/10; display: flex; justify-content: center; align-items: center;
@@ -180,7 +181,6 @@
     .cam-foot-left { position: absolute; bottom: 14px; left: 14px; font-size: 0.68rem; color: #94a3b8; }
     .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: var(--bg-accent); text-shadow: 0 0 20px rgba(0,0,0,0.8); }
 
-    /* CONTROLES INFERIORES DE CÁMARA */
     .cam-controls-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .cam-device-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); }
     .cam-buttons { display: flex; gap: 10px; align-items: center; }
@@ -201,7 +201,7 @@
     .btn-ghost { background: transparent; color: var(--text-muted); border: none; padding: 6px 10px; }
     .btn-ghost:hover { color: var(--primary-dark); }
 
-    /* FORMULARIO PREPARAR EVALUACIÓN */
+    /* FORMULARIOS */
     .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
@@ -210,27 +210,25 @@
     }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
 
-    /* GUÍA DE AUDIO EN PANEL DERECHO */
     .audio-panel { border-top: 1px solid var(--border); padding-top: 14px; display: flex; flex-direction: column; gap: 10px; }
     .audio-panel-header { display: flex; justify-content: space-between; align-items: center; }
     .audio-links { display: flex; gap: 14px; font-size: 0.78rem; font-weight: 600; }
     .audio-links a { color: var(--primary); text-decoration: none; cursor: pointer; }
     .audio-links a:hover { text-decoration: underline; }
 
-    /* LISTA DE PASOS PROTOCOLO */
     .step-list { display: flex; flex-direction: column; gap: 8px; margin: 6px 0; }
     .step-row { display: flex; align-items: center; gap: 10px; font-size: 0.8rem; color: var(--text-muted); }
     .step-circle { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; }
     .step-row.active { color: var(--primary-dark); font-weight: 600; }
     .step-row.active .step-circle { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    /* SECCIÓN INFERIOR: EL MOVIMIENTO, EN DETALLE */
+    /* SECCIÓN INFERIOR */
     .detail-section { margin-top: 12px; display: flex; flex-direction: column; gap: 16px; }
     .detail-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-    .detail-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .detail-grid-2 { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
     @media (max-width: 900px) { .detail-grid-2 { grid-template-columns: 1fr; } }
 
-    .chart-container { height: 210px; width: 100%; position: relative; }
+    .chart-container { height: 240px; width: 100%; position: relative; }
 
     /* TABLAS Y REPORTE */
     table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
@@ -352,7 +350,7 @@
         <div>
           <div class="page-kicker">EVALUACIÓN CINEMÁTICA DEL HOMBRO</div>
           <h1 class="page-title">Abducción de hombro<span>.</span></h1>
-          <p class="page-subtitle">Mide el arco doloroso (60°–120°). Comprende la estrategia de movimiento.</p>
+          <p class="page-subtitle">Mide el arco doloroso (60°–120°). Compara ambos brazos y analiza la desviación axial del tronco.</p>
         </div>
         <div class="page-actions">
           <button class="btn-outline" onclick="resetSession()">+ Nueva evaluación</button>
@@ -398,10 +396,10 @@
         <div class="kpi-box">
           <div class="kpi-box-top">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
-            <span>Inclinación tronco</span>
+            <span>Desviación línea media</span>
           </div>
-          <div class="kpi-box-val" id="kpi-trunk-angle">— <small>° DE</small></div>
-          <div class="kpi-box-foot" id="kpi-comp-status">Sin compensación</div>
+          <div class="kpi-box-val" id="kpi-trunk-angle">— <small>°</small></div>
+          <div class="kpi-box-foot" id="kpi-comp-status">Tronco alineado</div>
         </div>
 
         <div class="kpi-box">
@@ -420,7 +418,7 @@
           <div class="card-header-flex">
             <div>
               <div class="card-h3">Captura de movimiento</div>
-              <div class="card-sub">Tronco y extremidad superior · cámara fija</div>
+              <div class="card-sub">Tronco y extremidad superior · Línea media axial activa</div>
             </div>
             <div class="pill-switch">
               <button class="pill-btn active" id="btn-plane-front" onclick="setPlane('Frontal')">Frontal</button>
@@ -468,7 +466,7 @@
 
           <div class="audio-prompt-box">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-            <span>Esta prueba debe ser supervisada por su kinesiólogo o kinesióloga. Colóquese de frente con los brazos relajados al costado. Cuando se lo indiquen, eleve lateralmente y de forma lenta el brazo evaluado hasta el máximo rango tolerado y descienda suavemente.</span>
+            <span>Evalúa un brazo y luego cambia al brazo contralateral en el panel derecho para visualizar ambas curvas superpuestas y generar la tabla comparativa bilateral.</span>
           </div>
         </div>
 
@@ -476,7 +474,7 @@
           <div class="card-header-flex">
             <div>
               <div class="card-h3">Preparar evaluación</div>
-              <div class="card-sub">Protocolo por intento</div>
+              <div class="card-sub">Protocolo bilateral por intento</div>
             </div>
             <span id="protocol-counter" style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">01 / 03</span>
           </div>
@@ -542,24 +540,20 @@
           <button id="btn-rec" class="btn-primary" onclick="handleTestButton()" disabled style="width: 100%; padding: 12px;">
             <span>▶ Preparar intento</span>
           </button>
-          <p style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.35;">
-            El registro dura el tiempo configurado para permitir un movimiento lento, o puedes finalizarlo manualmente cuando completes el descenso.
-          </p>
         </div>
 
       </div>
 
+      <!-- SECCIÓN INFERIOR: GRÁFICO COMPARATIVO BILATERAL + TABLA -->
       <div class="detail-section">
         <div class="detail-header">
           <div>
             <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text);">El movimiento, en detalle</h2>
-            <p style="font-size: 0.8rem; color: var(--text-muted);">Señales cinemáticas y eventos del intento seleccionado.</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Curva comparativa Ángulo (°) vs. Tiempo (s) para ambos brazos.</p>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 0.78rem; color: var(--text-muted);">Intento:</span>
-            <select id="select-attempt-detail" style="padding: 6px 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.8rem; background: #fff;">
-              <option>Sin intentos</option>
-            </select>
+          <div style="display: flex; align-items: center; gap: 14px; font-size: 0.78rem; font-weight: 700;">
+            <span style="color: #8e5b9f;">━━ Hombro Derecho</span>
+            <span style="color: #2b8a80;">┄┄ Hombro Izquierdo</span>
           </div>
         </div>
 
@@ -567,10 +561,9 @@
           <div class="card">
             <div class="card-header-flex">
               <div>
-                <div class="card-h3">Dinámica de abducción glenohumeral</div>
-                <div class="card-sub">Ángulo proyectado (°) · Franja lila indica Arco Doloroso (60°–120°)</div>
+                <div class="card-h3">Dinámica bilateral de abducción (° vs s)</div>
+                <div class="card-sub">Franja sombreada indica Arco Doloroso (60°–120°)</div>
               </div>
-              <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary);">● Hombro</span>
             </div>
             <div class="chart-container">
               <canvas id="angleChart"></canvas>
@@ -580,8 +573,8 @@
           <div class="card">
             <div class="card-header-flex">
               <div>
-                <div class="card-h3">Eventos e intentos registrados</div>
-                <div class="card-sub">Observaciones cinemáticas que requieren revisión clínica</div>
+                <div class="card-h3">Historial de intentos registrados</div>
+                <div class="card-sub">Incluye desviación máxima de línea media del tronco</div>
               </div>
               <button class="btn-outline" onclick="exportCSV()" style="padding: 4px 10px; font-size: 0.72rem;">Exportar CSV</button>
             </div>
@@ -590,14 +583,14 @@
                 <thead>
                   <tr>
                     <th>Intento</th>
-                    <th>Lado</th>
+                    <th>Brazo</th>
                     <th>ROM Máx</th>
                     <th>T. Arco</th>
-                    <th>Compensación</th>
+                    <th>Desv. Tronco</th>
                   </tr>
                 </thead>
                 <tbody id="table-attempts">
-                  <tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar este indicador.</td></tr>
+                  <tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -673,7 +666,7 @@
         <div>
           <div class="page-kicker">DOCUMENTACIÓN CLÍNICA</div>
           <h1 class="page-title">Reporte clínico<span>.</span></h1>
-          <p class="page-subtitle">Ficha resumen bilateral y exportación oficial en PDF o CSV.</p>
+          <p class="page-subtitle">Tabla comparativa bilateral, curvas temporales y exportación oficial en PDF.</p>
         </div>
       </div>
 
@@ -681,7 +674,7 @@
         <div class="card">
           <div class="card-header-flex">
             <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary);">REPORTE DE EVALUACIÓN</span>
-            <span style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;">REGISTRO POR CÁMARA</span>
+            <span style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: 700;">COMPARATIVA BILATERAL</span>
           </div>
           <h2 style="font-size: 1.4rem; font-weight: 800;">Abducción de Hombro</h2>
 
@@ -692,9 +685,38 @@
             <div class="report-meta-item"><div class="label">Estado</div><div class="val" id="rep-status" style="color: #b97a29;">Pendiente de revisión profesional</div></div>
           </div>
 
-          <div class="report-summary-cards">
-            <div class="summary-box"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Mejor ROM · derecha</div><div class="big-val" id="rep-max-right">— °</div></div>
-            <div class="summary-box"><div style="font-size:0.75rem; color:var(--text-muted); font-weight:700;">Mejor ROM · izquierda</div><div class="big-val" id="rep-max-left">— °</div></div>
+          <div>
+            <strong style="font-size: 0.85rem; display: block; margin-bottom: 8px;">Tabla Comparativa Bilateral (Derecho vs. Izquierdo)</strong>
+            <table>
+              <thead>
+                <tr>
+                  <th>Parámetro Cinemático</th>
+                  <th>Hombro Derecho</th>
+                  <th>Hombro Izquierdo</th>
+                  <th>Asimetría / Dif.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>ROM Máximo Alcanzado</strong></td>
+                  <td id="comp-rom-right">— °</td>
+                  <td id="comp-rom-left">— °</td>
+                  <td id="comp-rom-diff">— °</td>
+                </tr>
+                <tr>
+                  <td><strong>Tiempo en Arco (60°–120°)</strong></td>
+                  <td id="comp-time-right">— s</td>
+                  <td id="comp-time-left">— s</td>
+                  <td id="comp-time-diff">— s</td>
+                </tr>
+                <tr>
+                  <td><strong>Desviación Máx. Línea Media</strong></td>
+                  <td id="comp-trunk-right">— °</td>
+                  <td id="comp-trunk-left">— °</td>
+                  <td id="comp-trunk-status">—</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
           <div>
@@ -715,7 +737,7 @@
           </div>
           <div class="form-group">
             <label>Observaciones clínicas</label>
-            <textarea id="input-obs" rows="4" placeholder="Estrategia observada, tolerancia, dolor percibido..." oninput="syncPatientData()"></textarea>
+            <textarea id="input-obs" rows="4" placeholder="Estrategia observada, tolerancia, compensación de tronco..." oninput="syncPatientData()"></textarea>
           </div>
           <button class="btn-primary" onclick="downloadRealPDF()" style="width: 100%; padding: 12px;">Descargar reporte PDF</button>
           <button class="btn-outline" onclick="exportCSV()" style="width: 100%;">Descargar señales CSV</button>
@@ -741,9 +763,9 @@
 
       <div class="detail-grid-2">
         <div class="card"><strong style="color: var(--primary);">01 · Preparación</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Cámara fija en plano frontal a 1.5 - 2 metros. Visibilidad completa del tronco y ambas extremidades superiores.</p></div>
-        <div class="card"><strong style="color: var(--primary);">02 · Calibración Neutra</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Mantener 3 segundos en bipedestación con brazos al costado para fijar la vertical del tronco.</p></div>
-        <div class="card"><strong style="color: var(--primary);">03 · Comparación Bilateral</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Evaluar hombro derecho e izquierdo por separado para detectar asimetrías de rango y velocidad.</p></div>
-        <div class="card"><strong style="color: var(--primary);">04 · Arco Doloroso</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Entre 60° y 120° ocurre el mayor compromiso del espacio subacromial y tendón del supraespinoso.</p></div>
+        <div class="card"><strong style="color: var(--primary);">02 · Calibración Neutra</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Mantener 3 segundos en bipedestación con brazos al costado para fijar la línea media axial del tronco.</p></div>
+        <div class="card"><strong style="color: var(--primary);">03 · Comparación Bilateral</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Evaluar hombro derecho e izquierdo por separado para superponer ambas curvas en el gráfico (° vs s).</p></div>
+        <div class="card"><strong style="color: var(--primary);">04 · Compensación de Tronco</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Una inclinación lateral superior a 10° respecto a la vertical indica estrategia compensatoria del tronco.</p></div>
       </div>
     </div>
 
@@ -789,86 +811,119 @@
       box.style.display = box.style.display === 'none' ? 'block' : 'none';
     }
 
+    // GENERACIÓN DE PDF CON TABLA COMPARATIVA BILATERAL Y GRÁFICO DE DOBLE CURVA
     function downloadRealPDF() {
       if (!window.jspdf) return alert("Cargando generador PDF, intenta nuevamente.");
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
+      // ENCABEZADO
       doc.setFillColor(243, 234, 245);
       doc.rect(0, 0, 210, 32, 'F');
       doc.setFont("helvetica", "bold");
       doc.setFontSize(19);
       doc.setTextColor(110, 65, 126);
-      doc.text("KineArc · Reporte Clínico de Hombro", 14, 18);
+      doc.text("KineArc · Reporte Clínico Bilateral de Hombro", 14, 18);
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(9);
       doc.setTextColor(122, 110, 130);
       doc.text(`Evaluación Cinemática de Abducción  |  Fecha: ${document.getElementById('strip-date').innerText}`, 14, 26);
 
+      // SECCIÓN 1: PACIENTE
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.setTextColor(44, 37, 48);
-      doc.text("1. DATOS DEL PACIENTE", 14, 44);
-      doc.line(14, 46, 196, 46);
+      doc.text("1. IDENTIFICACIÓN DEL PACIENTE", 14, 43);
+      doc.line(14, 45, 196, 45);
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text(`Código: ${document.getElementById('rep-code').innerText}`, 14, 54);
-      doc.text(`Edad: ${document.getElementById('rep-age').innerText}`, 110, 54);
-      doc.text(`Profesional: ${document.getElementById('rep-pro').innerText}`, 14, 62);
-      doc.text(`Estado: ${document.getElementById('rep-status').innerText}`, 110, 62);
+      doc.text(`Código: ${document.getElementById('rep-code').innerText}`, 14, 52);
+      doc.text(`Edad: ${document.getElementById('rep-age').innerText}`, 110, 52);
+      doc.text(`Profesional: ${document.getElementById('rep-pro').innerText}`, 14, 59);
+      doc.text(`Estado: ${document.getElementById('rep-status').innerText}`, 110, 59);
 
+      // SECCIÓN 2: TABLA COMPARATIVA BILATERAL
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.text("2. RANGO DE MOVIMIENTO MÁXIMO (BILATERAL)", 14, 76);
-      doc.line(14, 78, 196, 78);
+      doc.text("2. TABLA COMPARATIVA BILATERAL (DERECHO VS. IZQUIERDO)", 14, 71);
+      doc.line(14, 73, 196, 73);
 
-      doc.setFillColor(251, 249, 252);
-      doc.roundedRect(14, 82, 86, 20, 2, 2, 'FD');
-      doc.roundedRect(110, 82, 86, 20, 2, 2, 'FD');
+      // Cabecera tabla PDF
+      doc.setFillColor(243, 234, 245);
+      doc.rect(14, 76, 182, 8, 'F');
       doc.setFontSize(9);
-      doc.text("HOMBRO DERECHO", 18, 89);
-      doc.text("HOMBRO IZQUIERDO", 114, 89);
-      doc.setFontSize(14);
-      doc.setTextColor(110, 65, 126);
-      doc.text(document.getElementById('rep-max-right').innerText, 18, 98);
-      doc.text(document.getElementById('rep-max-left').innerText, 114, 98);
+      doc.text("Parámetro Cinemático", 16, 81.5);
+      doc.text("Hombro Derecho", 82, 81.5);
+      doc.text("Hombro Izquierdo", 124, 81.5);
+      doc.text("Diferencia / Estado", 164, 81.5);
 
-      const chartImg = document.getElementById('angleChart').toDataURL('image/png', 1.0);
-      doc.addImage(chartImg, 'PNG', 14, 110, 182, 48);
+      doc.setFont("helvetica", "normal");
+      const rRom = document.getElementById('comp-rom-right').innerText;
+      const lRom = document.getElementById('comp-rom-left').innerText;
+      const diffRom = document.getElementById('comp-rom-diff').innerText;
+      doc.text("ROM Máximo Alcanzado", 16, 90);
+      doc.text(rRom, 82, 90);
+      doc.text(lRom, 124, 90);
+      doc.text(diffRom, 164, 90);
 
-      let y = 170;
+      const rTime = document.getElementById('comp-time-right').innerText;
+      const lTime = document.getElementById('comp-time-left').innerText;
+      const diffTime = document.getElementById('comp-time-diff').innerText;
+      doc.text("Tiempo en Arco (60°-120°)", 16, 97);
+      doc.text(rTime, 82, 97);
+      doc.text(lTime, 124, 97);
+      doc.text(diffTime, 164, 97);
+
+      const rTrunk = document.getElementById('comp-trunk-right').innerText;
+      const lTrunk = document.getElementById('comp-trunk-left').innerText;
+      const stTrunk = document.getElementById('comp-trunk-status').innerText;
+      doc.text("Desviación Máx. Tronco", 16, 104);
+      doc.text(rTrunk, 82, 104);
+      doc.text(lTrunk, 124, 104);
+      doc.text(stTrunk, 164, 104);
+      doc.line(14, 108, 196, 108);
+
+      // SECCIÓN 3: GRÁFICO ÁNGULO VS TIEMPO (SEGUNDOS)
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.setTextColor(44, 37, 48);
-      doc.text("3. REGISTRO DE INTENTOS", 14, y);
-      y += 8;
+      doc.text("3. CURVAS CINEMÁTICAS COMPARATIVAS: ÁNGULO (°) VS. TIEMPO (s)", 14, 118);
+      const chartImg = document.getElementById('angleChart').toDataURL('image/png', 1.0);
+      doc.addImage(chartImg, 'PNG', 14, 121, 182, 54);
+
+      // SECCIÓN 4: REGISTRO DE INTENTOS
+      let y = 185;
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(11);
+      doc.text("4. DETALLE CRONOLÓGICO DE INTENTOS", 14, y);
+      y += 7;
       doc.setFont("helvetica", "normal");
-      doc.setFontSize(9.5);
+      doc.setFontSize(9);
       if (attemptsHistory.length === 0) {
         doc.text("Sin intentos registrados en la sesión.", 14, y);
-        y += 8;
+        y += 7;
       } else {
         attemptsHistory.forEach(a => {
-          doc.text(`Intento ${a.id} (${a.side}): ROM Máx ${a.maxAngle}° | Tiempo en arco: ${a.painTime}s | Compensación: ${a.comp}`, 14, y);
+          doc.text(`Intento ${a.id} (${a.side}): ROM Máx ${a.maxAngle}° | Tiempo en arco: ${a.painTime}s | Desv. Tronco: ${a.maxTrunk}° (${a.comp})`, 14, y);
           y += 6;
         });
       }
 
-      y += 6;
+      // SECCIÓN 5: OBSERVACIONES
+      y += 5;
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
-      doc.text("4. OBSERVACIONES CLÍNICAS", 14, y);
-      y += 7;
+      doc.text("5. OBSERVACIONES CLÍNICAS", 14, y);
+      y += 6;
       doc.setFont("helvetica", "normal");
       doc.setFontSize(9.5);
       doc.text(doc.splitTextToSize(document.getElementById('rep-obs-display').innerText, 180), 14, y);
 
-      doc.save(`Reporte_KineArc_${document.getElementById('rep-code').innerText}.pdf`);
+      doc.save(`Reporte_Bilateral_KineArc_${document.getElementById('rep-code').innerText}.pdf`);
     }
 
-    // VARIABLES DE VISIÓN ARTIFICIAL
+    // VARIABLES DE VISIÓN ARTIFICIAL Y SERIES TEMPORALES
     const videoElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('output_canvas');
     const canvasCtx = canvasElement.getContext('2d');
@@ -879,29 +934,35 @@
     let selectedSide = 'right';
     let showSilhouette = true;
     let isTesting = false;
+    let testStartTime = 0;
     let testTimeout = null;
     let countdownInterval = null;
     
     let currentAngle = 0;
     let maxAngle = 0;
-    let maxLeft = 0;
-    let maxRight = 0;
+    let maxTrunkDeviation = 0;
     let timeInPainZone = 0;
     let trunkCompensation = false;
     let frameTimestamps = [];
     let angleHistory = [];
     let attemptsHistory = [];
 
+    // ALMACENAMIENTO POR BRAZO PARA GRÁFICO Y TABLA COMPARATIVA
+    let rightArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
+    let leftArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
+
+    // GRÁFICO CHART.JS CON EJE X LINEAL EN SEGUNDOS Y DOBLE LÍNEA
     const ctxChart = document.getElementById('angleChart').getContext('2d');
     const painZonePlugin = {
       id: 'painZone',
       beforeDraw(chart) {
-        const { ctx, chartArea: { width }, scales: { y } } = chart;
+        const { ctx, chartArea: { left, width }, scales: { y } } = chart;
+        if (!y) return;
         const yTop = y.getPixelForValue(120);
         const yBottom = y.getPixelForValue(60);
         ctx.save();
-        ctx.fillStyle = 'rgba(209, 187, 212, 0.35)';
-        ctx.fillRect(chart.chartArea.left, yTop, width, yBottom - yTop);
+        ctx.fillStyle = 'rgba(209, 187, 212, 0.30)';
+        ctx.fillRect(left, yTop, width, yBottom - yTop);
         ctx.restore();
       }
     };
@@ -909,21 +970,46 @@
     const angleChart = new Chart(ctxChart, {
       type: 'line',
       data: {
-        labels: [],
-        datasets: [{
-          label: 'Abducción (°)',
-          data: [],
-          borderColor: '#8e5b9f',
-          borderWidth: 2,
-          fill: false,
-          tension: 0.1,
-          pointRadius: 0
-        }]
+        datasets: [
+          {
+            label: 'Hombro Derecho (°)',
+            data: [],
+            borderColor: '#8e5b9f',
+            backgroundColor: '#8e5b9f',
+            borderWidth: 2.5,
+            fill: false,
+            tension: 0.15,
+            pointRadius: 0
+          },
+          {
+            label: 'Hombro Izquierdo (°)',
+            data: [],
+            borderColor: '#2b8a80',
+            backgroundColor: '#2b8a80',
+            borderWidth: 2.5,
+            borderDash: [5, 4],
+            fill: false,
+            tension: 0.15,
+            pointRadius: 0
+          }
+        ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        scales: { y: { min: 0, max: 180 }, x: { display: false } },
+        scales: {
+          x: {
+            type: 'linear',
+            min: 0,
+            title: { display: true, text: 'Tiempo (segundos)', font: { weight: 'bold', size: 11 } },
+            ticks: { callback: (val) => val.toFixed(1) + 's' }
+          },
+          y: {
+            min: 0,
+            max: 180,
+            title: { display: true, text: 'Abducción (°)', font: { weight: 'bold', size: 11 } }
+          }
+        },
         animation: false
       },
       plugins: [painZonePlugin]
@@ -941,10 +1027,10 @@
 
     function speakFullInstructions() {
       speak(
-        "Protocolo de evaluación cinemática de abducción de hombro en KineArc. " +
-        "Paso uno: ubique la cámara en plano frontal asegurando visibilidad completa de tronco y brazos. " +
-        "Paso dos: mantenga postura neutra en reposo durante tres segundos para calibrar. " +
-        "Paso tres: eleve lateralmente y de forma lenta el brazo seleccionado hasta el máximo rango tolerado y descienda suavemente sin inclinar el tronco."
+        "Protocolo bilateral de abducción de hombro en KineArc. " +
+        "Paso uno: ubique la cámara en plano frontal asegurando visibilidad completa de tronco, caderas y ambos brazos. " +
+        "Paso dos: mantenga postura neutra erguida para alinear la línea media del tronco. " +
+        "Paso tres: eleve lateralmente y de forma lenta el brazo seleccionado hasta el máximo rango tolerado y descienda suavemente."
       );
     }
 
@@ -985,32 +1071,45 @@
         const lm = results.poseLandmarks;
         const isLeft = selectedSide === 'left';
         
+        const leftShoulder = lm[11];
+        const rightShoulder = lm[12];
+        const leftHip = lm[23];
+        const rightHip = lm[24];
+
         const hip = lm[isLeft ? 23 : 24];
         const shoulder = lm[isLeft ? 11 : 12];
         const elbow = lm[isLeft ? 13 : 14];
         const oppShoulder = lm[isLeft ? 12 : 11];
 
-        if (hip && shoulder && elbow && oppShoulder) {
+        if (hip && shoulder && elbow && oppShoulder && leftShoulder && rightShoulder && leftHip && rightHip) {
+          // 1. ÁNGULO DE ABDUCCIÓN DEL HOMBRO EVALUADO
           currentAngle = calculateAngle(hip, shoulder, elbow);
           
+          // 2. LÍNEA MEDIA AXIAL DEL TRONCO (Punto medio hombros <-> Punto medio caderas)
+          const midShoulder = { x: (leftShoulder.x + rightShoulder.x) / 2, y: (leftShoulder.y + rightShoulder.y) / 2 };
+          const midHip = { x: (leftHip.x + rightHip.x) / 2, y: (leftHip.y + rightHip.y) / 2 };
+          
+          // Ángulo de inclinación lateral respecto a la vertical perfecta (0°)
+          const dx = (midShoulder.x - midHip.x) * canvasElement.width;
+          const dy = (midHip.y - midShoulder.y) * canvasElement.height;
+          const trunkDeviation = Math.round(Math.abs(Math.atan2(dx, dy) * (180 / Math.PI)));
+          trunkCompensation = trunkDeviation > 10;
+
           if (isTesting) {
-            if (currentAngle > maxAngle) {
-              maxAngle = currentAngle;
-            }
+            const elapsedSec = parseFloat(((now - testStartTime) / 1000).toFixed(2));
+            if (currentAngle > maxAngle) maxAngle = currentAngle;
+            if (trunkDeviation > maxTrunkDeviation) maxTrunkDeviation = trunkDeviation;
             if (currentAngle >= 60 && currentAngle <= 120) {
               timeInPainZone += 1 / (frameTimestamps.length || 30);
             }
-            updateChart(currentAngle);
+            updateChartWithTime(elapsedSec, currentAngle);
           }
-
-          const trunkAngle = Math.round(Math.abs(Math.atan2(oppShoulder.y - shoulder.y, oppShoulder.x - shoulder.x) * (180 / Math.PI)));
-          trunkCompensation = trunkAngle > 12;
 
           const displayAngle = isTesting ? maxAngle : currentAngle;
           document.getElementById('kpi-max-angle').innerHTML = `${displayAngle} <small>°</small>`;
           document.getElementById('kpi-pain-time').innerHTML = `${timeInPainZone.toFixed(1)} <small>s</small>`;
-          document.getElementById('kpi-trunk-angle').innerHTML = `${trunkAngle} <small>° DE</small>`;
-          document.getElementById('kpi-comp-status').innerText = trunkCompensation ? "Compensación detectada" : "Tronco estable";
+          document.getElementById('kpi-trunk-angle').innerHTML = `${trunkDeviation} <small>°</small>`;
+          document.getElementById('kpi-comp-status').innerText = trunkCompensation ? `Compensación (>10°)` : `Tronco alineado`;
           
           angleHistory.push({ t: now, a: currentAngle });
           if (angleHistory.length > 10) angleHistory.shift();
@@ -1020,12 +1119,60 @@
             document.getElementById('kpi-speed').innerHTML = `${dt > 0 ? Math.round(da / dt) : 0} <small>°/s</small>`;
           }
 
-          drawSegment(shoulder, elbow, '#8e5b9f');
-          drawSegment(shoulder, hip, '#7a6e82');
-          drawSegment(shoulder, oppShoulder, trunkCompensation ? '#d9534f' : '#5cb85c');
+          // DIBUJO DE REFERENCIA VERTICAL Y LÍNEA MEDIA DEL TRONCO
+          drawMidlineAndTrunk(midHip, midShoulder, trunkDeviation, trunkCompensation);
+
+          // DIBUJO DEL BRAZO EVALUADO
+          const armColor = isLeft ? '#2b8a80' : '#8e5b9f';
+          drawSegment(shoulder, elbow, armColor);
+          drawSegment(shoulder, hip, '#94a3b8');
           drawPoint(shoulder, '#d9534f');
-          drawPoint(elbow, '#5cb85c');
+          drawPoint(elbow, armColor);
         }
+      }
+      canvasCtx.restore();
+    }
+
+    function drawMidlineAndTrunk(midHip, midShoulder, deg, isCompensated) {
+      const hx = midHip.x * canvasElement.width;
+      const hy = midHip.y * canvasElement.height;
+      const sx = midShoulder.x * canvasElement.width;
+      const sy = midShoulder.y * canvasElement.height;
+
+      // Línea vertical de referencia (0° ideal) punteada
+      canvasCtx.save();
+      canvasCtx.beginPath();
+      canvasCtx.setLineDash([4, 4]);
+      canvasCtx.moveTo(hx, hy);
+      canvasCtx.lineTo(hx, sy - 20);
+      canvasCtx.lineWidth = 2;
+      canvasCtx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+      canvasCtx.stroke();
+      canvasCtx.restore();
+
+      // Línea media real del tronco
+      canvasCtx.beginPath();
+      canvasCtx.moveTo(hx, hy);
+      canvasCtx.lineTo(sx, sy);
+      canvasCtx.lineWidth = 4;
+      canvasCtx.strokeStyle = isCompensated ? '#d9534f' : '#5cb85c';
+      canvasCtx.stroke();
+
+      drawPoint(midHip, '#ffffff');
+      drawPoint(midShoulder, isCompensated ? '#d9534f' : '#5cb85c');
+
+      // Etiqueta de grados de desviación sobre el tronco (corrigiendo espejo si es webcam)
+      canvasCtx.save();
+      if (sourceMode === 'webcam') {
+        canvasCtx.translate(sx, sy - 14);
+        canvasCtx.scale(-1, 1);
+        canvasCtx.fillStyle = isCompensated ? '#ff6b6b' : '#a7f3d0';
+        canvasCtx.font = 'bold 13px sans-serif';
+        canvasCtx.fillText(`Tronco: ${deg}°`, -35, 0);
+      } else {
+        canvasCtx.fillStyle = isCompensated ? '#ff6b6b' : '#a7f3d0';
+        canvasCtx.font = 'bold 13px sans-serif';
+        canvasCtx.fillText(`Tronco: ${deg}°`, sx - 35, sy - 14);
       }
       canvasCtx.restore();
     }
@@ -1056,11 +1203,9 @@
       canvasCtx.stroke();
     }
 
-    function updateChart(angle) {
-      const labels = angleChart.data.labels;
-      const data = angleChart.data.datasets[0].data;
-      labels.push('');
-      data.push(angle);
+    function updateChartWithTime(sec, angle) {
+      const datasetIndex = selectedSide === 'right' ? 0 : 1;
+      angleChart.data.datasets[datasetIndex].data.push({ x: sec, y: angle });
       angleChart.update();
     }
 
@@ -1114,35 +1259,37 @@
 
     function calibrateNeutral() {
       document.getElementById('step-row-2').classList.add('active');
-      speak("Calibrando postura neutra por tres segundos.");
+      speak("Calibrando postura neutra y línea media por tres segundos.");
     }
 
     function resetCurrentMetrics() {
-      maxAngle = 0; timeInPainZone = 0;
+      maxAngle = 0; maxTrunkDeviation = 0; timeInPainZone = 0;
       document.getElementById('kpi-max-angle').innerHTML = '— <small>°</small>';
       document.getElementById('kpi-pain-time').innerHTML = '— <small>s</small>';
-      document.getElementById('kpi-trunk-angle').innerHTML = '— <small>° DE</small>';
+      document.getElementById('kpi-trunk-angle').innerHTML = '— <small>°</small>';
       document.getElementById('kpi-speed').innerHTML = '— <small>°/s</small>';
-      angleChart.data.labels = []; angleChart.data.datasets[0].data = []; angleChart.update();
+      
+      // Limpia solo la curva del brazo actual para conservar la del contralateral en el gráfico
+      const datasetIndex = selectedSide === 'right' ? 0 : 1;
+      angleChart.data.datasets[datasetIndex].data = [];
+      angleChart.update();
     }
 
     function resetSession() {
       if (isTesting) finishTestExecution();
-      resetCurrentMetrics();
       attemptsHistory = [];
-      maxLeft = 0; maxRight = 0;
-      document.getElementById('rep-max-left').innerText = '— °';
-      document.getElementById('rep-max-right').innerText = '— °';
-      document.getElementById('table-attempts').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar este indicador.</td></tr>';
+      rightArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
+      leftArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
+      angleChart.data.datasets[0].data = [];
+      angleChart.data.datasets[1].data = [];
+      angleChart.update();
+      updateComparativeTable();
+      document.getElementById('table-attempts').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar.</td></tr>';
     }
 
-    // CONTROL INTELIGENTE DEL BOTÓN INICIAR / FINALIZAR INTENTO
     function handleTestButton() {
-      if (isTesting) {
-        finishTestExecution();
-      } else {
-        startGuidedTest();
-      }
+      if (isTesting) finishTestExecution();
+      else startGuidedTest();
     }
 
     function startGuidedTest() {
@@ -1167,6 +1314,7 @@
 
     function runTestExecution() {
       isTesting = true;
+      testStartTime = performance.now();
       const signalPill = document.getElementById('cam-signal-pill');
       signalPill.innerText = "● GRABANDO INTENTO";
       signalPill.classList.add('recording');
@@ -1200,43 +1348,71 @@
 
     function recordAttempt() {
       const attemptNum = attemptsHistory.length + 1;
+      const isComp = maxTrunkDeviation > 10;
       const attemptData = {
         id: attemptNum,
         side: selectedSide === 'left' ? 'Izquierdo' : 'Derecho',
         maxAngle,
         painTime: timeInPainZone.toFixed(1),
-        comp: trunkCompensation ? 'Sí' : 'No'
+        maxTrunk: maxTrunkDeviation,
+        comp: isComp ? 'Sí' : 'No'
       };
       attemptsHistory.push(attemptData);
 
-      if (selectedSide === 'left' && maxAngle > maxLeft) {
-        maxLeft = maxAngle;
-        document.getElementById('rep-max-left').innerText = `${maxLeft}°`;
-      } else if (selectedSide === 'right' && maxAngle > maxRight) {
-        maxRight = maxAngle;
-        document.getElementById('rep-max-right').innerText = `${maxRight}°`;
+      // Guardar resumen del brazo evaluado para la tabla comparativa
+      if (selectedSide === 'right') {
+        rightArmData.maxRom = maxAngle;
+        rightArmData.painTime = parseFloat(timeInPainZone.toFixed(1));
+        rightArmData.maxTrunk = maxTrunkDeviation;
+      } else {
+        leftArmData.maxRom = maxAngle;
+        leftArmData.painTime = parseFloat(timeInPainZone.toFixed(1));
+        leftArmData.maxTrunk = maxTrunkDeviation;
       }
+
+      updateComparativeTable();
 
       const tbody = document.getElementById('table-attempts');
       if (attemptNum === 1) tbody.innerHTML = '';
       const row = document.createElement('tr');
-      row.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.comp}</td>`;
+      row.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.maxTrunk}° (${attemptData.comp})</td>`;
       tbody.appendChild(row);
+    }
 
-      const sel = document.getElementById('select-attempt-detail');
-      if (attemptNum === 1) sel.innerHTML = '';
-      const opt = document.createElement('option');
-      opt.text = `Intento ${attemptData.id} · ${attemptData.side}`;
-      sel.add(opt);
+    function updateComparativeTable() {
+      document.getElementById('comp-rom-right').innerText = rightArmData.maxRom !== null ? `${rightArmData.maxRom}°` : '— °';
+      document.getElementById('comp-rom-left').innerText = leftArmData.maxRom !== null ? `${leftArmData.maxRom}°` : '— °';
+      if (rightArmData.maxRom !== null && leftArmData.maxRom !== null) {
+        const diff = Math.abs(rightArmData.maxRom - leftArmData.maxRom);
+        document.getElementById('comp-rom-diff').innerText = `${diff}° (${diff > 10 ? 'Asimetría' : 'Simétrico'})`;
+      } else {
+        document.getElementById('comp-rom-diff').innerText = '— °';
+      }
+
+      document.getElementById('comp-time-right').innerText = rightArmData.painTime !== null ? `${rightArmData.painTime} s` : '— s';
+      document.getElementById('comp-time-left').innerText = leftArmData.painTime !== null ? `${leftArmData.painTime} s` : '— s';
+      if (rightArmData.painTime !== null && leftArmData.painTime !== null) {
+        const tDiff = Math.abs(rightArmData.painTime - leftArmData.painTime).toFixed(1);
+        document.getElementById('comp-time-diff').innerText = `${tDiff} s`;
+      } else {
+        document.getElementById('comp-time-diff').innerText = '— s';
+      }
+
+      document.getElementById('comp-trunk-right').innerText = rightArmData.maxTrunk !== null ? `${rightArmData.maxTrunk}°` : '— °';
+      document.getElementById('comp-trunk-left').innerText = leftArmData.maxTrunk !== null ? `${leftArmData.maxTrunk}°` : '— °';
+      const maxT = Math.max(rightArmData.maxTrunk || 0, leftArmData.maxTrunk || 0);
+      document.getElementById('comp-trunk-status').innerText = (rightArmData.maxTrunk !== null || leftArmData.maxTrunk !== null)
+        ? (maxT > 10 ? 'Compensación' : 'Sin compensación')
+        : '—';
     }
 
     function exportCSV() {
       if (attemptsHistory.length === 0) return alert("Sin intentos para exportar.");
-      let csv = "Intento,Lado,ROM_Maximo,Tiempo_Arco,Compensacion\n";
-      attemptsHistory.forEach(a => csv += `${a.id},${a.side},${a.maxAngle},${a.painTime},${a.comp}\n`);
+      let csv = "Intento,Brazo,ROM_Maximo,Tiempo_Arco_s,Desviacion_Tronco_deg,Compensacion\n";
+      attemptsHistory.forEach(a => csv += `${a.id},${a.side},${a.maxAngle},${a.painTime},${a.maxTrunk},${a.comp}\n`);
       const link = document.createElement("a");
       link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-      link.download = `reporte_hombro_kinearc.csv`;
+      link.download = `reporte_bilateral_kinearc.csv`;
       link.click();
     }
   </script>
