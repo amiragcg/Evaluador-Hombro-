@@ -9,7 +9,7 @@
       --primary: #8e5b9f;
       --primary-light: #f3eaf5;
       --primary-dark: #6e417e;
-      --secondary: #2b8a80;
+      --secondary: #3282f6;
       --bg-accent: #d1bbd4;
       --danger: #d9534f;
       --warning: #f0ad4e;
@@ -184,16 +184,17 @@
       padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; backdrop-filter: blur(4px);
     }
     .cam-badge-tr.recording { background: rgba(217, 83, 79, 0.9); color: #fff; }
+    .cam-badge-tr.gesture-ready { background: rgba(50, 130, 246, 0.9); color: #fff; }
 
     .cam-guide-box {
       position: absolute; bottom: 14px; right: 14px; background: rgba(20, 34, 36, 0.85); border: 1px solid rgba(255,255,255,0.12);
-      color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 0.75rem; max-width: 210px;
+      color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 0.75rem; max-width: 235px;
     }
-    .cam-guide-box strong { display: block; margin-bottom: 2px; font-size: 0.78rem; }
-    .cam-guide-box span { color: #94a3b8; font-size: 0.7rem; }
+    .cam-guide-box strong { display: block; margin-bottom: 2px; font-size: 0.78rem; color: #93c5fd; }
+    .cam-guide-box span { color: #cbd5e1; font-size: 0.7rem; line-height: 1.35; display: block; }
 
     .cam-foot-left { position: absolute; bottom: 14px; left: 14px; font-size: 0.68rem; color: #94a3b8; }
-    .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: var(--bg-accent); text-shadow: 0 0 20px rgba(0,0,0,0.8); }
+    .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 24px rgba(50, 130, 246, 0.95); }
 
     .cam-controls-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .cam-device-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); }
@@ -254,7 +255,7 @@
     .report-meta-item .label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .report-meta-item .val { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 4px; }
 
-    /* DIRECTORIO DE PERSONAS (ESTILO CAPTURA 1) */
+    /* DIRECTORIO DE PERSONAS */
     .empty-state-box {
       padding: 48px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px;
     }
@@ -270,7 +271,7 @@
     .person-card:hover { border-color: var(--primary); background: #fff; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.08); }
     .person-card.selected { border: 2px solid var(--primary); background: #fff; }
 
-    /* MODALES (ESTILO CAPTURA 2 Y 3) */
+    /* MODALES */
     .modal-backdrop {
       display: none; position: fixed; inset: 0; background: rgba(20, 20, 25, 0.65); backdrop-filter: blur(3px);
       z-index: 200; align-items: center; justify-content: center; padding: 16px;
@@ -307,6 +308,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -399,10 +401,10 @@
         </svg>
       </div>
       <div>
-        <strong>Base de datos local</strong>
-        Los perfiles y evaluaciones se guardan individualmente en este equipo.
+        <strong>Control gestual activo</strong>
+        Palma opuesta inicia cuenta regresiva; brazos pegados detienen.
       </div>
-      <div class="version">MediaPipe Pose · v1.2</div>
+      <div class="version">MediaPipe Pose + Hands · v1.3</div>
     </div>
   </aside>
 
@@ -450,7 +452,7 @@
 
       <div class="safety-banner">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <span>Prueba supervisada. Realiza la elevación de forma lenta y controlada; detén la prueba ante dolor agudo o inseguridad.</span>
+        <span><strong>Control sin manos:</strong> Muestra la palma de la mano contraria para iniciar la cuenta de 3s. Baja ambos brazos pegados al cuerpo para detener y guardar.</span>
       </div>
 
       <div class="status-strip">
@@ -526,9 +528,9 @@
             <div class="overlay-countdown" id="overlay-count" style="display: none;">3</div>
 
             <div class="cam-foot-left" id="cam-plane-foot">PLANO FRONTAL · Video local</div>
-            <div class="cam-guide-box">
-              <strong>Prepara la cámara</strong>
-              <span>Incluye cabeza, tronco, caderas y ambos brazos.</span>
+            <div class="cam-guide-box" id="cam-gesture-guide">
+              <strong>Control Gestual Listo</strong>
+              <span id="cam-gesture-hint">Muestra la palma izquierda para iniciar Hombro Derecho.</span>
             </div>
           </div>
 
@@ -553,7 +555,7 @@
 
           <div class="audio-prompt-box">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-            <span>Cada intento registrado se guarda automáticamente en el historial individual de la persona seleccionada.</span>
+            <span><strong>Gesto de inicio:</strong> Levanta la palma abierta de la mano no evaluada. <strong>Gesto de término:</strong> Baja ambos brazos y pega ambas manos a los laterales de tus caderas.</span>
           </div>
         </div>
 
@@ -582,10 +584,10 @@
             <div class="form-group">
               <label>Duración máxima</label>
               <select id="select-duration">
-                <option value="12000" selected>12 segundos (Lento)</option>
-                <option value="15000">15 segundos (Muy lento)</option>
-                <option value="20000">20 segundos</option>
-                <option value="8000">8 segundos (Rápido)</option>
+                <option value="15000" selected>15 segundos (Lento)</option>
+                <option value="20000">20 segundos (Muy lento)</option>
+                <option value="30000">30 segundos</option>
+                <option value="10000">10 segundos (Rápido)</option>
               </select>
             </div>
           </div>
@@ -607,14 +609,14 @@
           </div>
 
           <div class="step-list">
-            <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Seleccionar persona y encuadrar cámara</span></div>
-            <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Postura neutra en reposo</span></div>
-            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Abducción lenta y registro bilateral</span></div>
+            <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Seleccionar persona y activar cámara</span></div>
+            <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Mostrar palma contraria (Cuenta 3s)</span></div>
+            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Bajar ambos brazos al cuerpo para detener</span></div>
           </div>
 
           <button class="btn-outline" onclick="calibrateNeutral()" style="width: 100%;">Calibrar postura · 3 s</button>
           <button id="btn-rec" class="btn-primary" onclick="handleTestButton()" disabled style="width: 100%; padding: 12px;">
-            <span>▶ Preparar intento</span>
+            <span>▶ Preparar intento (o mostrar palma)</span>
           </button>
         </div>
 
@@ -629,7 +631,7 @@
           </div>
           <div style="display: flex; align-items: center; gap: 14px; font-size: 0.78rem; font-weight: 700;">
             <span style="color: #8e5b9f;">━━ Hombro Derecho</span>
-            <span style="color: #2b8a80;">┄┄ Hombro Izquierdo</span>
+            <span style="color: #3282f6;">┄┄ Hombro Izquierdo</span>
           </div>
         </div>
 
@@ -677,7 +679,7 @@
     </div>
 
     <!-- ==========================================
-         VISTA 2: PERSONAS REGISTRADAS (ESTILO CAPTURA 1)
+         VISTA 2: PERSONAS REGISTRADAS
          ========================================== -->
     <div id="view-personas" class="view-content">
       <div class="page-header">
@@ -691,9 +693,7 @@
         </div>
       </div>
 
-      <div class="card" id="people-directory-container">
-        <!-- Se renderiza dinámicamente -->
-      </div>
+      <div class="card" id="people-directory-container"></div>
     </div>
 
     <!-- ==========================================
@@ -858,8 +858,8 @@
       </div>
 
       <div class="detail-grid-2">
-        <div class="card"><strong style="color: var(--primary);">01 · Gestión de Personas</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Crea un perfil individual con sus datos antropométricos antes de comenzar para almacenar cada sesión por separado.</p></div>
-        <div class="card"><strong style="color: var(--primary);">02 · Calibración Neutra</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Mantener 3 segundos en bipedestación con brazos al costado para fijar la línea media axial del tronco.</p></div>
+        <div class="card"><strong style="color: var(--primary);">01 · Inicio Manos Libres</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Muestra la palma abierta de la mano opuesta al hombro que vas a evaluar para activar automáticamente la cuenta regresiva de 3 segundos.</p></div>
+        <div class="card"><strong style="color: var(--primary);">02 · Término Automático</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Al finalizar la elevación, desciende el brazo y mantén ambas manos y brazos pegados a los laterales de las caderas para detener el registro.</p></div>
         <div class="card"><strong style="color: var(--primary);">03 · Comparación Bilateral</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Evaluar hombro derecho e izquierdo por separado para superponer ambas curvas en el gráfico (° vs s).</p></div>
         <div class="card"><strong style="color: var(--primary);">04 · Compensación de Tronco</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Una inclinación lateral superior a 5° respecto a la vertical indica estrategia compensatoria del tronco.</p></div>
       </div>
@@ -868,7 +868,7 @@
   </main>
 
   <!-- =========================================================
-       MODAL 1: NUEVA EVALUACIÓN (SELECCIONAR O AGREGAR PERSONA)
+       MODAL 1: NUEVA EVALUACIÓN
        ========================================================= -->
   <div id="modal-new-eval" class="modal-backdrop">
     <div class="modal-box">
@@ -882,19 +882,14 @@
         <button class="modal-tab-btn" id="tab-btn-new" onclick="switchEvalModalTab('new')">+ Nueva persona</button>
       </div>
 
-      <!-- TAB EXISTENTE (ESTILO CAPTURA 3) -->
       <div id="eval-tab-existing" style="display: flex; flex-direction: column; gap: 12px;">
         <div class="form-group">
           <label>Buscar persona registrada</label>
           <input type="text" id="search-person-input" placeholder="Buscar por apellido, nombre o deporte..." oninput="renderSearchDropdown()">
         </div>
-
-        <div class="person-select-list" id="search-person-list">
-          <!-- Lista dinámica estilo "Apellido, Nombre (74 kg)" -->
-        </div>
+        <div class="person-select-list" id="search-person-list"></div>
       </div>
 
-      <!-- TAB NUEVA PERSONA DENTRO DEL MODAL -->
       <div id="eval-tab-new" style="display: none; flex-direction: column; gap: 12px;">
         <div class="form-grid-2">
           <div class="form-group">
@@ -930,7 +925,7 @@
   </div>
 
   <!-- =========================================================
-       MODAL 2: NUEVA PERSONA (ESTILO CAPTURA 2 CON FOTO)
+       MODAL 2: NUEVA PERSONA
        ========================================================= -->
   <div id="modal-create-person" class="modal-backdrop">
     <div class="modal-box">
@@ -992,6 +987,8 @@
 
   <script>
     const TRUNK_LIMIT_DEG = 5;
+    const LEFT_ARM_COLOR = '#3282f6';
+    const RIGHT_ARM_COLOR = '#8e5b9f';
     const STORAGE_KEY = 'kinearc_people_db_v1';
 
     let peopleDB = [];
@@ -1130,7 +1127,6 @@
       selectActivePerson(newPerson.id);
       closeModal('modal-new-eval');
 
-      // Limpiar inputs rápidos
       document.getElementById('quick-first-name').value = '';
       document.getElementById('quick-last-name').value = '';
       document.getElementById('quick-age').value = '';
@@ -1169,12 +1165,10 @@
       const p = getActivePerson();
       if (!p) return;
 
-      // Cargar datos propios de esta persona
       attemptsHistory = p.attempts || [];
       rightArmData = p.rightArm || { points: [], maxRom: null, painTime: null, maxTrunk: null };
       leftArmData = p.leftArm || { points: [], maxRom: null, painTime: null, maxTrunk: null };
 
-      // Actualizar banner superior
       const avatarEl = document.getElementById('active-person-avatar');
       if (p.photo) {
         avatarEl.innerHTML = `<img src="${p.photo}" alt="${p.firstName}">`;
@@ -1187,12 +1181,10 @@
       document.getElementById('strip-patient-info').innerText = `Evaluación clínica · ${p.lastName}, ${p.firstName} (${p.mass} kg)`;
       document.getElementById('input-obs').value = p.obs || '';
 
-      // Restaurar curvas del gráfico de esta persona
       angleChart.data.datasets[0].data = rightArmData.points || [];
       angleChart.data.datasets[1].data = leftArmData.points || [];
       angleChart.update();
 
-      // Restaurar tabla de intentos y comparativa bilateral
       renderAttemptsTable();
       updateComparativeTable();
       syncPatientData();
@@ -1402,6 +1394,9 @@
       doc.save(`Reporte_KineArc_${fileName}.pdf`);
     }
 
+    // =========================================================
+    // PROCESAMIENTO DE POSE Y MANOS (DETECCIÓN GESTUAL)
+    // =========================================================
     const videoElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('output_canvas');
     const canvasCtx = canvasElement.getContext('2d');
@@ -1411,10 +1406,14 @@
     let sourceMode = 'webcam';
     let selectedSide = 'right';
     let showSilhouette = true;
+    
+    let isCountingDown = false;
     let isTesting = false;
     let testStartTime = 0;
     let testTimeout = null;
     let countdownInterval = null;
+    let neutralHoldFrames = 0;
+    let palmHoldFrames = 0;
     
     let currentAngle = 0;
     let maxAngle = 0;
@@ -1424,6 +1423,7 @@
     let frameTimestamps = [];
     let angleHistory = [];
     let attemptsHistory = [];
+    let latestHandResults = null;
 
     let rightArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
     let leftArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
@@ -1450,8 +1450,8 @@
           {
             label: 'Hombro Derecho (°)',
             data: [],
-            borderColor: '#8e5b9f',
-            backgroundColor: '#8e5b9f',
+            borderColor: RIGHT_ARM_COLOR,
+            backgroundColor: RIGHT_ARM_COLOR,
             borderWidth: 2.5,
             fill: false,
             tension: 0.15,
@@ -1460,8 +1460,8 @@
           {
             label: 'Hombro Izquierdo (°)',
             data: [],
-            borderColor: '#2b8a80',
-            backgroundColor: '#2b8a80',
+            borderColor: LEFT_ARM_COLOR,
+            backgroundColor: LEFT_ARM_COLOR,
             borderWidth: 2.5,
             borderDash: [5, 4],
             fill: false,
@@ -1503,10 +1503,10 @@
 
     function speakFullInstructions() {
       speak(
-        "Protocolo bilateral de abducción de hombro en KineArc. " +
-        "Paso uno: seleccione o registre a la persona y ubique la cámara en plano frontal. " +
-        "Paso dos: mantenga postura neutra erguida para alinear la línea media del tronco. " +
-        "Paso tres: eleve lateralmente y de forma lenta el brazo seleccionado sin inclinar el tronco más de cinco grados."
+        "Protocolo manos libres en KineArc. " +
+        "Para comenzar la cuenta regresiva de tres segundos, muestra la palma abierta de la mano contraria al hombro evaluado. " +
+        "Realiza la elevación lateral lenta sin inclinar el tronco más de cinco grados. " +
+        "Para detener y guardar la evaluación, desciende ambos brazos y pega ambas manos a los laterales de tus caderas."
       );
     }
 
@@ -1518,6 +1518,33 @@
       if (angle > 180.0) angle = 360 - angle;
       return Math.round(angle);
     }
+
+    function dist2D(a, b) {
+      return Math.hypot(a.x - b.x, a.y - b.y);
+    }
+
+    // Verifica si la mano tiene los dedos extendidos (palma abierta)
+    function isOpenPalm(handLm) {
+      if (!handLm || handLm.length < 21) return false;
+      const wrist = handLm[0];
+      const fingerPairs = [
+        [8, 6],   // Índice
+        [12, 10], // Medio
+        [16, 14], // Anular
+        [20, 18]  // Meñique
+      ];
+      let extendedCount = 0;
+      for (const [tipIdx, pipIdx] of fingerPairs) {
+        if (dist2D(handLm[tipIdx], wrist) > dist2D(handLm[pipIdx], wrist) * 1.12) {
+          extendedCount++;
+        }
+      }
+      return extendedCount >= 4;
+    }
+
+    const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+    hands.setOptions({ maxNumHands: 2, modelComplexity: 1, minDetectionConfidence: 0.6, minTrackingConfidence: 0.5 });
+    hands.onResults((res) => { latestHandResults = res; });
 
     const pose = new Pose({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}` });
     pose.setOptions({ modelComplexity: 1, smoothLandmarks: true, minDetectionConfidence: 0.5, minTrackingConfidence: 0.5 });
@@ -1541,24 +1568,30 @@
       if (showSilhouette) drawSilhouetteTemplate();
 
       if (results.poseLandmarks) {
-        if (!isTesting) {
-          document.getElementById('cam-signal-pill').innerText = "POSE DETECTADA";
-        }
         const lm = results.poseLandmarks;
         const isLeft = selectedSide === 'left';
         
         const leftShoulder = lm[11];
         const rightShoulder = lm[12];
+        const leftElbow = lm[13];
+        const rightElbow = lm[14];
+        const leftWrist = lm[15];
+        const rightWrist = lm[16];
         const leftHip = lm[23];
         const rightHip = lm[24];
 
-        const hip = lm[isLeft ? 23 : 24];
-        const shoulder = lm[isLeft ? 11 : 12];
-        const elbow = lm[isLeft ? 13 : 14];
-        const oppShoulder = lm[isLeft ? 12 : 11];
+        const hip = isLeft ? leftHip : rightHip;
+        const shoulder = isLeft ? leftShoulder : rightShoulder;
+        const elbow = isLeft ? leftElbow : rightElbow;
 
-        if (hip && shoulder && elbow && oppShoulder && leftShoulder && rightShoulder && leftHip && rightHip) {
+        // Muñeca y codo del brazo NO evaluado (contralateral)
+        const nonEvalWrist = isLeft ? rightWrist : leftWrist;
+        const nonEvalElbow = isLeft ? rightElbow : leftElbow;
+
+        if (hip && shoulder && elbow && leftShoulder && rightShoulder && leftHip && rightHip) {
           currentAngle = calculateAngle(hip, shoulder, elbow);
+          const rightAngle = calculateAngle(rightHip, rightShoulder, rightElbow);
+          const leftAngle = calculateAngle(leftHip, leftShoulder, leftElbow);
           
           const midShoulder = { x: (leftShoulder.x + rightShoulder.x) / 2, y: (leftShoulder.y + rightShoulder.y) / 2 };
           const midHip = { x: (leftHip.x + rightHip.x) / 2, y: (leftHip.y + rightHip.y) / 2 };
@@ -1568,6 +1601,37 @@
           const trunkDeviation = Math.round(Math.abs(Math.atan2(dx, dy) * (180 / Math.PI)));
           trunkCompensation = trunkDeviation > TRUNK_LIMIT_DEG;
 
+          // 1. DETECCIÓN DE PALMA DEL BRAZO NO EVALUADO PARA INICIAR (CUANDO ESTÁ EN ESPERA)
+          if (!isTesting && !isCountingDown && getActivePerson()) {
+            let nonEvalPalmDetected = false;
+            if (latestHandResults && latestHandResults.multiHandLandmarks && nonEvalWrist && nonEvalElbow) {
+              for (const handLm of latestHandResults.multiHandLandmarks) {
+                const handWrist = handLm[0];
+                const isNearNonEvalWrist = dist2D(handWrist, nonEvalWrist) < 0.14;
+                const isHandRaised = nonEvalWrist.y < nonEvalElbow.y + 0.04;
+                if (isNearNonEvalWrist && isHandRaised && isOpenPalm(handLm)) {
+                  nonEvalPalmDetected = true;
+                  drawHandSkeleton(handLm, '#3282f6');
+                }
+              }
+            }
+
+            if (nonEvalPalmDetected) {
+              palmHoldFrames++;
+              document.getElementById('cam-signal-pill').innerText = "✋ PALMA DETECTADA · INICIANDO...";
+              document.getElementById('cam-signal-pill').classList.add('gesture-ready');
+              if (palmHoldFrames >= 8) {
+                palmHoldFrames = 0;
+                startGuidedTest();
+              }
+            } else {
+              palmHoldFrames = 0;
+              document.getElementById('cam-signal-pill').innerText = "POSE DETECTADA";
+              document.getElementById('cam-signal-pill').classList.remove('gesture-ready');
+            }
+          }
+
+          // 2. DURANTE LA EVALUACIÓN: REGISTRO Y DETECCIÓN DE AMBOS BRAZOS PEGADOS AL CUERPO PARA DETENER
           if (isTesting) {
             const elapsedSec = parseFloat(((now - testStartTime) / 1000).toFixed(2));
             if (currentAngle > maxAngle) maxAngle = currentAngle;
@@ -1576,6 +1640,26 @@
               timeInPainZone += 1 / (frameTimestamps.length || 30);
             }
             updateChartWithTime(elapsedSec, currentAngle);
+
+            // Verificar si ambos brazos y manos están pegados a los laterales del cuerpo
+            if (elapsedSec > 1.8 && rightWrist && leftWrist) {
+              const shoulderWidth = Math.max(dist2D(leftShoulder, rightShoulder), 0.12);
+              const bothArmsDown = rightAngle <= 18 && leftAngle <= 18;
+              const rightHandAtSide = dist2D(rightWrist, rightHip) < shoulderWidth * 0.65 && rightWrist.y > rightHip.y - 0.08;
+              const leftHandAtSide = dist2D(leftWrist, leftHip) < shoulderWidth * 0.65 && leftWrist.y > leftHip.y - 0.08;
+
+              if (bothArmsDown && rightHandAtSide && leftHandAtSide) {
+                neutralHoldFrames++;
+                document.getElementById('cam-signal-pill').innerText = "⏹ POSTURA NEUTRA · DETENIENDO...";
+                if (neutralHoldFrames >= 16) {
+                  neutralHoldFrames = 0;
+                  finishTestExecution();
+                }
+              } else {
+                neutralHoldFrames = 0;
+                document.getElementById('cam-signal-pill').innerText = "● GRABANDO INTENTO";
+              }
+            }
           }
 
           const displayAngle = isTesting ? maxAngle : currentAngle;
@@ -1594,12 +1678,38 @@
 
           drawMidlineAndTrunk(midHip, midShoulder, trunkDeviation, trunkCompensation);
 
-          const armColor = isLeft ? '#2b8a80' : '#8e5b9f';
+          // Dibujar segmento del brazo evaluado (Izquierdo = #3282f6, Derecho = #8e5b9f)
+          const armColor = isLeft ? LEFT_ARM_COLOR : RIGHT_ARM_COLOR;
           drawSegment(shoulder, elbow, armColor);
+          if (isLeft && leftWrist) drawSegment(elbow, leftWrist, armColor);
+          if (!isLeft && rightWrist) drawSegment(elbow, rightWrist, armColor);
           drawSegment(shoulder, hip, '#94a3b8');
           drawPoint(shoulder, '#d9534f');
           drawPoint(elbow, armColor);
         }
+      }
+      canvasCtx.restore();
+    }
+
+    function drawHandSkeleton(handLm, color) {
+      const connections = [
+        [0,1],[1,2],[2,3],[3,4],
+        [0,5],[5,6],[6,7],[7,8],
+        [5,9],[9,10],[10,11],[11,12],
+        [9,13],[13,14],[14,15],[15,16],
+        [13,17],[17,18],[18,19],[19,20],[0,17]
+      ];
+      canvasCtx.save();
+      canvasCtx.strokeStyle = color;
+      canvasCtx.lineWidth = 2.5;
+      for (const [a, b] of connections) {
+        canvasCtx.beginPath();
+        canvasCtx.moveTo(handLm[a].x * canvasElement.width, handLm[a].y * canvasElement.height);
+        canvasCtx.lineTo(handLm[b].x * canvasElement.width, handLm[b].y * canvasElement.height);
+        canvasCtx.stroke();
+      }
+      for (const pt of handLm) {
+        drawPoint(pt, '#ffffff');
       }
       canvasCtx.restore();
     }
@@ -1666,7 +1776,7 @@
       canvasCtx.beginPath();
       canvasCtx.moveTo(lm1.x * canvasElement.width, lm1.y * canvasElement.height);
       canvasCtx.lineTo(lm2.x * canvasElement.width, lm2.y * canvasElement.height);
-      canvasCtx.lineWidth = 4;
+      canvasCtx.lineWidth = 4.5;
       canvasCtx.strokeStyle = color;
       canvasCtx.stroke();
     }
@@ -1687,6 +1797,7 @@
       document.getElementById('cam-status-text').innerText = "VIDEO LOCAL";
       async function processFrame() {
         if (!videoElement.paused && !videoElement.ended) {
+          await hands.send({ image: videoElement });
           await pose.send({ image: videoElement });
           requestAnimationFrame(processFrame);
         }
@@ -1701,7 +1812,14 @@
       const pill = document.getElementById('cam-status-pill');
       if (!isCameraActive) {
         sourceMode = 'webcam';
-        camera = new Camera(videoElement, { onFrame: async () => { await pose.send({ image: videoElement }); }, width: 640, height: 480 });
+        camera = new Camera(videoElement, {
+          onFrame: async () => {
+            await hands.send({ image: videoElement });
+            await pose.send({ image: videoElement });
+          },
+          width: 640,
+          height: 480
+        });
         camera.start();
         isCameraActive = true;
         btn.innerHTML = `<span>Pausar cámara</span>`;
@@ -1722,6 +1840,9 @@
     function setSide(side) {
       selectedSide = side;
       document.getElementById('kpi-side-label').innerText = side === 'left' ? 'Hombro izquierdo' : 'Hombro derecho';
+      document.getElementById('cam-gesture-hint').innerText = side === 'left'
+        ? 'Muestra la palma derecha para iniciar Hombro Izquierdo.'
+        : 'Muestra la palma izquierda para iniciar Hombro Derecho.';
       resetCurrentMetrics();
     }
 
@@ -1748,24 +1869,29 @@
         return;
       }
       if (isTesting) finishTestExecution();
-      else startGuidedTest();
+      else if (!isCountingDown) startGuidedTest();
     }
 
     function startGuidedTest() {
+      if (isCountingDown || isTesting) return;
+      isCountingDown = true;
       resetCurrentMetrics();
+      document.getElementById('step-row-2').classList.add('active');
       document.getElementById('step-row-3').classList.add('active');
       const countEl = document.getElementById('overlay-count');
       countEl.style.display = 'block';
       let count = 3; countEl.innerText = count;
-      speak("Mantenga postura neutra. Tres, dos, uno, eleve el brazo lentamente.");
+      speak("Iniciando en tres, dos, uno.");
       
       if (countdownInterval) clearInterval(countdownInterval);
       countdownInterval = setInterval(() => {
         count--;
-        if (count > 0) countEl.innerText = count;
-        else { 
+        if (count > 0) {
+          countEl.innerText = count;
+        } else { 
           clearInterval(countdownInterval); 
-          countEl.style.display = 'none'; 
+          countEl.style.display = 'none';
+          isCountingDown = false;
           runTestExecution(); 
         }
       }, 1000);
@@ -1773,16 +1899,18 @@
 
     function runTestExecution() {
       isTesting = true;
+      neutralHoldFrames = 0;
       testStartTime = performance.now();
       const signalPill = document.getElementById('cam-signal-pill');
       signalPill.innerText = "● GRABANDO INTENTO";
+      signalPill.classList.remove('gesture-ready');
       signalPill.classList.add('recording');
 
       const btnRec = document.getElementById('btn-rec');
       btnRec.className = "btn-danger";
-      btnRec.innerHTML = `<span>⏹ Finalizar intento ahora</span>`;
+      btnRec.innerHTML = `<span>⏹ Finalizar (o bajar ambos brazos)</span>`;
 
-      const duration = parseInt(document.getElementById('select-duration').value) || 12000;
+      const duration = parseInt(document.getElementById('select-duration').value) || 15000;
       if (testTimeout) clearTimeout(testTimeout);
       testTimeout = setTimeout(() => {
         if (isTesting) finishTestExecution();
@@ -1791,6 +1919,8 @@
 
     function finishTestExecution() {
       isTesting = false;
+      isCountingDown = false;
+      neutralHoldFrames = 0;
       if (testTimeout) clearTimeout(testTimeout);
       
       const signalPill = document.getElementById('cam-signal-pill');
@@ -1799,9 +1929,9 @@
 
       const btnRec = document.getElementById('btn-rec');
       btnRec.className = "btn-primary";
-      btnRec.innerHTML = `<span>▶ Preparar intento</span>`;
+      btnRec.innerHTML = `<span>▶ Preparar intento (o mostrar palma)</span>`;
 
-      speak("Evaluación completada y guardada en el perfil.");
+      speak("Evaluación detenida y guardada.");
       recordAttempt();
     }
 
@@ -1903,7 +2033,6 @@
       link.click();
     }
 
-    // ARRANCAR CARGANDO PERSONAS GUARDADAS
     loadPeopleDB();
   </script>
 </body>
