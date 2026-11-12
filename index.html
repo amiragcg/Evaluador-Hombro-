@@ -74,6 +74,7 @@
     .nav-btn.active { background: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
     .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary); display: none; }
     .nav-btn.active .nav-dot { display: block; }
+    .badge-count { background: var(--primary-light); color: var(--primary-dark); padding: 2px 7px; border-radius: 99px; font-size: 0.72rem; font-weight: 700; }
 
     .sidebar-footer {
       margin-top: auto; padding: 16px; background: var(--bg); border: 1px solid var(--border);
@@ -109,6 +110,19 @@
     .page-title span { color: var(--primary); }
     .page-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
     .page-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    /* TARJETA DE PERSONA ACTIVA */
+    .active-person-banner {
+      background: #ffffff; border: 1px solid var(--border); border-left: 4px solid var(--primary);
+      border-radius: 12px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      box-shadow: 0 2px 8px rgba(142, 91, 159, 0.04);
+    }
+    .person-banner-left { display: flex; align-items: center; gap: 14px; }
+    .avatar-circle {
+      width: 46px; height: 46px; border-radius: 50%; background: var(--primary-light); color: var(--primary-dark);
+      display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; overflow: hidden; flex-shrink: 0; border: 2px solid var(--border);
+    }
+    .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
 
     /* BANNER DE SEGURIDAD */
     .safety-banner {
@@ -206,7 +220,7 @@
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
     .form-group input, .form-group select, .form-group textarea {
-      padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; color: var(--text); background: #fff; outline: none;
+      padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; color: var(--text); background: #fff; outline: none; width: 100%;
     }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
 
@@ -239,9 +253,56 @@
     @media (max-width: 768px) { .report-meta-grid { grid-template-columns: repeat(2, 1fr); } }
     .report-meta-item .label { font-size: 0.7rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .report-meta-item .val { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-top: 4px; }
-    .report-summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .summary-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
-    .summary-box .big-val { font-size: 2rem; font-weight: 900; color: var(--primary-dark); margin-top: 4px; }
+
+    /* DIRECTORIO DE PERSONAS (ESTILO CAPTURA 1) */
+    .empty-state-box {
+      padding: 48px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px;
+    }
+    .empty-smiley {
+      width: 48px; height: 48px; border-radius: 50%; border: 2px solid #cbd5e1; color: #94a3b8;
+      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    }
+    .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .person-card {
+      border: 1px solid var(--border); border-radius: 12px; padding: 16px; background: var(--bg);
+      display: flex; flex-direction: column; gap: 12px; transition: 0.2s;
+    }
+    .person-card:hover { border-color: var(--primary); background: #fff; box-shadow: 0 4px 12px rgba(142, 91, 159, 0.08); }
+    .person-card.selected { border: 2px solid var(--primary); background: #fff; }
+
+    /* MODALES (ESTILO CAPTURA 2 Y 3) */
+    .modal-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(20, 20, 25, 0.65); backdrop-filter: blur(3px);
+      z-index: 200; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      background: #ffffff; border-radius: 16px; width: 100%; max-width: 500px; padding: 24px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.25); display: flex; flex-direction: column; gap: 18px; max-height: 92vh; overflow-y: auto;
+    }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h2 { font-size: 1.25rem; font-weight: 800; color: var(--text); }
+    .modal-close { background: transparent; border: none; font-size: 1.3rem; color: var(--text-muted); cursor: pointer; }
+
+    .modal-tabs { display: flex; background: var(--bg); padding: 4px; border-radius: 10px; border: 1px solid var(--border); }
+    .modal-tab-btn { flex: 1; padding: 8px; border: none; background: transparent; border-radius: 8px; font-weight: 700; font-size: 0.82rem; color: var(--text-muted); cursor: pointer; }
+    .modal-tab-btn.active { background: #fff; color: var(--primary-dark); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+
+    .person-select-list {
+      max-height: 240px; overflow-y: auto; border: 1px solid var(--border); border-radius: 10px; display: flex; flex-direction: column;
+    }
+    .person-select-item {
+      padding: 11px 14px; border-bottom: 1px solid var(--border); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.86rem;
+    }
+    .person-select-item:last-child { border-bottom: none; }
+    .person-select-item:hover { background: var(--primary-light); color: var(--primary-dark); font-weight: 600; }
+
+    .photo-upload-row { display: flex; align-items: center; gap: 14px; }
+    .photo-preview {
+      width: 56px; height: 56px; border-radius: 50%; background: var(--bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; overflow: hidden; color: var(--text-muted); font-size: 1.3rem; flex-shrink: 0;
+    }
+    .photo-preview img { width: 100%; height: 100%; object-fit: cover; }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
@@ -275,7 +336,7 @@
     <div>
       <div class="nav-section-label">Espacio Clínico</div>
       <nav>
-        <button class="nav-btn active" onclick="showView('evaluacion', this)">
+        <button class="nav-btn active" id="nav-evaluacion" onclick="showView('evaluacion', this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
@@ -286,7 +347,18 @@
           <span class="nav-dot"></span>
         </button>
 
-        <button class="nav-btn" onclick="showView('resultados', this)">
+        <button class="nav-btn" id="nav-personas" onclick="showView('personas', this)">
+          <div class="nav-btn-content">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span>Personas</span>
+          </div>
+          <span class="badge-count" id="sidebar-people-count">0</span>
+        </button>
+
+        <button class="nav-btn" id="nav-resultados" onclick="showView('resultados', this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
@@ -296,7 +368,7 @@
           <span class="nav-dot"></span>
         </button>
 
-        <button class="nav-btn" onclick="showView('reporte', this)">
+        <button class="nav-btn" id="nav-reporte" onclick="showView('reporte', this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -307,7 +379,7 @@
           <span class="nav-dot"></span>
         </button>
 
-        <button class="nav-btn" onclick="showView('guia', this)">
+        <button class="nav-btn" id="nav-guia" onclick="showView('guia', this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -327,10 +399,10 @@
         </svg>
       </div>
       <div>
-        <strong>Procesamiento local</strong>
-        El video y los datos de la evaluación permanecen en esta pestaña.
+        <strong>Base de datos local</strong>
+        Los perfiles y evaluaciones se guardan individualmente en este equipo.
       </div>
-      <div class="version">MediaPipe Pose · v1.0</div>
+      <div class="version">MediaPipe Pose · v1.2</div>
     </div>
   </aside>
 
@@ -353,11 +425,26 @@
           <p class="page-subtitle">Mide el arco doloroso (60°–120°). Compara ambos brazos y analiza la desviación axial del tronco.</p>
         </div>
         <div class="page-actions">
-          <button class="btn-outline" onclick="resetSession()">+ Nueva evaluación</button>
+          <button class="btn-outline" onclick="openNewEvaluationModal()">+ Nueva evaluación</button>
           <button class="btn-primary" onclick="downloadRealPDF()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span>Reporte PDF</span>
           </button>
+        </div>
+      </div>
+
+      <!-- BANNER DE PERSONA SELECCIONADA -->
+      <div class="active-person-banner">
+        <div class="person-banner-left">
+          <div class="avatar-circle" id="active-person-avatar">👤</div>
+          <div>
+            <div style="font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.8px;">Persona en evaluación</div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--text);" id="active-person-name">Sin persona seleccionada</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);" id="active-person-details">Haz clic en "+ Nueva evaluación" para seleccionar o registrar una persona.</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-outline" onclick="openNewEvaluationModal()">Cambiar / Registrar persona</button>
         </div>
       </div>
 
@@ -369,7 +456,7 @@
       <div class="status-strip">
         <div class="status-indicator">
           <span class="dot-live"></span>
-          <span id="strip-patient-info">Evaluación clínica · Sin código</span>
+          <span id="strip-patient-info">Evaluación clínica · Sin persona asignada</span>
         </div>
         <span id="strip-date"></span>
       </div>
@@ -399,7 +486,7 @@
             <span>Desviación línea media</span>
           </div>
           <div class="kpi-box-val" id="kpi-trunk-angle">— <small>°</small></div>
-          <div class="kpi-box-foot" id="kpi-comp-status">Tronco alineado</div>
+          <div class="kpi-box-foot" id="kpi-comp-status">Tronco alineado (≤ 5°)</div>
         </div>
 
         <div class="kpi-box">
@@ -418,7 +505,7 @@
           <div class="card-header-flex">
             <div>
               <div class="card-h3">Captura de movimiento</div>
-              <div class="card-sub">Tronco y extremidad superior · Línea media axial activa</div>
+              <div class="card-sub">Tronco y extremidad superior · Umbral compensación: &gt; 5°</div>
             </div>
             <div class="pill-switch">
               <button class="pill-btn active" id="btn-plane-front" onclick="setPlane('Frontal')">Frontal</button>
@@ -466,7 +553,7 @@
 
           <div class="audio-prompt-box">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-            <span>Evalúa un brazo y luego cambia al brazo contralateral en el panel derecho para visualizar ambas curvas superpuestas y generar la tabla comparativa bilateral.</span>
+            <span>Cada intento registrado se guarda automáticamente en el historial individual de la persona seleccionada.</span>
           </div>
         </div>
 
@@ -479,19 +566,8 @@
             <span id="protocol-counter" style="background: var(--primary-light); color: var(--primary-dark); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700;">01 / 03</span>
           </div>
 
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 10px;">
-            <div class="form-group">
-              <label>Código de persona</label>
-              <input type="text" id="input-code" placeholder="Ej. HM-001" oninput="syncPatientData()">
-            </div>
-            <div class="form-group">
-              <label>Edad</label>
-              <input type="text" id="input-age" placeholder="Años" oninput="syncPatientData()">
-            </div>
-          </div>
-
           <div class="form-group">
-            <label>Profesional</label>
+            <label>Profesional evaluador</label>
             <input type="text" id="input-pro" placeholder="Nombre del kinesiólogo/a" oninput="syncPatientData()">
           </div>
 
@@ -531,9 +607,9 @@
           </div>
 
           <div class="step-list">
-            <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Cámara y tronco completo</span></div>
+            <div class="step-row active" id="step-row-1"><span class="step-circle">1</span><span>Seleccionar persona y encuadrar cámara</span></div>
             <div class="step-row" id="step-row-2"><span class="step-circle">2</span><span>Postura neutra en reposo</span></div>
-            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Abducción lenta y registro completo</span></div>
+            <div class="step-row" id="step-row-3"><span class="step-circle">3</span><span>Abducción lenta y registro bilateral</span></div>
           </div>
 
           <button class="btn-outline" onclick="calibrateNeutral()" style="width: 100%;">Calibrar postura · 3 s</button>
@@ -549,7 +625,7 @@
         <div class="detail-header">
           <div>
             <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text);">El movimiento, en detalle</h2>
-            <p style="font-size: 0.8rem; color: var(--text-muted);">Curva comparativa Ángulo (°) vs. Tiempo (s) para ambos brazos.</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Curva comparativa Ángulo (°) vs. Tiempo (s) para la persona seleccionada.</p>
           </div>
           <div style="display: flex; align-items: center; gap: 14px; font-size: 0.78rem; font-weight: 700;">
             <span style="color: #8e5b9f;">━━ Hombro Derecho</span>
@@ -573,8 +649,8 @@
           <div class="card">
             <div class="card-header-flex">
               <div>
-                <div class="card-h3">Historial de intentos registrados</div>
-                <div class="card-sub">Incluye desviación máxima de línea media del tronco</div>
+                <div class="card-h3">Historial individual de intentos</div>
+                <div class="card-sub">Compensación de tronco marcada cuando desviación &gt; 5°</div>
               </div>
               <button class="btn-outline" onclick="exportCSV()" style="padding: 4px 10px; font-size: 0.72rem;">Exportar CSV</button>
             </div>
@@ -601,7 +677,27 @@
     </div>
 
     <!-- ==========================================
-         VISTA 2: RESULTADOS Y VALIDACIÓN
+         VISTA 2: PERSONAS REGISTRADAS (ESTILO CAPTURA 1)
+         ========================================== -->
+    <div id="view-personas" class="view-content">
+      <div class="page-header">
+        <div>
+          <div class="page-kicker">DIRECTORIO CLÍNICO</div>
+          <h1 class="page-title">Personas registradas <span id="people-header-count" style="font-size: 1.2rem; background: var(--primary-light); padding: 4px 12px; border-radius: 99px; vertical-align: middle;">0</span></h1>
+          <p class="page-subtitle">Cada persona conserva sus propias mediciones, curvas bilaterales e historial de evaluaciones.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn-primary" onclick="openPersonCreatorModal()">+ Agregar Persona</button>
+        </div>
+      </div>
+
+      <div class="card" id="people-directory-container">
+        <!-- Se renderiza dinámicamente -->
+      </div>
+    </div>
+
+    <!-- ==========================================
+         VISTA 3: RESULTADOS Y VALIDACIÓN
          ========================================== -->
     <div id="view-resultados" class="view-content">
       <div class="page-header">
@@ -659,7 +755,7 @@
     </div>
 
     <!-- ==========================================
-         VISTA 3: REPORTE CLÍNICO
+         VISTA 4: REPORTE CLÍNICO
          ========================================== -->
     <div id="view-reporte" class="view-content">
       <div class="page-header">
@@ -679,9 +775,9 @@
           <h2 style="font-size: 1.4rem; font-weight: 800;">Abducción de Hombro</h2>
 
           <div class="report-meta-grid">
-            <div class="report-meta-item"><div class="label">Código de persona</div><div class="val" id="rep-code">Sin informar</div></div>
-            <div class="report-meta-item"><div class="label">Edad</div><div class="val" id="rep-age">Sin informar</div></div>
-            <div class="report-meta-item"><div class="label">Profesional</div><div class="val" id="rep-pro">Sin informar</div></div>
+            <div class="report-meta-item"><div class="label">Persona evaluada</div><div class="val" id="rep-name">Sin informar</div></div>
+            <div class="report-meta-item"><div class="label">Edad / Masa</div><div class="val" id="rep-age-mass">Sin informar</div></div>
+            <div class="report-meta-item"><div class="label">Deporte / Prueba</div><div class="val" id="rep-sport">Sin informar</div></div>
             <div class="report-meta-item"><div class="label">Estado</div><div class="val" id="rep-status" style="color: #b97a29;">Pendiente de revisión profesional</div></div>
           </div>
 
@@ -746,7 +842,7 @@
     </div>
 
     <!-- ==========================================
-         VISTA 4: GUÍA Y EVIDENCIA
+         VISTA 5: GUÍA Y EVIDENCIA
          ========================================== -->
     <div id="view-guia" class="view-content">
       <div class="page-header">
@@ -762,17 +858,409 @@
       </div>
 
       <div class="detail-grid-2">
-        <div class="card"><strong style="color: var(--primary);">01 · Preparación</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Cámara fija en plano frontal a 1.5 - 2 metros. Visibilidad completa del tronco y ambas extremidades superiores.</p></div>
+        <div class="card"><strong style="color: var(--primary);">01 · Gestión de Personas</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Crea un perfil individual con sus datos antropométricos antes de comenzar para almacenar cada sesión por separado.</p></div>
         <div class="card"><strong style="color: var(--primary);">02 · Calibración Neutra</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Mantener 3 segundos en bipedestación con brazos al costado para fijar la línea media axial del tronco.</p></div>
         <div class="card"><strong style="color: var(--primary);">03 · Comparación Bilateral</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Evaluar hombro derecho e izquierdo por separado para superponer ambas curvas en el gráfico (° vs s).</p></div>
-        <div class="card"><strong style="color: var(--primary);">04 · Compensación de Tronco</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Una inclinación lateral superior a 10° respecto a la vertical indica estrategia compensatoria del tronco.</p></div>
+        <div class="card"><strong style="color: var(--primary);">04 · Compensación de Tronco</strong><p style="font-size: 0.85rem; color: var(--text-muted);">Una inclinación lateral superior a 5° respecto a la vertical indica estrategia compensatoria del tronco.</p></div>
       </div>
     </div>
 
   </main>
 
+  <!-- =========================================================
+       MODAL 1: NUEVA EVALUACIÓN (SELECCIONAR O AGREGAR PERSONA)
+       ========================================================= -->
+  <div id="modal-new-eval" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Nueva evaluación</h2>
+        <button class="modal-close" onclick="closeModal('modal-new-eval')">✕</button>
+      </div>
+
+      <div class="modal-tabs">
+        <button class="modal-tab-btn active" id="tab-btn-existing" onclick="switchEvalModalTab('existing')">Seleccionar existente</button>
+        <button class="modal-tab-btn" id="tab-btn-new" onclick="switchEvalModalTab('new')">+ Nueva persona</button>
+      </div>
+
+      <!-- TAB EXISTENTE (ESTILO CAPTURA 3) -->
+      <div id="eval-tab-existing" style="display: flex; flex-direction: column; gap: 12px;">
+        <div class="form-group">
+          <label>Buscar persona registrada</label>
+          <input type="text" id="search-person-input" placeholder="Buscar por apellido, nombre o deporte..." oninput="renderSearchDropdown()">
+        </div>
+
+        <div class="person-select-list" id="search-person-list">
+          <!-- Lista dinámica estilo "Apellido, Nombre (74 kg)" -->
+        </div>
+      </div>
+
+      <!-- TAB NUEVA PERSONA DENTRO DEL MODAL -->
+      <div id="eval-tab-new" style="display: none; flex-direction: column; gap: 12px;">
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Nombre *</label>
+            <input type="text" id="quick-first-name" placeholder="Ej. Catalina">
+          </div>
+          <div class="form-group">
+            <label>Apellido *</label>
+            <input type="text" id="quick-last-name" placeholder="Ej. Rodríguez">
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Edad</label>
+            <input type="number" id="quick-age" placeholder="Años">
+          </div>
+          <div class="form-group">
+            <label>Masa (kg) *</label>
+            <input type="number" step="0.1" id="quick-mass" placeholder="Ej. 58.5">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Deporte / Actividad</label>
+          <input type="text" id="quick-sport" placeholder="Ej. Natación, Tenis, Clínica general...">
+        </div>
+        <div class="form-group">
+          <label>Prueba / Posición / Diagnóstico</label>
+          <input type="text" id="quick-position" placeholder="Ej. Hombro doloroso derecho">
+        </div>
+        <button class="btn-primary" onclick="createPersonFromQuickModal()" style="width: 100%; padding: 12px; margin-top: 4px;">Crear y comenzar evaluación</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MODAL 2: NUEVA PERSONA (ESTILO CAPTURA 2 CON FOTO)
+       ========================================================= -->
+  <div id="modal-create-person" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Nueva Persona</h2>
+        <button class="modal-close" onclick="closeModal('modal-create-person')">✕</button>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Nombre *</label>
+          <input type="text" id="new-first-name" placeholder="Nombre">
+        </div>
+        <div class="form-group">
+          <label>Apellido *</label>
+          <input type="text" id="new-last-name" placeholder="Apellido">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-group">
+          <label>Edad</label>
+          <input type="number" id="new-age" placeholder="Años">
+        </div>
+        <div class="form-group">
+          <label>Masa (kg) *</label>
+          <input type="number" step="0.1" id="new-mass" placeholder="kg">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Deporte / Actividad</label>
+        <input type="text" id="new-sport" placeholder="Ej. Vóleibol, CrossFit, Rehabilitación...">
+      </div>
+
+      <div class="form-group">
+        <label>Prueba / Posición / Diagnóstico</label>
+        <input type="text" id="new-position" placeholder="Ej. Atacante / Pinzamiento subacromial">
+      </div>
+
+      <div class="form-group">
+        <label>Foto</label>
+        <div class="photo-upload-row">
+          <div class="photo-preview" id="new-photo-preview">😊</div>
+          <input type="file" id="new-photo-input" accept="image/*" style="display: none;" onchange="previewPersonPhoto(event)">
+          <button type="button" class="btn-outline" onclick="document.getElementById('new-photo-input').click()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span>Subir</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px;">
+        <button class="btn-outline" onclick="closeModal('modal-create-person')">Cancelar</button>
+        <button class="btn-primary" onclick="saveNewPersonFromModal()">Crear</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const TRUNK_LIMIT_DEG = 5;
+    const STORAGE_KEY = 'kinearc_people_db_v1';
+
+    let peopleDB = [];
+    let activePersonId = null;
+    let tempPhotoBase64 = null;
+
     document.getElementById('strip-date').innerText = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    // INICIALIZACIÓN DE BASE DE DATOS LOCAL
+    function loadPeopleDB() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        peopleDB = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        peopleDB = [];
+      }
+      if (peopleDB.length > 0 && !activePersonId) {
+        selectActivePerson(peopleDB[0].id);
+      } else {
+        updatePeopleUI();
+      }
+    }
+
+    function savePeopleDB() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(peopleDB));
+      updatePeopleUI();
+    }
+
+    function getActivePerson() {
+      return peopleDB.find(p => p.id === activePersonId) || null;
+    }
+
+    // MODALES
+    function openModal(id) { document.getElementById(id).classList.add('open'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+    function openNewEvaluationModal() {
+      if (isTesting) finishTestExecution();
+      switchEvalModalTab(peopleDB.length > 0 ? 'existing' : 'new');
+      renderSearchDropdown();
+      openModal('modal-new-eval');
+    }
+
+    function openPersonCreatorModal() {
+      tempPhotoBase64 = null;
+      document.getElementById('new-first-name').value = '';
+      document.getElementById('new-last-name').value = '';
+      document.getElementById('new-age').value = '';
+      document.getElementById('new-mass').value = '';
+      document.getElementById('new-sport').value = '';
+      document.getElementById('new-position').value = '';
+      document.getElementById('new-photo-preview').innerHTML = '😊';
+      openModal('modal-create-person');
+    }
+
+    function switchEvalModalTab(tab) {
+      document.getElementById('tab-btn-existing').className = tab === 'existing' ? 'modal-tab-btn active' : 'modal-tab-btn';
+      document.getElementById('tab-btn-new').className = tab === 'new' ? 'modal-tab-btn active' : 'modal-tab-btn';
+      document.getElementById('eval-tab-existing').style.display = tab === 'existing' ? 'flex' : 'none';
+      document.getElementById('eval-tab-new').style.display = tab === 'new' ? 'flex' : 'none';
+    }
+
+    function previewPersonPhoto(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        tempPhotoBase64 = e.target.result;
+        document.getElementById('new-photo-preview').innerHTML = `<img src="${tempPhotoBase64}" alt="Foto">`;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveNewPersonFromModal() {
+      const firstName = document.getElementById('new-first-name').value.trim();
+      const lastName = document.getElementById('new-last-name').value.trim();
+      const age = document.getElementById('new-age').value.trim();
+      const mass = document.getElementById('new-mass').value.trim();
+      const sport = document.getElementById('new-sport').value.trim();
+      const position = document.getElementById('new-position').value.trim();
+
+      if (!firstName || !lastName || !mass) {
+        return alert("Por favor completa los campos obligatorios: Nombre, Apellido y Masa (kg).");
+      }
+
+      const newPerson = {
+        id: 'p_' + Date.now(),
+        firstName,
+        lastName,
+        age: age || '—',
+        mass,
+        sport: sport || 'General',
+        position: position || 'Sin especificar',
+        photo: tempPhotoBase64,
+        attempts: [],
+        rightArm: { points: [], maxRom: null, painTime: null, maxTrunk: null },
+        leftArm: { points: [], maxRom: null, painTime: null, maxTrunk: null },
+        obs: ''
+      };
+
+      peopleDB.unshift(newPerson);
+      savePeopleDB();
+      selectActivePerson(newPerson.id);
+      closeModal('modal-create-person');
+    }
+
+    function createPersonFromQuickModal() {
+      const firstName = document.getElementById('quick-first-name').value.trim();
+      const lastName = document.getElementById('quick-last-name').value.trim();
+      const age = document.getElementById('quick-age').value.trim();
+      const mass = document.getElementById('quick-mass').value.trim();
+      const sport = document.getElementById('quick-sport').value.trim();
+      const position = document.getElementById('quick-position').value.trim();
+
+      if (!firstName || !lastName || !mass) {
+        return alert("Por favor completa Nombre, Apellido y Masa (kg).");
+      }
+
+      const newPerson = {
+        id: 'p_' + Date.now(),
+        firstName,
+        lastName,
+        age: age || '—',
+        mass,
+        sport: sport || 'General',
+        position: position || 'Sin especificar',
+        photo: null,
+        attempts: [],
+        rightArm: { points: [], maxRom: null, painTime: null, maxTrunk: null },
+        leftArm: { points: [], maxRom: null, painTime: null, maxTrunk: null },
+        obs: ''
+      };
+
+      peopleDB.unshift(newPerson);
+      savePeopleDB();
+      selectActivePerson(newPerson.id);
+      closeModal('modal-new-eval');
+
+      // Limpiar inputs rápidos
+      document.getElementById('quick-first-name').value = '';
+      document.getElementById('quick-last-name').value = '';
+      document.getElementById('quick-age').value = '';
+      document.getElementById('quick-mass').value = '';
+      document.getElementById('quick-sport').value = '';
+      document.getElementById('quick-position').value = '';
+    }
+
+    function renderSearchDropdown() {
+      const query = (document.getElementById('search-person-input').value || '').toLowerCase();
+      const container = document.getElementById('search-person-list');
+      const filtered = peopleDB.filter(p =>
+        `${p.lastName} ${p.firstName} ${p.sport}`.toLowerCase().includes(query)
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="padding: 20px; text-align: center; color: var(--text-muted); font-size: 0.82rem;">No se encontraron personas. Usa la pestaña "+ Nueva persona".</div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(p => `
+        <div class="person-select-item" onclick="selectPersonFromModal('${p.id}')">
+          <span><strong>${p.lastName}, ${p.firstName}</strong> (${p.mass} kg)</span>
+          <span style="font-size: 0.74rem; color: var(--text-muted);">${p.attempts.length} eval.</span>
+        </div>
+      `).join('');
+    }
+
+    function selectPersonFromModal(personId) {
+      selectActivePerson(personId);
+      closeModal('modal-new-eval');
+    }
+
+    function selectActivePerson(personId) {
+      activePersonId = personId;
+      const p = getActivePerson();
+      if (!p) return;
+
+      // Cargar datos propios de esta persona
+      attemptsHistory = p.attempts || [];
+      rightArmData = p.rightArm || { points: [], maxRom: null, painTime: null, maxTrunk: null };
+      leftArmData = p.leftArm || { points: [], maxRom: null, painTime: null, maxTrunk: null };
+
+      // Actualizar banner superior
+      const avatarEl = document.getElementById('active-person-avatar');
+      if (p.photo) {
+        avatarEl.innerHTML = `<img src="${p.photo}" alt="${p.firstName}">`;
+      } else {
+        avatarEl.innerText = `${p.firstName[0]}${p.lastName[0]}`.toUpperCase();
+      }
+
+      document.getElementById('active-person-name').innerText = `${p.lastName}, ${p.firstName}`;
+      document.getElementById('active-person-details').innerText = `Edad: ${p.age} años · Masa: ${p.mass} kg · ${p.sport} (${p.position})`;
+      document.getElementById('strip-patient-info').innerText = `Evaluación clínica · ${p.lastName}, ${p.firstName} (${p.mass} kg)`;
+      document.getElementById('input-obs').value = p.obs || '';
+
+      // Restaurar curvas del gráfico de esta persona
+      angleChart.data.datasets[0].data = rightArmData.points || [];
+      angleChart.data.datasets[1].data = leftArmData.points || [];
+      angleChart.update();
+
+      // Restaurar tabla de intentos y comparativa bilateral
+      renderAttemptsTable();
+      updateComparativeTable();
+      syncPatientData();
+      updatePeopleUI();
+    }
+
+    function updatePeopleUI() {
+      document.getElementById('sidebar-people-count').innerText = peopleDB.length;
+      document.getElementById('people-header-count').innerText = peopleDB.length;
+
+      const dirContainer = document.getElementById('people-directory-container');
+      if (peopleDB.length === 0) {
+        dirContainer.innerHTML = `
+          <div class="empty-state-box">
+            <div class="empty-smiley">😊</div>
+            <div style="color: var(--text-muted); font-size: 0.9rem;">No hay personas registradas</div>
+            <button class="btn-primary" onclick="openPersonCreatorModal()">Agregar Persona</button>
+          </div>
+        `;
+        return;
+      }
+
+      dirContainer.innerHTML = `
+        <div class="people-grid">
+          ${peopleDB.map(p => {
+            const isSelected = p.id === activePersonId;
+            const avatarHtml = p.photo
+              ? `<img src="${p.photo}" alt="${p.firstName}">`
+              : `${p.firstName[0]}${p.lastName[0]}`.toUpperCase();
+            return `
+              <div class="person-card ${isSelected ? 'selected' : ''}">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div class="avatar-circle">${avatarHtml}</div>
+                  <div>
+                    <strong style="font-size: 0.98rem; display: block;">${p.lastName}, ${p.firstName}</strong>
+                    <span style="font-size: 0.76rem; color: var(--text-muted);">${p.age} años · ${p.mass} kg</span>
+                  </div>
+                </div>
+                <div style="font-size: 0.78rem; color: var(--text-muted);">
+                  <div><strong>Actividad:</strong> ${p.sport}</div>
+                  <div><strong>Detalle:</strong> ${p.position}</div>
+                  <div><strong>Intentos registrados:</strong> ${p.attempts.length}</div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: auto;">
+                  <button class="btn-primary" style="flex: 1;" onclick="evaluatePerson('${p.id}')">Evaluar / Ver historial</button>
+                  <button class="btn-ghost" style="color: var(--danger);" onclick="deletePerson('${p.id}')" title="Eliminar">🗑</button>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    function evaluatePerson(personId) {
+      selectActivePerson(personId);
+      showView('evaluacion', document.getElementById('nav-evaluacion'));
+    }
+
+    function deletePerson(personId) {
+      if (!confirm("¿Eliminar esta persona y todas sus evaluaciones?")) return;
+      peopleDB = peopleDB.filter(p => p.id !== personId);
+      if (activePersonId === personId) {
+        activePersonId = peopleDB.length > 0 ? peopleDB[0].id : null;
+      }
+      savePeopleDB();
+      if (activePersonId) selectActivePerson(activePersonId);
+    }
 
     function openSidebar() { document.getElementById('sidebar').classList.add('open'); document.getElementById('sidebar-overlay').classList.add('active'); }
     function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-overlay').classList.remove('active'); }
@@ -781,23 +1269,29 @@
       document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.getElementById(`view-${viewId}`).classList.add('active');
-      btn.classList.add('active');
+      if (btn) btn.classList.add('active');
       closeSidebar();
     }
 
     function syncPatientData() {
-      const code = document.getElementById('input-code').value || 'Sin informar';
-      const age = document.getElementById('input-age').value || 'Sin informar';
-      const pro = document.getElementById('input-pro').value || 'Sin informar';
+      const p = getActivePerson();
       const status = document.getElementById('input-status').value;
-      const obs = document.getElementById('input-obs').value || 'Sin observaciones.';
+      const obs = document.getElementById('input-obs').value;
 
-      document.getElementById('strip-patient-info').innerText = code !== 'Sin informar' ? `Evaluación clínica · Código: ${code}` : 'Evaluación clínica · Sin código';
-      document.getElementById('rep-code').innerText = code;
-      document.getElementById('rep-age').innerText = age;
-      document.getElementById('rep-pro').innerText = pro;
+      if (p) {
+        p.obs = obs;
+        savePeopleDB();
+        document.getElementById('rep-name').innerText = `${p.lastName}, ${p.firstName}`;
+        document.getElementById('rep-age-mass').innerText = `${p.age} años · ${p.mass} kg`;
+        document.getElementById('rep-sport').innerText = `${p.sport} (${p.position})`;
+      } else {
+        document.getElementById('rep-name').innerText = 'Sin persona seleccionada';
+        document.getElementById('rep-age-mass').innerText = '—';
+        document.getElementById('rep-sport').innerText = '—';
+      }
+
       document.getElementById('rep-status').innerText = status;
-      document.getElementById('rep-obs-display').innerText = obs;
+      document.getElementById('rep-obs-display').innerText = obs || 'Sin observaciones.';
     }
 
     function setPlane(plane) {
@@ -811,13 +1305,12 @@
       box.style.display = box.style.display === 'none' ? 'block' : 'none';
     }
 
-    // GENERACIÓN DE PDF CON TABLA COMPARATIVA BILATERAL Y GRÁFICO DE DOBLE CURVA
     function downloadRealPDF() {
       if (!window.jspdf) return alert("Cargando generador PDF, intenta nuevamente.");
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+      const p = getActivePerson();
 
-      // ENCABEZADO
       doc.setFillColor(243, 234, 245);
       doc.rect(0, 0, 210, 32, 'F');
       doc.setFont("helvetica", "bold");
@@ -830,27 +1323,24 @@
       doc.setTextColor(122, 110, 130);
       doc.text(`Evaluación Cinemática de Abducción  |  Fecha: ${document.getElementById('strip-date').innerText}`, 14, 26);
 
-      // SECCIÓN 1: PACIENTE
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.setTextColor(44, 37, 48);
-      doc.text("1. IDENTIFICACIÓN DEL PACIENTE", 14, 43);
+      doc.text("1. IDENTIFICACIÓN DE LA PERSONA", 14, 43);
       doc.line(14, 45, 196, 45);
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(10);
-      doc.text(`Código: ${document.getElementById('rep-code').innerText}`, 14, 52);
-      doc.text(`Edad: ${document.getElementById('rep-age').innerText}`, 110, 52);
-      doc.text(`Profesional: ${document.getElementById('rep-pro').innerText}`, 14, 59);
-      doc.text(`Estado: ${document.getElementById('rep-status').innerText}`, 110, 59);
+      doc.text(`Nombre: ${p ? p.lastName + ', ' + p.firstName : 'Sin informar'}`, 14, 52);
+      doc.text(`Edad / Masa: ${p ? p.age + ' años / ' + p.mass + ' kg' : 'Sin informar'}`, 110, 52);
+      doc.text(`Actividad: ${p ? p.sport + ' (' + p.position + ')' : 'Sin informar'}`, 14, 59);
+      doc.text(`Profesional: ${document.getElementById('input-pro').value || 'Sin informar'}`, 110, 59);
 
-      // SECCIÓN 2: TABLA COMPARATIVA BILATERAL
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.text("2. TABLA COMPARATIVA BILATERAL (DERECHO VS. IZQUIERDO)", 14, 71);
       doc.line(14, 73, 196, 73);
 
-      // Cabecera tabla PDF
       doc.setFillColor(243, 234, 245);
       doc.rect(14, 76, 182, 8, 'F');
       doc.setFontSize(9);
@@ -860,39 +1350,28 @@
       doc.text("Diferencia / Estado", 164, 81.5);
 
       doc.setFont("helvetica", "normal");
-      const rRom = document.getElementById('comp-rom-right').innerText;
-      const lRom = document.getElementById('comp-rom-left').innerText;
-      const diffRom = document.getElementById('comp-rom-diff').innerText;
       doc.text("ROM Máximo Alcanzado", 16, 90);
-      doc.text(rRom, 82, 90);
-      doc.text(lRom, 124, 90);
-      doc.text(diffRom, 164, 90);
+      doc.text(document.getElementById('comp-rom-right').innerText, 82, 90);
+      doc.text(document.getElementById('comp-rom-left').innerText, 124, 90);
+      doc.text(document.getElementById('comp-rom-diff').innerText, 164, 90);
 
-      const rTime = document.getElementById('comp-time-right').innerText;
-      const lTime = document.getElementById('comp-time-left').innerText;
-      const diffTime = document.getElementById('comp-time-diff').innerText;
       doc.text("Tiempo en Arco (60°-120°)", 16, 97);
-      doc.text(rTime, 82, 97);
-      doc.text(lTime, 124, 97);
-      doc.text(diffTime, 164, 97);
+      doc.text(document.getElementById('comp-time-right').innerText, 82, 97);
+      doc.text(document.getElementById('comp-time-left').innerText, 124, 97);
+      doc.text(document.getElementById('comp-time-diff').innerText, 164, 97);
 
-      const rTrunk = document.getElementById('comp-trunk-right').innerText;
-      const lTrunk = document.getElementById('comp-trunk-left').innerText;
-      const stTrunk = document.getElementById('comp-trunk-status').innerText;
-      doc.text("Desviación Máx. Tronco", 16, 104);
-      doc.text(rTrunk, 82, 104);
-      doc.text(lTrunk, 124, 104);
-      doc.text(stTrunk, 164, 104);
+      doc.text("Desviación Máx. Tronco (>5°)", 16, 104);
+      doc.text(document.getElementById('comp-trunk-right').innerText, 82, 104);
+      doc.text(document.getElementById('comp-trunk-left').innerText, 124, 104);
+      doc.text(document.getElementById('comp-trunk-status').innerText, 164, 104);
       doc.line(14, 108, 196, 108);
 
-      // SECCIÓN 3: GRÁFICO ÁNGULO VS TIEMPO (SEGUNDOS)
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.text("3. CURVAS CINEMÁTICAS COMPARATIVAS: ÁNGULO (°) VS. TIEMPO (s)", 14, 118);
       const chartImg = document.getElementById('angleChart').toDataURL('image/png', 1.0);
       doc.addImage(chartImg, 'PNG', 14, 121, 182, 54);
 
-      // SECCIÓN 4: REGISTRO DE INTENTOS
       let y = 185;
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
@@ -901,7 +1380,7 @@
       doc.setFont("helvetica", "normal");
       doc.setFontSize(9);
       if (attemptsHistory.length === 0) {
-        doc.text("Sin intentos registrados en la sesión.", 14, y);
+        doc.text("Sin intentos registrados para esta persona.", 14, y);
         y += 7;
       } else {
         attemptsHistory.forEach(a => {
@@ -910,7 +1389,6 @@
         });
       }
 
-      // SECCIÓN 5: OBSERVACIONES
       y += 5;
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
@@ -920,10 +1398,10 @@
       doc.setFontSize(9.5);
       doc.text(doc.splitTextToSize(document.getElementById('rep-obs-display').innerText, 180), 14, y);
 
-      doc.save(`Reporte_Bilateral_KineArc_${document.getElementById('rep-code').innerText}.pdf`);
+      const fileName = p ? `${p.lastName}_${p.firstName}` : 'Sin_Nombre';
+      doc.save(`Reporte_KineArc_${fileName}.pdf`);
     }
 
-    // VARIABLES DE VISIÓN ARTIFICIAL Y SERIES TEMPORALES
     const videoElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('output_canvas');
     const canvasCtx = canvasElement.getContext('2d');
@@ -947,11 +1425,9 @@
     let angleHistory = [];
     let attemptsHistory = [];
 
-    // ALMACENAMIENTO POR BRAZO PARA GRÁFICO Y TABLA COMPARATIVA
     let rightArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
     let leftArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
 
-    // GRÁFICO CHART.JS CON EJE X LINEAL EN SEGUNDOS Y DOBLE LÍNEA
     const ctxChart = document.getElementById('angleChart').getContext('2d');
     const painZonePlugin = {
       id: 'painZone',
@@ -1028,9 +1504,9 @@
     function speakFullInstructions() {
       speak(
         "Protocolo bilateral de abducción de hombro en KineArc. " +
-        "Paso uno: ubique la cámara en plano frontal asegurando visibilidad completa de tronco, caderas y ambos brazos. " +
+        "Paso uno: seleccione o registre a la persona y ubique la cámara en plano frontal. " +
         "Paso dos: mantenga postura neutra erguida para alinear la línea media del tronco. " +
-        "Paso tres: eleve lateralmente y de forma lenta el brazo seleccionado hasta el máximo rango tolerado y descienda suavemente."
+        "Paso tres: eleve lateralmente y de forma lenta el brazo seleccionado sin inclinar el tronco más de cinco grados."
       );
     }
 
@@ -1082,18 +1558,15 @@
         const oppShoulder = lm[isLeft ? 12 : 11];
 
         if (hip && shoulder && elbow && oppShoulder && leftShoulder && rightShoulder && leftHip && rightHip) {
-          // 1. ÁNGULO DE ABDUCCIÓN DEL HOMBRO EVALUADO
           currentAngle = calculateAngle(hip, shoulder, elbow);
           
-          // 2. LÍNEA MEDIA AXIAL DEL TRONCO (Punto medio hombros <-> Punto medio caderas)
           const midShoulder = { x: (leftShoulder.x + rightShoulder.x) / 2, y: (leftShoulder.y + rightShoulder.y) / 2 };
           const midHip = { x: (leftHip.x + rightHip.x) / 2, y: (leftHip.y + rightHip.y) / 2 };
           
-          // Ángulo de inclinación lateral respecto a la vertical perfecta (0°)
           const dx = (midShoulder.x - midHip.x) * canvasElement.width;
           const dy = (midHip.y - midShoulder.y) * canvasElement.height;
           const trunkDeviation = Math.round(Math.abs(Math.atan2(dx, dy) * (180 / Math.PI)));
-          trunkCompensation = trunkDeviation > 10;
+          trunkCompensation = trunkDeviation > TRUNK_LIMIT_DEG;
 
           if (isTesting) {
             const elapsedSec = parseFloat(((now - testStartTime) / 1000).toFixed(2));
@@ -1109,7 +1582,7 @@
           document.getElementById('kpi-max-angle').innerHTML = `${displayAngle} <small>°</small>`;
           document.getElementById('kpi-pain-time').innerHTML = `${timeInPainZone.toFixed(1)} <small>s</small>`;
           document.getElementById('kpi-trunk-angle').innerHTML = `${trunkDeviation} <small>°</small>`;
-          document.getElementById('kpi-comp-status').innerText = trunkCompensation ? `Compensación (>10°)` : `Tronco alineado`;
+          document.getElementById('kpi-comp-status').innerText = trunkCompensation ? `Compensación (>${TRUNK_LIMIT_DEG}°)` : `Tronco alineado (≤${TRUNK_LIMIT_DEG}°)`;
           
           angleHistory.push({ t: now, a: currentAngle });
           if (angleHistory.length > 10) angleHistory.shift();
@@ -1119,10 +1592,8 @@
             document.getElementById('kpi-speed').innerHTML = `${dt > 0 ? Math.round(da / dt) : 0} <small>°/s</small>`;
           }
 
-          // DIBUJO DE REFERENCIA VERTICAL Y LÍNEA MEDIA DEL TRONCO
           drawMidlineAndTrunk(midHip, midShoulder, trunkDeviation, trunkCompensation);
 
-          // DIBUJO DEL BRAZO EVALUADO
           const armColor = isLeft ? '#2b8a80' : '#8e5b9f';
           drawSegment(shoulder, elbow, armColor);
           drawSegment(shoulder, hip, '#94a3b8');
@@ -1139,7 +1610,6 @@
       const sx = midShoulder.x * canvasElement.width;
       const sy = midShoulder.y * canvasElement.height;
 
-      // Línea vertical de referencia (0° ideal) punteada
       canvasCtx.save();
       canvasCtx.beginPath();
       canvasCtx.setLineDash([4, 4]);
@@ -1150,7 +1620,6 @@
       canvasCtx.stroke();
       canvasCtx.restore();
 
-      // Línea media real del tronco
       canvasCtx.beginPath();
       canvasCtx.moveTo(hx, hy);
       canvasCtx.lineTo(sx, sy);
@@ -1161,7 +1630,6 @@
       drawPoint(midHip, '#ffffff');
       drawPoint(midShoulder, isCompensated ? '#d9534f' : '#5cb85c');
 
-      // Etiqueta de grados de desviación sobre el tronco (corrigiendo espejo si es webcam)
       canvasCtx.save();
       if (sourceMode === 'webcam') {
         canvasCtx.translate(sx, sy - 14);
@@ -1269,25 +1737,16 @@
       document.getElementById('kpi-trunk-angle').innerHTML = '— <small>°</small>';
       document.getElementById('kpi-speed').innerHTML = '— <small>°/s</small>';
       
-      // Limpia solo la curva del brazo actual para conservar la del contralateral en el gráfico
       const datasetIndex = selectedSide === 'right' ? 0 : 1;
       angleChart.data.datasets[datasetIndex].data = [];
       angleChart.update();
     }
 
-    function resetSession() {
-      if (isTesting) finishTestExecution();
-      attemptsHistory = [];
-      rightArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
-      leftArmData = { points: [], maxRom: null, painTime: null, maxTrunk: null };
-      angleChart.data.datasets[0].data = [];
-      angleChart.data.datasets[1].data = [];
-      angleChart.update();
-      updateComparativeTable();
-      document.getElementById('table-attempts').innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar.</td></tr>';
-    }
-
     function handleTestButton() {
+      if (!getActivePerson()) {
+        openNewEvaluationModal();
+        return;
+      }
       if (isTesting) finishTestExecution();
       else startGuidedTest();
     }
@@ -1342,13 +1801,16 @@
       btnRec.className = "btn-primary";
       btnRec.innerHTML = `<span>▶ Preparar intento</span>`;
 
-      speak("Evaluación completada.");
+      speak("Evaluación completada y guardada en el perfil.");
       recordAttempt();
     }
 
     function recordAttempt() {
+      const p = getActivePerson();
+      if (!p) return;
+
       const attemptNum = attemptsHistory.length + 1;
-      const isComp = maxTrunkDeviation > 10;
+      const isComp = maxTrunkDeviation > TRUNK_LIMIT_DEG;
       const attemptData = {
         id: attemptNum,
         side: selectedSide === 'left' ? 'Izquierdo' : 'Derecho',
@@ -1359,24 +1821,47 @@
       };
       attemptsHistory.push(attemptData);
 
-      // Guardar resumen del brazo evaluado para la tabla comparativa
+      const currentPoints = [...angleChart.data.datasets[selectedSide === 'right' ? 0 : 1].data];
+
       if (selectedSide === 'right') {
-        rightArmData.maxRom = maxAngle;
-        rightArmData.painTime = parseFloat(timeInPainZone.toFixed(1));
-        rightArmData.maxTrunk = maxTrunkDeviation;
+        rightArmData = {
+          points: currentPoints,
+          maxRom: maxAngle,
+          painTime: parseFloat(timeInPainZone.toFixed(1)),
+          maxTrunk: maxTrunkDeviation
+        };
+        p.rightArm = rightArmData;
       } else {
-        leftArmData.maxRom = maxAngle;
-        leftArmData.painTime = parseFloat(timeInPainZone.toFixed(1));
-        leftArmData.maxTrunk = maxTrunkDeviation;
+        leftArmData = {
+          points: currentPoints,
+          maxRom: maxAngle,
+          painTime: parseFloat(timeInPainZone.toFixed(1)),
+          maxTrunk: maxTrunkDeviation
+        };
+        p.leftArm = leftArmData;
       }
 
+      p.attempts = attemptsHistory;
+      savePeopleDB();
+      renderAttemptsTable();
       updateComparativeTable();
+    }
 
+    function renderAttemptsTable() {
       const tbody = document.getElementById('table-attempts');
-      if (attemptNum === 1) tbody.innerHTML = '';
-      const row = document.createElement('tr');
-      row.innerHTML = `<td>Intento ${attemptData.id}</td><td>${attemptData.side}</td><td><strong>${attemptData.maxAngle}°</strong></td><td>${attemptData.painTime}s</td><td>${attemptData.maxTrunk}° (${attemptData.comp})</td>`;
-      tbody.appendChild(row);
+      if (attemptsHistory.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 30px;">Aún no hay datos. Realiza un intento para visualizar.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = attemptsHistory.map(a => `
+        <tr>
+          <td>Intento ${a.id}</td>
+          <td>${a.side}</td>
+          <td><strong>${a.maxAngle}°</strong></td>
+          <td>${a.painTime}s</td>
+          <td>${a.maxTrunk}° (${a.comp})</td>
+        </tr>
+      `).join('');
     }
 
     function updateComparativeTable() {
@@ -1402,19 +1887,24 @@
       document.getElementById('comp-trunk-left').innerText = leftArmData.maxTrunk !== null ? `${leftArmData.maxTrunk}°` : '— °';
       const maxT = Math.max(rightArmData.maxTrunk || 0, leftArmData.maxTrunk || 0);
       document.getElementById('comp-trunk-status').innerText = (rightArmData.maxTrunk !== null || leftArmData.maxTrunk !== null)
-        ? (maxT > 10 ? 'Compensación' : 'Sin compensación')
+        ? (maxT > TRUNK_LIMIT_DEG ? `Compensación (>${TRUNK_LIMIT_DEG}°)` : 'Sin compensación')
         : '—';
     }
 
     function exportCSV() {
+      const p = getActivePerson();
       if (attemptsHistory.length === 0) return alert("Sin intentos para exportar.");
-      let csv = "Intento,Brazo,ROM_Maximo,Tiempo_Arco_s,Desviacion_Tronco_deg,Compensacion\n";
-      attemptsHistory.forEach(a => csv += `${a.id},${a.side},${a.maxAngle},${a.painTime},${a.maxTrunk},${a.comp}\n`);
+      let csv = "Persona,Intento,Brazo,ROM_Maximo,Tiempo_Arco_s,Desviacion_Tronco_deg,Compensacion_Mayor_5deg\n";
+      const pName = p ? `${p.lastName} ${p.firstName}` : 'Sin_Nombre';
+      attemptsHistory.forEach(a => csv += `"${pName}",${a.id},${a.side},${a.maxAngle},${a.painTime},${a.maxTrunk},${a.comp}\n`);
       const link = document.createElement("a");
       link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-      link.download = `reporte_bilateral_kinearc.csv`;
+      link.download = `reporte_${pName.replace(/\s+/g, '_')}.csv`;
       link.click();
     }
+
+    // ARRANCAR CARGANDO PERSONAS GUARDADAS
+    loadPeopleDB();
   </script>
 </body>
 </html>
