@@ -10,6 +10,10 @@
       --primary-light: #f3eaf5;
       --primary-dark: #6e417e;
       --secondary: #3282f6;
+      --teal-demo: #007791;
+      --teal-demo-dark: #005d72;
+      --teal-demo-light: #e6f4f7;
+      --teal-demo-border: #99ccd7;
       --bg-accent: #d1bbd4;
       --danger: #d9534f;
       --warning: #f0ad4e;
@@ -252,31 +256,74 @@
     .page-subtitle { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; }
     .page-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-    /* BANNER DE MODO EJEMPLO */
+    /* BOTÓN VOLVER ARRIBA EN EVALUACIÓN */
+    .back-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: -6px;
+    }
+    .btn-back-example {
+      background: var(--teal-demo-light);
+      color: var(--teal-demo-dark);
+      border: 1px solid var(--teal-demo-border);
+      padding: 7px 14px;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-back-example:hover {
+      background: var(--teal-demo);
+      color: #ffffff;
+      border-color: var(--teal-demo);
+    }
+
+    /* BANNER DE MODO EJEMPLO (COLOR PETRÓLEO #007791) */
     .demo-mode-banner {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-left: 4px solid var(--secondary);
+      background: var(--teal-demo-light);
+      border: 1px solid var(--teal-demo-border);
+      border-left: 5px solid var(--teal-demo);
       border-radius: 12px;
-      padding: 14px 18px;
+      padding: 15px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      color: #1e3a8a;
-      font-size: 0.84rem;
+      color: #004352;
+      font-size: 0.85rem;
+      box-shadow: 0 3px 10px rgba(0, 119, 145, 0.08);
     }
     .demo-badge {
-      background: var(--secondary);
+      background: var(--teal-demo);
       color: #ffffff;
       font-size: 0.68rem;
       font-weight: 800;
-      padding: 3px 8px;
+      padding: 3px 9px;
       border-radius: 6px;
       text-transform: uppercase;
       letter-spacing: 0.6px;
       margin-right: 8px;
+      display: inline-block;
+    }
+    .btn-demo-cta {
+      background: var(--teal-demo);
+      color: #ffffff;
+      border: 1px solid var(--teal-demo);
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+    .btn-demo-cta:hover {
+      background: var(--teal-demo-dark);
+      border-color: var(--teal-demo-dark);
     }
 
     /* TARJETA DE PERSONA ACTIVA */
@@ -285,10 +332,19 @@
       border-radius: 12px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
       box-shadow: 0 2px 8px rgba(142, 91, 159, 0.04);
     }
+    .active-person-banner.is-demo-card {
+      border-left-color: var(--teal-demo);
+      border-color: var(--teal-demo-border);
+    }
     .person-banner-left { display: flex; align-items: center; gap: 14px; }
     .avatar-circle {
       width: 46px; height: 46px; border-radius: 50%; background: var(--primary-light); color: var(--primary-dark);
       display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; overflow: hidden; flex-shrink: 0; border: 2px solid var(--border);
+    }
+    .avatar-circle.is-demo-avatar {
+      background: var(--teal-demo-light);
+      color: var(--teal-demo);
+      border-color: var(--teal-demo-border);
     }
     .avatar-circle img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -317,6 +373,7 @@
     .kpi-box-top { display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); }
     .kpi-box-top-left { display: flex; align-items: center; gap: 8px; }
     .kpi-lock-pill { font-size: 0.65rem; font-weight: 700; background: var(--primary-light); color: var(--primary-dark); padding: 2px 6px; border-radius: 4px; }
+    .kpi-lock-pill.demo-pill { background: var(--teal-demo-light); color: var(--teal-demo-dark); }
     .kpi-box-val { font-size: 1.75rem; font-weight: 800; color: var(--text); }
     .kpi-box-val small { font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-left: 2px; }
     .kpi-box-foot { font-size: 0.75rem; color: var(--text-muted); }
@@ -356,26 +413,26 @@
       padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; backdrop-filter: blur(4px);
     }
     .cam-badge-tr.recording { background: rgba(217, 83, 79, 0.9); color: #fff; }
-    .cam-badge-tr.gesture-ready { background: rgba(50, 130, 246, 0.9); color: #fff; }
+    .cam-badge-tr.gesture-ready { background: rgba(0, 119, 145, 0.92); color: #fff; }
 
     .cam-guide-box {
       position: absolute; bottom: 14px; right: 14px; background: rgba(20, 34, 36, 0.85); border: 1px solid rgba(255,255,255,0.12);
       color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 0.75rem; max-width: 235px;
     }
-    .cam-guide-box strong { display: block; margin-bottom: 2px; font-size: 0.78rem; color: #93c5fd; }
+    .cam-guide-box strong { display: block; margin-bottom: 2px; font-size: 0.78rem; color: #7dd3fc; }
     .cam-guide-box span { color: #cbd5e1; font-size: 0.7rem; line-height: 1.35; display: block; }
 
     .cam-foot-left { position: absolute; bottom: 14px; left: 14px; font-size: 0.68rem; color: #94a3b8; }
-    .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 24px rgba(50, 130, 246, 0.95); }
+    .overlay-countdown { position: absolute; font-size: 5rem; font-weight: 900; color: #ffffff; text-shadow: 0 0 24px rgba(0, 119, 145, 0.95); }
 
     .cam-controls-bar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .cam-device-label { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--text-muted); flex-wrap: wrap; }
     .cam-buttons { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
     .btn-sensor-on {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border-color: #93c5fd;
+      background: var(--teal-demo-light);
+      color: var(--teal-demo-dark);
+      border-color: var(--teal-demo-border);
     }
     .btn-sensor-off {
       background: #f8fafc;
@@ -549,7 +606,7 @@
           <span class="nav-dot"></span>
         </button>
 
-        <button class="nav-btn" id="nav-evaluacion" onclick="showView('evaluacion', this)">
+        <button class="nav-btn" id="nav-evaluacion" onclick="openEvaluationExampleView(this)">
           <div class="nav-btn-content">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
@@ -733,6 +790,18 @@
          VISTA 1: EVALUACIÓN
          ========================================== -->
     <div id="view-evaluacion" class="view-content">
+
+      <!-- BARRA SUPERIOR CON FLECHA ATRÁS (VISIBLE AL EVALUAR A UNA PERSONA REAL) -->
+      <div class="back-bar" id="eval-back-bar">
+        <button type="button" class="btn-back-example" onclick="returnToExampleEvaluation()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Volver a vista principal de ejemplo</span>
+        </button>
+        <span style="font-size: 0.76rem; color: var(--text-muted);">Sesión individual activa</span>
+      </div>
       
       <div class="page-header">
         <div>
@@ -749,28 +818,28 @@
         </div>
       </div>
 
-      <!-- AVISO DE MODO EJEMPLO (SE MUESTRA SI NO HAY PERSONA SELECCIONADA) -->
+      <!-- AVISO DE MODO EJEMPLO EN COLOR #007791 -->
       <div class="demo-mode-banner" id="demo-mode-banner">
         <div>
           <span class="demo-badge">Vista de ejemplo</span>
           <strong>Estás visualizando datos ilustrativos de demostración.</strong> Estos valores muestran cómo se verán los KPI, curvas y tabla bilateral. Haz clic en <strong>"+ Nueva evaluación"</strong> para seleccionar una persona existente o registrar una nueva.
         </div>
-        <button class="btn-primary" style="background: var(--secondary);" onclick="openNewEvaluationModal()">Comenzar con persona real</button>
+        <button class="btn-demo-cta" onclick="openNewEvaluationModal()">Comenzar con persona real</button>
       </div>
 
-      <!-- BANNER DE PERSONA SELECCIONADA -->
-      <div class="active-person-banner" id="active-person-banner">
+      <!-- TARJETA DE PERSONA SELECCIONADA / EJEMPLO -->
+      <div class="active-person-banner is-demo-card" id="active-person-banner">
         <div class="person-banner-left">
-          <div class="avatar-circle" id="active-person-avatar">
+          <div class="avatar-circle is-demo-avatar" id="active-person-avatar">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </div>
           <div>
-            <div style="font-size: 0.7rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.8px;" id="active-person-kicker">Ejemplo de demostración (No es una persona real)</div>
+            <div style="font-size: 0.7rem; font-weight: 700; color: var(--teal-demo); text-transform: uppercase; letter-spacing: 0.8px;" id="active-person-kicker">Ejemplo ilustrativo (No es una persona real)</div>
             <div style="font-size: 1.05rem; font-weight: 800; color: var(--text);" id="active-person-name">Sujeto de Ejemplo (Vista previa)</div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);" id="active-person-details">Edad: 21 años · Masa: 65 kg · Demostración cinemática bilateral</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted);" id="active-person-details">Datos de muestra para visualizar el funcionamiento del sistema</div>
           </div>
         </div>
-        <div style="display: flex; gap: 8px;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
           <button class="btn-outline" onclick="openNewEvaluationModal()">Seleccionar / Registrar persona</button>
         </div>
       </div>
@@ -796,7 +865,7 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
               <span>ROM máximo</span>
             </div>
-            <span class="kpi-lock-pill" id="kpi-state-badge" style="display:none;">Registrado</span>
+            <span class="kpi-lock-pill demo-pill" id="kpi-state-badge">Ejemplo</span>
           </div>
           <div class="kpi-box-val" id="kpi-max-angle">142 <small>°</small></div>
           <div class="kpi-box-foot" id="kpi-side-label">Hombro derecho (Ejemplo)</div>
@@ -1379,7 +1448,19 @@
     document.getElementById('strip-date').innerText = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
 
     function goToEvaluation() {
+      enterDemoMode();
       showView('evaluacion', document.getElementById('nav-evaluacion'));
+    }
+
+    function openEvaluationExampleView(btn) {
+      enterDemoMode();
+      showView('evaluacion', btn);
+    }
+
+    function returnToExampleEvaluation() {
+      if (isTesting) finishTestExecution();
+      enterDemoMode();
+      document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function toggleHandSensor() {
@@ -1433,12 +1514,21 @@
       rightArmData = { points: DEMO_RIGHT_POINTS, maxRom: 142, painTime: 2.1, maxTrunk: 3 };
       leftArmData = { points: DEMO_LEFT_POINTS, maxRom: 154, painTime: 1.8, maxTrunk: 2 };
 
+      document.getElementById('eval-back-bar').style.display = 'none';
       document.getElementById('demo-mode-banner').style.display = 'flex';
+
+      const personBanner = document.getElementById('active-person-banner');
+      personBanner.classList.add('is-demo-card');
+
+      const avatarEl = document.getElementById('active-person-avatar');
+      avatarEl.classList.add('is-demo-avatar');
+      avatarEl.innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+
+      document.getElementById('active-person-kicker').style.color = 'var(--teal-demo)';
       document.getElementById('active-person-kicker').innerText = 'Ejemplo ilustrativo (No es una persona real)';
       document.getElementById('active-person-name').innerText = 'Sujeto de Ejemplo (Vista previa)';
       document.getElementById('active-person-details').innerText = 'Datos de muestra para visualizar el funcionamiento del sistema';
       document.getElementById('strip-patient-info').innerText = 'Evaluación clínica · Modo de ejemplo ilustrativo';
-      document.getElementById('active-person-avatar').innerHTML = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
 
       lockKpisFromAttempt(DEMO_ATTEMPTS[0]);
       document.getElementById('kpi-side-label').innerText = 'Hombro derecho (Ejemplo)';
@@ -1450,6 +1540,7 @@
       renderAttemptsTable();
       updateComparativeTable();
       syncPatientData();
+      updatePeopleUI();
     }
 
     // MODALES
@@ -1565,7 +1656,6 @@
       document.getElementById('quick-sport').value = '';
       document.getElementById('quick-position').value = '';
 
-      // Ir directo a Evaluación con la persona recién creada lista
       showView('evaluacion', document.getElementById('nav-evaluacion'));
     }
 
@@ -1592,7 +1682,6 @@
     function selectPersonFromModal(personId) {
       selectActivePerson(personId);
       closeModal('modal-new-eval');
-      // Al seleccionar una persona existente, te lleva a su perfil en el apartado Personas
       showView('personas', document.getElementById('nav-personas'));
       setTimeout(() => {
         const card = document.getElementById(`person-card-${personId}`);
@@ -1608,7 +1697,11 @@
         return;
       }
 
+      document.getElementById('eval-back-bar').style.display = 'flex';
       document.getElementById('demo-mode-banner').style.display = 'none';
+
+      const personBanner = document.getElementById('active-person-banner');
+      personBanner.classList.remove('is-demo-card');
 
       attemptsHistory = (p.attempts || []).map(a => ({
         ...a,
@@ -1617,12 +1710,14 @@
       p.attempts = attemptsHistory;
 
       const avatarEl = document.getElementById('active-person-avatar');
+      avatarEl.classList.remove('is-demo-avatar');
       if (p.photo) {
         avatarEl.innerHTML = `<img src="${p.photo}" alt="${p.firstName}">`;
       } else {
         avatarEl.innerText = `${p.firstName[0]}${p.lastName[0]}`.toUpperCase();
       }
 
+      document.getElementById('active-person-kicker').style.color = 'var(--primary)';
       document.getElementById('active-person-kicker').innerText = 'Persona en evaluación';
       document.getElementById('active-person-name').innerText = `${p.lastName}, ${p.firstName}`;
       document.getElementById('active-person-details').innerText = `Edad: ${p.age} años · Masa: ${p.mass} kg · ${p.sport} (${p.position})`;
@@ -1667,8 +1762,15 @@
         : `Tronco alineado (≤${TRUNK_LIMIT_DEG}°)`;
       document.getElementById('kpi-speed').innerHTML = `${lockedKpiState.maxSpeed} <small>°/s</small>`;
 
-      document.getElementById('kpi-state-badge').style.display = 'inline-block';
-      document.getElementById('kpi-state-badge').innerText = activePersonId ? 'Registrado' : 'Ejemplo';
+      const badge = document.getElementById('kpi-state-badge');
+      badge.style.display = 'inline-block';
+      if (activePersonId) {
+        badge.innerText = 'Registrado';
+        badge.classList.remove('demo-pill');
+      } else {
+        badge.innerText = 'Ejemplo';
+        badge.classList.add('demo-pill');
+      }
       document.querySelectorAll('.kpi-box').forEach(b => b.classList.add('locked'));
     }
 
@@ -1819,7 +1921,7 @@
                       <span style="font-size: 0.76rem; color: var(--text-muted);">${p.age} años · ${p.mass} kg</span>
                     </div>
                   </div>
-                  ${isSelected ? '<span style="background: var(--primary-light); color: var(--primary-dark); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;">Perfil activo</span>' : ''}
+                  ${isSelected ? '<span style="background: var(--primary-light); color: var(--primary-dark); font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;">Seleccionado</span>' : ''}
                 </div>
                 <div style="font-size: 0.78rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 3px;">
                   <div><strong>Actividad:</strong> ${p.sport}</div>
@@ -2237,7 +2339,7 @@
                 const isHandRaised = nonEvalWrist.y < nonEvalElbow.y + 0.04;
                 if (isNearNonEvalWrist && isHandRaised && isOpenPalm(handLm)) {
                   nonEvalPalmDetected = true;
-                  drawHandSkeleton(handLm, '#3282f6');
+                  drawHandSkeleton(handLm, '#007791');
                 }
               }
             }
